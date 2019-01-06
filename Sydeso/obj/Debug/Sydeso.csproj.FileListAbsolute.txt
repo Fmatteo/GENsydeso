@@ -14,3 +14,16 @@ c:\users\jhumar rosales\documents\visual studio 2015\Projects\Sydeso\Sydeso\bin\
 c:\users\jhumar rosales\documents\visual studio 2015\Projects\Sydeso\Sydeso\bin\Debug\MySql.Data.xml
 c:\users\jhumar rosales\documents\visual studio 2015\Projects\Sydeso\Sydeso\obj\Debug\Sydeso.Main_Form.resources
 c:\users\jhumar rosales\documents\visual studio 2015\Projects\Sydeso\Sydeso\bin\Debug\database\sydeso.sql
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\Sydeso.exe.config
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.exe
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.pdb
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\database\sydeso.sql
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\Sydeso.exe
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\Sydeso.pdb
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\MySql.Data.dll
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\Google.Protobuf.dll
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\MySql.Data.xml
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.csprojResolveAssemblyReference.cache
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.Main_Form.resources
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.Properties.Resources.resources
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.csproj.GenerateResource.Cache

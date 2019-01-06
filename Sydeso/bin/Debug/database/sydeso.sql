@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2019 at 08:40 AM
+-- Generation Time: Jan 06, 2019 at 01:53 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -77,10 +77,10 @@ CREATE TABLE `restaurant_customers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `restaurant_employees`
+-- Table structure for table `restaurant_employee`
 --
 
-CREATE TABLE `restaurant_employees` (
+CREATE TABLE `restaurant_employee` (
   `ID` int(11) NOT NULL,
   `Firstname` text NOT NULL,
   `Lastname` text NOT NULL,
@@ -92,26 +92,42 @@ CREATE TABLE `restaurant_employees` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `restaurant_food_items`
+-- Table structure for table `restaurant_employee_time_in_out`
 --
 
-CREATE TABLE `restaurant_food_items` (
+CREATE TABLE `restaurant_employee_time_in_out` (
   `ID` int(11) NOT NULL,
-  `Name` text NOT NULL,
-  `Price` double NOT NULL,
-  `Category_ID` int(11) NOT NULL
+  `Employee_ID` int(11) NOT NULL,
+  `Timein` time NOT NULL,
+  `Timeout` time NOT NULL,
+  `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `restaurant_ingredients`
+-- Table structure for table `restaurant_expenses`
 --
 
-CREATE TABLE `restaurant_ingredients` (
-  `Food_ID` int(11) NOT NULL,
+CREATE TABLE `restaurant_expenses` (
+  `ID` int(11) NOT NULL,
   `Name` text NOT NULL,
-  `Quantity` int(11) NOT NULL
+  `Description` text NOT NULL,
+  `Amount` double NOT NULL,
+  `Date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restaurant_logs`
+--
+
+CREATE TABLE `restaurant_logs` (
+  `ID` int(11) NOT NULL,
+  `Detail` text NOT NULL,
+  `Date` date NOT NULL,
+  `Time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -157,6 +173,55 @@ CREATE TABLE `restaurant_order_type` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `restaurant_products`
+--
+
+CREATE TABLE `restaurant_products` (
+  `ID` int(11) NOT NULL,
+  `Name` text NOT NULL,
+  `Qty` int(11) DEFAULT NULL,
+  `Reorder` int(11) DEFAULT NULL,
+  `Price` double NOT NULL,
+  `Category_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restaurant_sales`
+--
+
+CREATE TABLE `restaurant_sales` (
+  `ID` int(11) NOT NULL,
+  `Customer_ID` int(11) NOT NULL,
+  `Account_ID` int(11) NOT NULL,
+  `Cash_Tendered` double NOT NULL,
+  `Discount` double NOT NULL,
+  `Amount` double NOT NULL,
+  `Cash_Change` double NOT NULL,
+  `Payment_Mode` text NOT NULL,
+  `OR_Number` text NOT NULL,
+  `Date` date NOT NULL,
+  `Time` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restaurant_sales_details`
+--
+
+CREATE TABLE `restaurant_sales_details` (
+  `ID` int(11) NOT NULL,
+  `Sales_ID` int(11) NOT NULL,
+  `Prod_ID` int(11) NOT NULL,
+  `Qty` int(11) NOT NULL,
+  `Price` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `restaurant_status`
 --
 
@@ -187,20 +252,6 @@ CREATE TABLE `restaurant_table_booking` (
   `Table_ID` int(11) NOT NULL,
   `Customer_ID` int(11) NOT NULL,
   `Status_ID` int(11) NOT NULL,
-  `Date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `restaurant_time_in_out`
---
-
-CREATE TABLE `restaurant_time_in_out` (
-  `ID` int(11) NOT NULL,
-  `Employee_ID` int(11) NOT NULL,
-  `Timein` time NOT NULL,
-  `Timeout` time NOT NULL,
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -246,22 +297,28 @@ ALTER TABLE `restaurant_customers`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `restaurant_employees`
+-- Indexes for table `restaurant_employee`
 --
-ALTER TABLE `restaurant_employees`
+ALTER TABLE `restaurant_employee`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `restaurant_food_items`
+-- Indexes for table `restaurant_employee_time_in_out`
 --
-ALTER TABLE `restaurant_food_items`
+ALTER TABLE `restaurant_employee_time_in_out`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `restaurant_ingredients`
+-- Indexes for table `restaurant_expenses`
 --
-ALTER TABLE `restaurant_ingredients`
-  ADD PRIMARY KEY (`Food_ID`);
+ALTER TABLE `restaurant_expenses`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `restaurant_logs`
+--
+ALTER TABLE `restaurant_logs`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `restaurant_order`
@@ -282,6 +339,24 @@ ALTER TABLE `restaurant_order_type`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `restaurant_products`
+--
+ALTER TABLE `restaurant_products`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `restaurant_sales`
+--
+ALTER TABLE `restaurant_sales`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `restaurant_sales_details`
+--
+ALTER TABLE `restaurant_sales_details`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `restaurant_status`
 --
 ALTER TABLE `restaurant_status`
@@ -297,12 +372,6 @@ ALTER TABLE `restaurant_table`
 -- Indexes for table `restaurant_table_booking`
 --
 ALTER TABLE `restaurant_table_booking`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `restaurant_time_in_out`
---
-ALTER TABLE `restaurant_time_in_out`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -340,22 +409,28 @@ ALTER TABLE `restaurant_customers`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `restaurant_employees`
+-- AUTO_INCREMENT for table `restaurant_employee`
 --
-ALTER TABLE `restaurant_employees`
+ALTER TABLE `restaurant_employee`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `restaurant_food_items`
+-- AUTO_INCREMENT for table `restaurant_employee_time_in_out`
 --
-ALTER TABLE `restaurant_food_items`
+ALTER TABLE `restaurant_employee_time_in_out`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `restaurant_ingredients`
+-- AUTO_INCREMENT for table `restaurant_expenses`
 --
-ALTER TABLE `restaurant_ingredients`
-  MODIFY `Food_ID` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `restaurant_expenses`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `restaurant_logs`
+--
+ALTER TABLE `restaurant_logs`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `restaurant_order`
@@ -376,6 +451,24 @@ ALTER TABLE `restaurant_order_type`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `restaurant_products`
+--
+ALTER TABLE `restaurant_products`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `restaurant_sales`
+--
+ALTER TABLE `restaurant_sales`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `restaurant_sales_details`
+--
+ALTER TABLE `restaurant_sales_details`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `restaurant_status`
 --
 ALTER TABLE `restaurant_status`
@@ -391,12 +484,6 @@ ALTER TABLE `restaurant_table`
 -- AUTO_INCREMENT for table `restaurant_table_booking`
 --
 ALTER TABLE `restaurant_table_booking`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `restaurant_time_in_out`
---
-ALTER TABLE `restaurant_time_in_out`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
