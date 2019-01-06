@@ -92,11 +92,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="icons\" />
     <Folder Include="pages\restaurant\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="database\sydeso.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_exit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
