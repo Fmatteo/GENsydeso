@@ -31,3 +31,7 @@ C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.pdb
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_back.png
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_next.png
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.csprojResolveAssemblyReference.cache
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.Notification.resources
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_danger.png
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_information.png
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_success.png

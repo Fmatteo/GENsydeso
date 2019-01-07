@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2019 at 07:16 AM
+-- Generation Time: Jan 07, 2019 at 10:43 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -266,6 +266,8 @@ CREATE TABLE `system_accounts` (
 CREATE TABLE `system_config` (
   `ID` int(11) NOT NULL,
   `Company_Name` text NOT NULL,
+  `Company_Address` text NOT NULL,
+  `Company_Phone` text NOT NULL,
   `Business_Type` text NOT NULL,
   `Company_Logo` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

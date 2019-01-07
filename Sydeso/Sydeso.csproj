@@ -61,12 +61,20 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="helpers\database_helper.cs" />
+    <Compile Include="helpers\general_helper.cs" />
     <Compile Include="helpers\restaurant_helper.cs" />
+    <Compile Include="helpers\speech_helper.cs" />
     <Compile Include="Main_Form.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main_Form.Designer.cs">
       <DependentUpon>Main_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\Notification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\Notification.Designer.cs">
+      <DependentUpon>Notification.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,6 +86,9 @@
     </Compile>
     <EmbeddedResource Include="Main_Form.resx">
       <DependentUpon>Main_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\Notification.resx">
+      <DependentUpon>Notification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -114,10 +125,19 @@
     <Content Include="icons\icon_back.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="icons\icon_danger.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icons\icon_exit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="icons\icon_information.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icons\icon_next.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_success.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
