@@ -70,7 +70,7 @@ namespace Sydeso
         public void setup_config(String name, String address, String phone, String btype, String path)
         {
             String query = "";
-            if (!string.IsNullOrWhiteSpace(path))
+            if (string.IsNullOrWhiteSpace(path))
             {
                 query = "INSERT INTO system_config(Company_Name, Company_Address, Company_Phone, Business_Type)values(@name, @add, @phone, @type)";
             }
