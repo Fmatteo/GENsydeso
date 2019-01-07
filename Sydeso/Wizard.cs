@@ -84,15 +84,22 @@ namespace Sydeso
             {
                 if (!string.IsNullOrWhiteSpace(txtUser.Text) && !string.IsNullOrWhiteSpace(txtPass.Text) && !string.IsNullOrWhiteSpace(txtFname.Text) && !string.IsNullOrWhiteSpace(txtLname.Text))
                 {
-                    db.account_insert(txtFname.Text, txtLname.Text, txtUser.Text, txtPass.Text);
-                    rh.account_insert_privileges(txtUser.Text);
-                    db.setup_config(txtCompanyName.Text, txtCompanyAddress.Text, txtCompanyPhone.Text, cbBusinessType.SelectedItem.ToString(), pbLogo.ImageLocation);
-                    x.alert("Notification: ", "System configuration success.", "success");
+                    try
+                    {
+                        db.account_insert(txtFname.Text, txtLname.Text, txtUser.Text, txtPass.Text);
+                        rh.account_insert_privileges(txtUser.Text);
+                        db.setup_config(txtCompanyName.Text, txtCompanyAddress.Text, txtCompanyPhone.Text, cbBusinessType.SelectedItem.ToString(), pbLogo.ImageLocation);
+                        x.alert("Notification: ", "System configuration success.", "success");
 
-                    speech.CancelSpeaking();
-                    speech.SpeakFirst("That is all we need for now. Thank you for choosing System Development Solution as your partner in your business.");
+                        speech.CancelSpeaking();
+                        speech.SpeakFirst("That is all we need for now. Thank you for choosing System Development Solution as your partner in your business.");
 
-                    this.Close();
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: ");
+                    }
                 }
                 else
                 {
