@@ -66,6 +66,7 @@
             this.btnExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnExit.TabIndex = 4;
             this.btnExit.TabStop = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // panel2
             // 
@@ -110,6 +111,7 @@
             // timer
             // 
             this.timer.Interval = 4000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // Notification
             // 
@@ -119,9 +121,10 @@
             this.Controls.Add(this.pnlParent);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Notification";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Notification";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.Notification_Load);
             this.pnlParent.ResumeLayout(false);
             this.pnlParent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnExit)).EndInit();
