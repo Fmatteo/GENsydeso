@@ -7,9 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Speech;
-using System.Speech.Recognition;
-using System.Speech.Synthesis;
 
 namespace Sydeso
 {
@@ -25,12 +22,13 @@ namespace Sydeso
             }
         }
 
-        SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer();
+        speech_helper speech = new speech_helper();
+        general_helper x = new general_helper();
         public Wizard()
         {
-            speechSynthesizer.SpeakAsync("Greetings from System Development Solution, Welcome user.");
+            speech.Speak("Greetings from System Development Solution, Welcome user.");
             InitializeComponent();
-            speechSynthesizer.SpeakAsync("Before using the application, please tell us about you and your company. Simply, fill up the form below and hit next.");
+            speech.Speak("Before using the application, please tell us about you and your company. Simply, fill up the form below and hit next.");
         }
 
         private void Wizard_Load(object sender, EventArgs e)
@@ -49,20 +47,20 @@ namespace Sydeso
                     groupBox1.Enabled = !groupBox1.Enabled;
 
                     groupBox2.Enabled = !groupBox2.Enabled;
-                    speechSynthesizer.SpeakAsync("Now, select your business type and upload some logo if you have one.");
+                    speech.Speak("Now, select your business type and upload some logo if you have one.");
                 }
                 else
                 {
-                    speechSynthesizer.SpeakAsyncCancelAll();
-                    speechSynthesizer.SpeakAsync("Please input all the necessary fields to proceed.");
-                    MessageBox.Show("Please input all required fields to proceed", "Error: ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    speech.CancelSpeaking();
+                    speech.Speak("Please input all the necessary fields to proceed.");
+                    x.alert("Error: ", "Please input all required fields to proceed.", "danger");
                 }
             }
             else
             {
                 if (cbBusinessType.SelectedIndex >= 0)
                 {
-                    speechSynthesizer.SpeakAsync("That is all we need for now. Thank you!");
+                    speech.Speak("That is all we need for now. Thank you!");
                 }
             }
         }
