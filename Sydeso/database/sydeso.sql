@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2019 at 10:43 AM
+-- Generation Time: Jan 07, 2019 at 01:56 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -23,6 +23,26 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `sydeso` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `sydeso`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restaurant_accounts_privileges`
+--
+
+CREATE TABLE `restaurant_accounts_privileges` (
+  `ID` int(11) NOT NULL,
+  `Account_ID` int(11) NOT NULL,
+  `Dashboard` tinyint(4) NOT NULL,
+  `Products` tinyint(4) NOT NULL,
+  `Order_POS` tinyint(4) NOT NULL,
+  `Sales_Expenses` tinyint(4) NOT NULL,
+  `Tables` tinyint(4) NOT NULL,
+  `Employees` tinyint(4) NOT NULL,
+  `Customers` tinyint(4) NOT NULL,
+  `Accounts` tinyint(4) NOT NULL,
+  `History` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -269,12 +289,18 @@ CREATE TABLE `system_config` (
   `Company_Address` text NOT NULL,
   `Company_Phone` text NOT NULL,
   `Business_Type` text NOT NULL,
-  `Company_Logo` blob NOT NULL
+  `Company_Logo` blob
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `restaurant_accounts_privileges`
+--
+ALTER TABLE `restaurant_accounts_privileges`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `restaurant_category`
@@ -387,6 +413,12 @@ ALTER TABLE `system_config`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `restaurant_accounts_privileges`
+--
+ALTER TABLE `restaurant_accounts_privileges`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `restaurant_category`

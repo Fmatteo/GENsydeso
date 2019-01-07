@@ -12,14 +12,19 @@ namespace Sydeso
 {
     public partial class Main_Form : Form
     {
-        private bool move;
-        private Point lastPoint;
-
+        database_helper db = new database_helper();
         public Main_Form()
         {
+            if (!db.setup())
+            {
+                new Wizard().ShowDialog();
+            }
             InitializeComponent();
         }
 
+        #region Draggable
+        private bool move;
+        private Point lastPoint;
         private void pnl_toolbar_MouseDown(object sender, MouseEventArgs e)
         {
             move = true;
@@ -37,7 +42,8 @@ namespace Sydeso
         private void pnl_toolbar_MouseUp(object sender, MouseEventArgs e)
         {
             move = false;
-        }
+        } 
+        #endregion
 
         private void btnExit_Click(object sender, EventArgs e)
         {

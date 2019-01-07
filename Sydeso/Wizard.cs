@@ -24,6 +24,9 @@ namespace Sydeso
 
         speech_helper speech = new speech_helper();
         general_helper x = new general_helper();
+        database_helper db = new database_helper();
+        restaurant_helper rh = new restaurant_helper();
+
         public Wizard()
         {
             speech.Speak("Greetings from System Development Solution, Welcome user.");
@@ -43,24 +46,58 @@ namespace Sydeso
                 if (!string.IsNullOrWhiteSpace(txtCompanyName.Text) && !string.IsNullOrWhiteSpace(txtCompanyAddress.Text) && !string.IsNullOrWhiteSpace(txtCompanyPhone.Text))
                 {
                     btnPrev.Enabled = !btnPrev.Enabled;
-                    groupBox1.SendToBack();
+                    groupBox2.BringToFront();
                     groupBox1.Enabled = !groupBox1.Enabled;
 
                     groupBox2.Enabled = !groupBox2.Enabled;
+
+                    speech.CancelSpeaking();
                     speech.Speak("Now, select your business type and upload some logo if you have one.");
                 }
                 else
                 {
                     speech.CancelSpeaking();
                     speech.Speak("Please input all the necessary fields to proceed.");
-                    x.alert("Error: ", "Please input all required fields to proceed.", "danger");
+                    x.alert("Error: ", "Please fill up all required fields to proceed.", "danger");
+                }
+            }
+            else if (groupBox2.Enabled == true)
+            {
+                if (cbBusinessType.SelectedIndex >= 0)
+                {
+                    groupBox3.BringToFront();
+                    groupBox2.Enabled = !groupBox2.Enabled;
+
+                    groupBox3.Enabled = !groupBox3.Enabled;
+
+                    speech.CancelSpeaking();
+                    speech.Speak("Finally, setup your own account to gain access and authority in the system.");
+                }
+                else
+                {
+                    speech.CancelSpeaking();
+                    speech.Speak("Please provide the business type, the system needed it.");
+                    x.alert("Error: ", "Please fill up all required fields to proceed.", "danger");
                 }
             }
             else
             {
-                if (cbBusinessType.SelectedIndex >= 0)
+                if (!string.IsNullOrWhiteSpace(txtUser.Text) && !string.IsNullOrWhiteSpace(txtPass.Text) && !string.IsNullOrWhiteSpace(txtFname.Text) && !string.IsNullOrWhiteSpace(txtLname.Text))
                 {
-                    speech.Speak("That is all we need for now. Thank you!");
+                    db.account_insert(txtFname.Text, txtLname.Text, txtUser.Text, txtPass.Text);
+                    rh.account_insert_privileges(txtUser.Text);
+                    db.setup_config(txtCompanyName.Text, txtCompanyAddress.Text, txtCompanyPhone.Text, cbBusinessType.SelectedItem.ToString(), pbLogo.ImageLocation);
+                    x.alert("Notification: ", "System configuration success.", "success");
+
+                    speech.CancelSpeaking();
+                    speech.SpeakFirst("That is all we need for now. Thank you for choosing System Development Solution as your partner in your business.");
+
+                    this.Close();
+                }
+                else
+                {
+                    speech.CancelSpeaking();
+                    speech.Speak("Please setup your account first before proceeding.");
                 }
             }
         }
@@ -69,11 +106,22 @@ namespace Sydeso
         {
             if (groupBox2.Enabled == true)
             {
-                groupBox2.SendToBack();
+                speech.CancelSpeaking();
+                speech.Speak("Please provide information about your company.");
                 groupBox2.Enabled = !groupBox2.Enabled;
 
+                groupBox1.BringToFront();
                 groupBox1.Enabled = !groupBox1.Enabled;
                 btnPrev.Enabled = !btnPrev.Enabled;
+            }
+            else
+            {
+                speech.CancelSpeaking();
+                speech.Speak("Now, select your business type and upload some logo if you have one.");
+                groupBox2.BringToFront();
+                groupBox3.Enabled = !groupBox3.Enabled;
+
+                groupBox2.Enabled = !groupBox2.Enabled;
             }
         }
 
@@ -105,7 +153,53 @@ namespace Sydeso
         private void Wizard_MouseUp(object sender, MouseEventArgs e)
         {
             move = false;
-        } 
+        }
         #endregion
+
+        private void txtCompanyPhone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void pbEye_Click(object sender, EventArgs e)
+        {
+            if (txtPass.PasswordChar == '•')
+            {
+                txtPass.PasswordChar = '\0';
+                pbEye.Image = Image.FromFile(Application.StartupPath + "/icons/icon_show.png");
+            }
+            else
+            {
+                txtPass.PasswordChar = '•';
+                pbEye.Image = Image.FromFile(Application.StartupPath + "/icons/icon_hide.png");
+            }
+        }
+
+        private void txtPass_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtPass.Text))
+            {
+                pbEye.Visible = true;
+            }
+            else
+            {
+                pbEye.Visible = false;
+            }
+        }
+
+        private void pbLogo_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Choose your logo";
+            ofd.Filter = "PNG Files|*.png";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pbLogo.ImageLocation = ofd.FileName;
+            }
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace Sydeso
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Wizard());
+            Application.Run(new Main_Form());
         }
     }
 }

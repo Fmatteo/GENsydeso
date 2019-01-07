@@ -32,16 +32,23 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.btnNext = new System.Windows.Forms.PictureBox();
             this.btnPrev = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.btnExit = new System.Windows.Forms.PictureBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.pbEye = new System.Windows.Forms.PictureBox();
             this.borderedPanel3 = new Sydeso.BorderedPanel();
             this.txtCompanyPhone = new System.Windows.Forms.TextBox();
             this.borderedPanel2 = new Sydeso.BorderedPanel();
@@ -52,18 +59,31 @@
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.borderedPanel6 = new Sydeso.BorderedPanel();
             this.cbBusinessType = new System.Windows.Forms.ComboBox();
-            this.btnExit = new System.Windows.Forms.PictureBox();
+            this.borderedPanel9 = new Sydeso.BorderedPanel();
+            this.txtLname = new System.Windows.Forms.TextBox();
+            this.borderedPanel5 = new Sydeso.BorderedPanel();
+            this.txtPass = new System.Windows.Forms.TextBox();
+            this.borderedPanel7 = new Sydeso.BorderedPanel();
+            this.txtUser = new System.Windows.Forms.TextBox();
+            this.borderedPanel8 = new Sydeso.BorderedPanel();
+            this.txtFname = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnNext)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPrev)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnExit)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbEye)).BeginInit();
             this.borderedPanel3.SuspendLayout();
             this.borderedPanel2.SuspendLayout();
             this.borderedPanel1.SuspendLayout();
             this.borderedPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.borderedPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnExit)).BeginInit();
+            this.borderedPanel9.SuspendLayout();
+            this.borderedPanel5.SuspendLayout();
+            this.borderedPanel7.SuspendLayout();
+            this.borderedPanel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -105,15 +125,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Before proceeding, tell us more";
             // 
-            // label3
+            // label5
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.75F);
-            this.label3.Location = new System.Drawing.Point(40, 41);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(116, 20);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Company Name";
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 10.75F);
+            this.label5.Location = new System.Drawing.Point(40, 151);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(175, 20);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Company Phone Number";
             // 
             // label4
             // 
@@ -125,15 +145,15 @@
             this.label4.TabIndex = 2;
             this.label4.Text = "Company Address";
             // 
-            // label5
+            // label3
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 10.75F);
-            this.label5.Location = new System.Drawing.Point(40, 151);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(175, 20);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Company Phone Number";
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.75F);
+            this.label3.Location = new System.Drawing.Point(40, 41);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(116, 20);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Company Name";
             // 
             // label6
             // 
@@ -188,6 +208,17 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Before proceeding, tell us more";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.label8.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label8.Location = new System.Drawing.Point(40, 144);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(130, 13);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "Upload, if you have one";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -208,16 +239,91 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "Business Type";
             // 
-            // label8
+            // btnExit
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.label8.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label8.Location = new System.Drawing.Point(40, 144);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(130, 13);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "Upload, if you have one";
+            this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
+            this.btnExit.Location = new System.Drawing.Point(740, 2);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(20, 20);
+            this.btnExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnExit.TabIndex = 7;
+            this.btnExit.TabStop = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 10.75F);
+            this.label12.Location = new System.Drawing.Point(40, 41);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(73, 20);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Firstname";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 10.75F);
+            this.label11.Location = new System.Drawing.Point(40, 96);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(75, 20);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Username";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 10.75F);
+            this.label10.Location = new System.Drawing.Point(40, 151);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(70, 20);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Password";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 10.75F);
+            this.label13.Location = new System.Drawing.Point(165, 41);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(72, 20);
+            this.label13.TabIndex = 6;
+            this.label13.Text = "Lastname";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.pbEye);
+            this.groupBox3.Controls.Add(this.borderedPanel9);
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.borderedPanel5);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.borderedPanel7);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.borderedPanel8);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Enabled = false;
+            this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.groupBox3.ForeColor = System.Drawing.Color.White;
+            this.groupBox3.Location = new System.Drawing.Point(215, 159);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(332, 247);
+            this.groupBox3.TabIndex = 6;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Before proceeding, setup your account";
+            // 
+            // pbEye
+            // 
+            this.pbEye.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbEye.Image = ((System.Drawing.Image)(resources.GetObject("pbEye.Image")));
+            this.pbEye.Location = new System.Drawing.Point(295, 179);
+            this.pbEye.Name = "pbEye";
+            this.pbEye.Size = new System.Drawing.Size(20, 20);
+            this.pbEye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbEye.TabIndex = 7;
+            this.pbEye.TabStop = false;
+            this.pbEye.Visible = false;
+            this.pbEye.Click += new System.EventHandler(this.pbEye_Click);
             // 
             // borderedPanel3
             // 
@@ -240,6 +346,7 @@
             this.txtCompanyPhone.Name = "txtCompanyPhone";
             this.txtCompanyPhone.Size = new System.Drawing.Size(228, 15);
             this.txtCompanyPhone.TabIndex = 0;
+            this.txtCompanyPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCompanyPhone_KeyPress);
             // 
             // borderedPanel2
             // 
@@ -299,12 +406,14 @@
             // pbLogo
             // 
             this.pbLogo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbLogo.Image = ((System.Drawing.Image)(resources.GetObject("pbLogo.Image")));
             this.pbLogo.Location = new System.Drawing.Point(2, 2);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(96, 96);
             this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbLogo.TabIndex = 0;
             this.pbLogo.TabStop = false;
+            this.pbLogo.Click += new System.EventHandler(this.pbLogo_Click);
             // 
             // borderedPanel6
             // 
@@ -333,17 +442,95 @@
             this.cbBusinessType.Size = new System.Drawing.Size(228, 21);
             this.cbBusinessType.TabIndex = 0;
             // 
-            // btnExit
+            // borderedPanel9
             // 
-            this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
-            this.btnExit.Location = new System.Drawing.Point(740, 2);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(20, 20);
-            this.btnExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnExit.TabIndex = 7;
-            this.btnExit.TabStop = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.borderedPanel9.BackColor = System.Drawing.Color.Transparent;
+            this.borderedPanel9.BorderColor = System.Drawing.Color.White;
+            this.borderedPanel9.Controls.Add(this.txtLname);
+            this.borderedPanel9.Location = new System.Drawing.Point(169, 64);
+            this.borderedPanel9.Name = "borderedPanel9";
+            this.borderedPanel9.Padding = new System.Windows.Forms.Padding(2);
+            this.borderedPanel9.Size = new System.Drawing.Size(120, 29);
+            this.borderedPanel9.TabIndex = 2;
+            // 
+            // txtLname
+            // 
+            this.txtLname.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
+            this.txtLname.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtLname.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.txtLname.ForeColor = System.Drawing.Color.Gainsboro;
+            this.txtLname.Location = new System.Drawing.Point(8, 7);
+            this.txtLname.Name = "txtLname";
+            this.txtLname.Size = new System.Drawing.Size(105, 15);
+            this.txtLname.TabIndex = 0;
+            // 
+            // borderedPanel5
+            // 
+            this.borderedPanel5.BackColor = System.Drawing.Color.Transparent;
+            this.borderedPanel5.BorderColor = System.Drawing.Color.White;
+            this.borderedPanel5.Controls.Add(this.txtPass);
+            this.borderedPanel5.Location = new System.Drawing.Point(44, 174);
+            this.borderedPanel5.Name = "borderedPanel5";
+            this.borderedPanel5.Padding = new System.Windows.Forms.Padding(2);
+            this.borderedPanel5.Size = new System.Drawing.Size(245, 29);
+            this.borderedPanel5.TabIndex = 4;
+            // 
+            // txtPass
+            // 
+            this.txtPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
+            this.txtPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPass.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.txtPass.ForeColor = System.Drawing.Color.Gainsboro;
+            this.txtPass.Location = new System.Drawing.Point(8, 7);
+            this.txtPass.Name = "txtPass";
+            this.txtPass.PasswordChar = '•';
+            this.txtPass.Size = new System.Drawing.Size(228, 15);
+            this.txtPass.TabIndex = 0;
+            this.txtPass.TextChanged += new System.EventHandler(this.txtPass_TextChanged);
+            // 
+            // borderedPanel7
+            // 
+            this.borderedPanel7.BackColor = System.Drawing.Color.Transparent;
+            this.borderedPanel7.BorderColor = System.Drawing.Color.White;
+            this.borderedPanel7.Controls.Add(this.txtUser);
+            this.borderedPanel7.Location = new System.Drawing.Point(44, 119);
+            this.borderedPanel7.Name = "borderedPanel7";
+            this.borderedPanel7.Padding = new System.Windows.Forms.Padding(2);
+            this.borderedPanel7.Size = new System.Drawing.Size(245, 29);
+            this.borderedPanel7.TabIndex = 3;
+            // 
+            // txtUser
+            // 
+            this.txtUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
+            this.txtUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtUser.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.txtUser.ForeColor = System.Drawing.Color.Gainsboro;
+            this.txtUser.Location = new System.Drawing.Point(8, 7);
+            this.txtUser.Name = "txtUser";
+            this.txtUser.Size = new System.Drawing.Size(228, 15);
+            this.txtUser.TabIndex = 0;
+            // 
+            // borderedPanel8
+            // 
+            this.borderedPanel8.BackColor = System.Drawing.Color.Transparent;
+            this.borderedPanel8.BorderColor = System.Drawing.Color.White;
+            this.borderedPanel8.Controls.Add(this.txtFname);
+            this.borderedPanel8.Location = new System.Drawing.Point(43, 64);
+            this.borderedPanel8.Name = "borderedPanel8";
+            this.borderedPanel8.Padding = new System.Windows.Forms.Padding(2);
+            this.borderedPanel8.Size = new System.Drawing.Size(120, 29);
+            this.borderedPanel8.TabIndex = 0;
+            // 
+            // txtFname
+            // 
+            this.txtFname.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
+            this.txtFname.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtFname.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.txtFname.ForeColor = System.Drawing.Color.Gainsboro;
+            this.txtFname.Location = new System.Drawing.Point(8, 7);
+            this.txtFname.Name = "txtFname";
+            this.txtFname.Size = new System.Drawing.Size(105, 15);
+            this.txtFname.TabIndex = 0;
             // 
             // Wizard
             // 
@@ -359,11 +546,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Wizard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Wizard";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.Wizard_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Wizard_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Wizard_MouseMove);
@@ -374,6 +561,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnPrev)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnExit)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbEye)).EndInit();
             this.borderedPanel3.ResumeLayout(false);
             this.borderedPanel3.PerformLayout();
             this.borderedPanel2.ResumeLayout(false);
@@ -383,7 +574,14 @@
             this.borderedPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.borderedPanel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnExit)).EndInit();
+            this.borderedPanel9.ResumeLayout(false);
+            this.borderedPanel9.PerformLayout();
+            this.borderedPanel5.ResumeLayout(false);
+            this.borderedPanel5.PerformLayout();
+            this.borderedPanel7.ResumeLayout(false);
+            this.borderedPanel7.PerformLayout();
+            this.borderedPanel8.ResumeLayout(false);
+            this.borderedPanel8.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -415,5 +613,19 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox pbLogo;
         private System.Windows.Forms.PictureBox btnExit;
+        private System.Windows.Forms.Label label12;
+        private BorderedPanel borderedPanel8;
+        private System.Windows.Forms.TextBox txtFname;
+        private System.Windows.Forms.Label label11;
+        private BorderedPanel borderedPanel7;
+        private System.Windows.Forms.TextBox txtUser;
+        private System.Windows.Forms.Label label10;
+        private BorderedPanel borderedPanel5;
+        private System.Windows.Forms.TextBox txtPass;
+        private System.Windows.Forms.Label label13;
+        private BorderedPanel borderedPanel9;
+        private System.Windows.Forms.TextBox txtLname;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.PictureBox pbEye;
     }
 }

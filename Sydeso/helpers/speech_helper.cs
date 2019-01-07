@@ -13,6 +13,11 @@ namespace Sydeso
             speechSynthesizer.SpeakAsync(text);
         }
 
+        public void SpeakFirst(string text)
+        {
+            speechSynthesizer.Speak(text);
+        }
+
         public void CancelSpeaking()
         {
             speechSynthesizer.SpeakAsyncCancelAll();
