@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2019 at 01:53 PM
+-- Generation Time: Jan 07, 2019 at 10:43 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -23,31 +23,6 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `sydeso` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `sydeso`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `restaurant_accounts`
---
-
-CREATE TABLE `restaurant_accounts` (
-  `ID` int(11) NOT NULL,
-  `Firstname` text NOT NULL,
-  `Lastname` text NOT NULL,
-  `Username` text NOT NULL,
-  `Password` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `restaurant_cancelation`
---
-
-CREATE TABLE `restaurant_cancelation` (
-  `ID` int(11) NOT NULL,
-  `Order_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -182,7 +157,20 @@ CREATE TABLE `restaurant_products` (
   `Qty` int(11) DEFAULT NULL,
   `Reorder` int(11) DEFAULT NULL,
   `Price` double NOT NULL,
-  `Category_ID` int(11) NOT NULL
+  `Category` text NOT NULL,
+  `Image` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restaurant_products_damage`
+--
+
+CREATE TABLE `restaurant_products_damage` (
+  `ID` int(11) NOT NULL,
+  `Prod_ID` int(11) NOT NULL,
+  `Qty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -258,12 +246,28 @@ CREATE TABLE `restaurant_table_booking` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `system_accounts`
+--
+
+CREATE TABLE `system_accounts` (
+  `ID` int(11) NOT NULL,
+  `Firstname` text NOT NULL,
+  `Lastname` text NOT NULL,
+  `Username` text NOT NULL,
+  `Password` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `system_config`
 --
 
 CREATE TABLE `system_config` (
   `ID` int(11) NOT NULL,
   `Company_Name` text NOT NULL,
+  `Company_Address` text NOT NULL,
+  `Company_Phone` text NOT NULL,
   `Business_Type` text NOT NULL,
   `Company_Logo` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -271,18 +275,6 @@ CREATE TABLE `system_config` (
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `restaurant_accounts`
---
-ALTER TABLE `restaurant_accounts`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `restaurant_cancelation`
---
-ALTER TABLE `restaurant_cancelation`
-  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `restaurant_category`
@@ -345,6 +337,12 @@ ALTER TABLE `restaurant_products`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `restaurant_products_damage`
+--
+ALTER TABLE `restaurant_products_damage`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `restaurant_sales`
 --
 ALTER TABLE `restaurant_sales`
@@ -375,6 +373,12 @@ ALTER TABLE `restaurant_table_booking`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `system_accounts`
+--
+ALTER TABLE `system_accounts`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `system_config`
 --
 ALTER TABLE `system_config`
@@ -383,18 +387,6 @@ ALTER TABLE `system_config`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `restaurant_accounts`
---
-ALTER TABLE `restaurant_accounts`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `restaurant_cancelation`
---
-ALTER TABLE `restaurant_cancelation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `restaurant_category`
@@ -457,6 +449,12 @@ ALTER TABLE `restaurant_products`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `restaurant_products_damage`
+--
+ALTER TABLE `restaurant_products_damage`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `restaurant_sales`
 --
 ALTER TABLE `restaurant_sales`
@@ -484,6 +482,12 @@ ALTER TABLE `restaurant_table`
 -- AUTO_INCREMENT for table `restaurant_table_booking`
 --
 ALTER TABLE `restaurant_table_booking`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `system_accounts`
+--
+ALTER TABLE `system_accounts`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
