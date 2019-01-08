@@ -54,3 +54,8 @@ C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_nav.resources
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.Login_DTR.resources
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_password.png
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_username.png
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_dashboard.resources
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_mic_off.png
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_mic_on.png
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_settings.png
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_shutdown.png

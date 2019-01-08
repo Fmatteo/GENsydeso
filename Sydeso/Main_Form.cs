@@ -117,7 +117,44 @@ namespace Sydeso
         {
             Control c = sender as Control;
 
-            MessageBox.Show(c.Name);
+            switch (c.Name)
+            {
+                case "btnDashboard_Res":
+                    restaurant_dashboard res_dash = new restaurant_dashboard();
+                    res_dash.TopLevel = false;
+                    res_dash.Parent = this.pnl_content;
+                    res_dash.Show();
+                    break;
+                default:
+                    break;
+            }
         }
+
+        #region Voice Command
+        private bool voice;
+        private void btnToggleVoiceCommand_Click(object sender, EventArgs e)
+        {
+            if (!voice)
+            {
+                voice = true;
+                btnToggleVoiceCommand.Image = Image.FromFile(Application.StartupPath + "/icons/icon_mic_on.png");
+
+                speech.CancelSpeaking();
+                speech.Speak("Voice command activated.");
+
+                speech.StartRecognizing(account_details);
+            }
+            else
+            {
+                voice = false;
+                btnToggleVoiceCommand.Image = Image.FromFile(Application.StartupPath + "/icons/icon_mic_off.png");
+
+                speech.CancelSpeaking();
+                speech.Speak("Voice command de-activated.");
+
+                speech.StopRecognizing();
+            }
+        } 
+        #endregion
     }
 }
