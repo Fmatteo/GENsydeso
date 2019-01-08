@@ -22,18 +22,22 @@ namespace Sydeso
             }
         }
 
+        #region Variables
         database_helper db = new database_helper();
         speech_helper speech = new speech_helper();
         List<Object> config;
         List<String> account_details;
-        private String _user;
+        private String _user; 
+        #endregion
 
         public Main_Form()
         {
             #region Initialize Wizard
             if (!db.setup()) // If hasn't setup yet
             {
-                if (Wizard._Show() == DialogResult.No)
+                String wizard = Wizard._Show();
+
+                if (string.IsNullOrWhiteSpace(wizard))
                 {
                     Environment.Exit(0);
                 }

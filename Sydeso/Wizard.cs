@@ -27,9 +27,9 @@ namespace Sydeso
         database_helper db = new database_helper();
         restaurant_helper rh = new restaurant_helper();
 
-        static Wizard wiz; static DialogResult result = DialogResult.No;
+        static Wizard wiz; static String result = "";
 
-        public static DialogResult _Show()
+        public static String _Show()
         {
             wiz = new Wizard();
             wiz.ShowDialog();
@@ -39,12 +39,13 @@ namespace Sydeso
         public Wizard()
         {
             InitializeComponent();
+            speech.Speak("Greetings from System Development Solution, Welcome user.");
+            speech.Speak("Before using the application, please tell us about you and your company. Simply, fill up the form below and hit next.");
         }
 
         private void Wizard_Load(object sender, EventArgs e)
         {
-            speech.Speak("Greetings from System Development Solution, Welcome user.");
-            speech.Speak("Before using the application, please tell us about you and your company. Simply, fill up the form below and hit next.");
+            
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -96,13 +97,12 @@ namespace Sydeso
                     db.account_insert(txtFname.Text, txtLname.Text, txtUser.Text, txtPass.Text);
                     rh.account_insert_privileges(txtUser.Text);
                     db.setup_config(txtCompanyName.Text, txtCompanyAddress.Text, txtCompanyPhone.Text, cbBusinessType.SelectedItem.ToString(), pbLogo.ImageLocation);
-                    x.alert("Notification: ", "System configuration success.", "success");
+                    x.alert("Notification: ", "System configuration success.\nPlease restart the app.", "success");
 
                     speech.CancelSpeaking();
-                    speech.SpeakFirst("That is all we need for now. Thank you for choosing System Development Solution as your partner in your business.");
+                    speech.SpeakFirst("That is all we need for now. Thank you for choosing System Development Solution as your partner in your business. Please re-launch the app.");
 
-                    result = DialogResult.Yes;
-                    this.Close();
+                    result = "1"; this.Close();
                 }
                 else
                 {
