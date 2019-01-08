@@ -61,7 +61,7 @@ namespace Sydeso
 
             InitializeComponent();
 
-            #region Navigation
+            #region Initialize Navigation
 
             config = db.get_setup_config();
 
@@ -77,6 +77,7 @@ namespace Sydeso
                     {
                         c.Click += Menu_Item_Click;
                     }
+
                     break;
                 default:
                     break;
@@ -112,6 +113,35 @@ namespace Sydeso
         {
             Application.Exit();
         }
+
+        #region Initialize Dashboard
+
+        /// <summary>
+        /// Sets dashboard(default page) depending on the chosen business type
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Main_Form_Load(object sender, EventArgs e)
+        {
+            switch (config[4].ToString())
+            {
+                case "Restaurant":
+                    if (res_dash == null)
+                    {
+                        res_dash = new restaurant_dashboard();
+                        res_dash.TopLevel = false;
+                        res_dash.Parent = this.pnl_content;
+                        res_dash.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                        res_dash.FormClosed += Res_dash_FormClosed;
+                        res_dash.Show();
+                        res_nav.btnDashboard_Res.Normalcolor = Color.FromArgb(233, 233, 233);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        } 
+        #endregion
 
         restaurant_dashboard res_dash = null;
         private void Menu_Item_Click(object sender, EventArgs e)
@@ -167,7 +197,15 @@ namespace Sydeso
 
                 speech.StopRecognizing();
             }
-        } 
+        }
         #endregion
+
+        private void pnl_content_SizeChanged(object sender, EventArgs e)
+        {
+            if (res_dash != null)
+            {
+                res_dash.Left = (this.pnl_content.Width - res_dash.Width) / 2;
+            }
+        }
     }
 }

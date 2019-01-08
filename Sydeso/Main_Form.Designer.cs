@@ -49,6 +49,7 @@
             this.pnl_content.Name = "pnl_content";
             this.pnl_content.Size = new System.Drawing.Size(1080, 660);
             this.pnl_content.TabIndex = 3;
+            this.pnl_content.SizeChanged += new System.EventHandler(this.pnl_content_SizeChanged);
             // 
             // pnl_toolbar
             // 
@@ -126,6 +127,7 @@
             this.Name = "Main_Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Main_Form_Load);
             this.pnl_toolbar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnToggleVoiceCommand)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSettings)).EndInit();
