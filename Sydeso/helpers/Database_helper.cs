@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Security.Cryptography;
@@ -38,6 +39,66 @@ namespace Sydeso
             return resultSHA512;
         }
 
+        #region System Accounts
+        public void account_insert(String fname, String lname, String user, String pass)
+        {
+            Connect();
+            cmd = new MySqlCommand("INSERT INTO system_accounts(Firstname, Lastname, Username, Password)values(@fname, @lname, @user, @pass)", con);
+            cmd.Parameters.AddWithValue("@fname", fname);
+            cmd.Parameters.AddWithValue("@lname", lname);
+            cmd.Parameters.AddWithValue("@user", user);
+            cmd.Parameters.AddWithValue("@pass", hashPass(pass));
+            cmd.ExecuteNonQuery();
+            Disconnect();
+        }
+
+        public Boolean account_login(String user, String pass)
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM system_accounts WHERE Username = @user AND Password = @pass", con);
+            cmd.Parameters.AddWithValue("@user", user);
+            cmd.Parameters.AddWithValue("@pass", hashPass(pass));
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return true;
+            }
+            dr.Close();
+            Disconnect();
+            return false;
+        }
+
+        /// <summary>
+        /// Gets the account details...
+        /// </summary>
+        private List<String> _account_details;
+        public List<String> account_details(String user)
+        {
+            _account_details = new List<string>();
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM system_accounts WHERE Username = @user", con);
+            cmd.Parameters.AddWithValue("@user", user);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                _account_details.Add(dr["ID"].ToString());
+                _account_details.Add(dr["Firstname"].ToString());
+                _account_details.Add(dr["Lastname"].ToString());
+                _account_details.Add(dr["Username"].ToString());
+            }
+            dr.Close();
+            Disconnect();
+            return _account_details;
+        }
+        #endregion
+
+        #region System Config
+        /// <summary>
+        /// Check if the system undergone already with the setup
+        /// </summary>
+        /// <returns></returns>
         public Boolean setup()
         {
             Connect();
@@ -55,18 +116,14 @@ namespace Sydeso
             return false;
         }
 
-        public void account_insert(String fname, String lname, String user, String pass)
-        {
-            Connect();
-            cmd = new MySqlCommand("INSERT INTO system_accounts(Firstname, Lastname, Username, Password)values(@fname, @lname, @user, @pass)", con);
-            cmd.Parameters.AddWithValue("@fname", fname);
-            cmd.Parameters.AddWithValue("@lname", lname);
-            cmd.Parameters.AddWithValue("@user", user);
-            cmd.Parameters.AddWithValue("@pass", hashPass(pass));
-            cmd.ExecuteNonQuery();
-            Disconnect();
-        }
-
+        /// <summary>
+        /// After the setup, save all the data from the user...
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="address"></param>
+        /// <param name="phone"></param>
+        /// <param name="btype"></param>
+        /// <param name="path"></param>
         public void setup_config(String name, String address, String phone, String btype, String path)
         {
             String query = "";
@@ -92,5 +149,40 @@ namespace Sydeso
             cmd.ExecuteNonQuery();
             Disconnect();
         }
+
+        /// <summary>
+        /// Get the details about the system configuration
+        /// </summary>
+        private List<Object> _get_setup_config;
+        public List<Object> get_setup_config()
+        {
+            _get_setup_config = new List<Object>();
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM system_config", con);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                _get_setup_config.Add(dr["ID"]);
+                _get_setup_config.Add(dr["Company_Name"]);
+                _get_setup_config.Add(dr["Company_Address"]);
+                _get_setup_config.Add(dr["Company_Phone"]);
+                _get_setup_config.Add(dr["Business_Type"]);
+
+                try
+                {
+                    _get_setup_config.Add((Bitmap)Image.FromStream(new MemoryStream((System.Byte[])dr["Company_Logo"])));
+                }
+                catch (Exception)
+                {
+                    _get_setup_config.Add("");
+                }
+            }
+            dr.Close();
+            Disconnect();
+
+            return _get_setup_config;
+        } 
+        #endregion
     }
 }

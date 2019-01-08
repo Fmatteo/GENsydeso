@@ -27,16 +27,24 @@ namespace Sydeso
         database_helper db = new database_helper();
         restaurant_helper rh = new restaurant_helper();
 
+        static Wizard wiz; static DialogResult result = DialogResult.No;
+
+        public static DialogResult _Show()
+        {
+            wiz = new Wizard();
+            wiz.ShowDialog();
+            return result;
+        }
+
         public Wizard()
         {
-            speech.Speak("Greetings from System Development Solution, Welcome user.");
             InitializeComponent();
-            speech.Speak("Before using the application, please tell us about you and your company. Simply, fill up the form below and hit next.");
         }
 
         private void Wizard_Load(object sender, EventArgs e)
         {
-
+            speech.Speak("Greetings from System Development Solution, Welcome user.");
+            speech.Speak("Before using the application, please tell us about you and your company. Simply, fill up the form below and hit next.");
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -85,15 +93,16 @@ namespace Sydeso
                 if (!string.IsNullOrWhiteSpace(txtUser.Text) && !string.IsNullOrWhiteSpace(txtPass.Text) && !string.IsNullOrWhiteSpace(txtFname.Text) && !string.IsNullOrWhiteSpace(txtLname.Text))
                 {
 
-                        db.account_insert(txtFname.Text, txtLname.Text, txtUser.Text, txtPass.Text);
-                        rh.account_insert_privileges(txtUser.Text);
-                        db.setup_config(txtCompanyName.Text, txtCompanyAddress.Text, txtCompanyPhone.Text, cbBusinessType.SelectedItem.ToString(), pbLogo.ImageLocation);
-                        x.alert("Notification: ", "System configuration success.", "success");
+                    db.account_insert(txtFname.Text, txtLname.Text, txtUser.Text, txtPass.Text);
+                    rh.account_insert_privileges(txtUser.Text);
+                    db.setup_config(txtCompanyName.Text, txtCompanyAddress.Text, txtCompanyPhone.Text, cbBusinessType.SelectedItem.ToString(), pbLogo.ImageLocation);
+                    x.alert("Notification: ", "System configuration success.", "success");
 
-                        speech.CancelSpeaking();
-                        speech.SpeakFirst("That is all we need for now. Thank you for choosing System Development Solution as your partner in your business.");
+                    speech.CancelSpeaking();
+                    speech.SpeakFirst("That is all we need for now. Thank you for choosing System Development Solution as your partner in your business.");
 
-                        this.Close();
+                    result = DialogResult.Yes;
+                    this.Close();
                 }
                 else
                 {

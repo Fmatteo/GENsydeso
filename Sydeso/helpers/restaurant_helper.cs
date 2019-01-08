@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace Sydeso
 {
-    class restaurant_helper
+    class restaurant_helper : database_helper
     {
-        private MySqlConnection con;
+        /*private MySqlConnection con;
         private MySqlCommand cmd;
         private MySqlDataReader dr;
 
@@ -20,7 +20,7 @@ namespace Sydeso
         {
             con.Close();
             con.Dispose();
-        }
+        }*/
 
         public void account_insert_privileges(String user)
         {
