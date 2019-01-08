@@ -97,10 +97,10 @@ namespace Sydeso
                     db.account_insert(txtFname.Text, txtLname.Text, txtUser.Text, txtPass.Text);
                     rh.account_insert_privileges(txtUser.Text);
                     db.setup_config(txtCompanyName.Text, txtCompanyAddress.Text, txtCompanyPhone.Text, cbBusinessType.SelectedItem.ToString(), pbLogo.ImageLocation);
-                    x.alert("Notification: ", "System configuration success.\nPlease restart the app.", "success");
+                    x.alert("Notification: ", "System configuration success.\nPlease restart the application.", "success");
 
                     speech.CancelSpeaking();
-                    speech.SpeakFirst("That is all we need for now. Thank you for choosing System Development Solution as your partner in your business. Please re-launch the app.");
+                    speech.SpeakFirst("That is all we need for now. Thank you for choosing System Development Solution as your partner in your business. Please re-launch the application.");
 
                     result = "1"; this.Close();
                 }

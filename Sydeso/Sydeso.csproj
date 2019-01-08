@@ -94,17 +94,65 @@
     <Compile Include="pages\Notification.Designer.cs">
       <DependentUpon>Notification.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\restaurant\restaurant_accounts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_accounts.Designer.cs">
+      <DependentUpon>restaurant_accounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_customers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_customers.Designer.cs">
+      <DependentUpon>restaurant_customers.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\restaurant\restaurant_dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="pages\restaurant\restaurant_dashboard.Designer.cs">
       <DependentUpon>restaurant_dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\restaurant\restaurant_employees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_employees.Designer.cs">
+      <DependentUpon>restaurant_employees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_history.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_history.Designer.cs">
+      <DependentUpon>restaurant_history.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\restaurant\restaurant_nav.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="pages\restaurant\restaurant_nav.Designer.cs">
       <DependentUpon>restaurant_nav.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_order_pos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_order_pos.Designer.cs">
+      <DependentUpon>restaurant_order_pos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_products.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_products.Designer.cs">
+      <DependentUpon>restaurant_products.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_sales_expenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_sales_expenses.Designer.cs">
+      <DependentUpon>restaurant_sales_expenses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_tables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_tables.Designer.cs">
+      <DependentUpon>restaurant_tables.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,11 +171,35 @@
     <EmbeddedResource Include="pages\Notification.resx">
       <DependentUpon>Notification.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_accounts.resx">
+      <DependentUpon>restaurant_accounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_customers.resx">
+      <DependentUpon>restaurant_customers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_dashboard.resx">
       <DependentUpon>restaurant_dashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_employees.resx">
+      <DependentUpon>restaurant_employees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_history.resx">
+      <DependentUpon>restaurant_history.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_nav.resx">
       <DependentUpon>restaurant_nav.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_order_pos.resx">
+      <DependentUpon>restaurant_order_pos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_products.resx">
+      <DependentUpon>restaurant_products.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_sales_expenses.resx">
+      <DependentUpon>restaurant_sales_expenses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_tables.resx">
+      <DependentUpon>restaurant_tables.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -167,6 +239,9 @@
     <Content Include="icons\icon_back.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="icons\icon_back_red.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icons\icon_customer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -204,6 +279,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\icon_next.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_next_red.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\icon_order.png">

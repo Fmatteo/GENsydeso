@@ -110,7 +110,7 @@
             // 
             // timer
             // 
-            this.timer.Interval = 4000;
+            this.timer.Interval = 6000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // Notification

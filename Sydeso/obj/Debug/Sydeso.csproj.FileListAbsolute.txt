@@ -59,3 +59,13 @@ C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_mic_off.png
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_mic_on.png
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_settings.png
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_shutdown.png
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_accounts.resources
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_customers.resources
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_employees.resources
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_history.resources
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_order_pos.resources
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_products.resources
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_sales_expenses.resources
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_tables.resources
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_back_red.png
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_next_red.png
