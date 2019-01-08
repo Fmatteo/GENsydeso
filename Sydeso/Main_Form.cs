@@ -27,7 +27,8 @@ namespace Sydeso
         speech_helper speech = new speech_helper();
         List<Object> config;
         List<String> account_details;
-        private String _user; 
+        private String _user;
+        restaurant_nav res_nav = new restaurant_nav();
         #endregion
 
         public Main_Form()
@@ -67,7 +68,6 @@ namespace Sydeso
             switch (config[4].ToString())
             {
                 case "Restaurant":
-                    restaurant_nav res_nav = new restaurant_nav();
                     res_nav.Parent = this;
                     res_nav.Dock = DockStyle.Left;
                     res_nav.BringToFront();
@@ -113,6 +113,7 @@ namespace Sydeso
             Application.Exit();
         }
 
+        restaurant_dashboard res_dash = null;
         private void Menu_Item_Click(object sender, EventArgs e)
         {
             Control c = sender as Control;
@@ -120,14 +121,26 @@ namespace Sydeso
             switch (c.Name)
             {
                 case "btnDashboard_Res":
-                    restaurant_dashboard res_dash = new restaurant_dashboard();
-                    res_dash.TopLevel = false;
-                    res_dash.Parent = this.pnl_content;
-                    res_dash.Show();
+                    if (res_dash == null)
+                    {
+                        res_dash = new restaurant_dashboard();
+                        res_dash.TopLevel = false;
+                        res_dash.Parent = this.pnl_content;
+                        res_dash.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                        res_dash.FormClosed += Res_dash_FormClosed;
+                        res_dash.Show();
+                        res_nav.btnDashboard_Res.Normalcolor = Color.FromArgb(233, 233, 233);
+                    }
                     break;
                 default:
                     break;
             }
+        }
+
+        private void Res_dash_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            res_nav.btnDashboard_Res.Normalcolor = Color.White;
+            res_dash = null;
         }
 
         #region Voice Command

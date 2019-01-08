@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bunifu_UI_v1.4">
       <HintPath>..\..\..\..\Users\Jhumar Rosales\Downloads\Bunifu_UI_v1.4.dll</HintPath>
@@ -156,6 +159,8 @@
     <Content Include="database\sydeso.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="icon.ico" />
     <Content Include="icons\icon_account.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
