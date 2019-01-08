@@ -102,7 +102,7 @@ namespace Sydeso
                     speech.CancelSpeaking();
                     speech.SpeakFirst("That is all we need for now. Thank you for choosing System Development Solution as your partner in your business. Please re-launch the application.");
 
-                    result = "1"; this.Close();
+                    Environment.Exit(0);
                 }
                 else
                 {

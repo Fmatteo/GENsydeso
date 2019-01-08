@@ -37,7 +37,6 @@ C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.Wizard.resources
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.csproj.GenerateResource.Cache
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.exe
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.pdb
-C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.csprojResolveAssemblyReference.cache
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_menu.png
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_menu_vertical.png
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\Bunifu_UI_v1.4.dll

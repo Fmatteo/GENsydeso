@@ -82,8 +82,12 @@ namespace Sydeso
                 default:
                     break;
             }
-            this.pnl_content.BringToFront(); 
+            this.pnl_content.BringToFront();
             #endregion
+
+            // Loads the icon..
+            if (config[5].ToString() != "") // Check if there is an icon saved..
+                pbIcon.Image = (Image)config[5];
         }
 
         #region Draggable
@@ -188,6 +192,7 @@ namespace Sydeso
                         res_dash.TopLevel = false;
                         res_dash.Parent = this.pnl_content;
                         res_dash.FormClosed += Res_dash_FormClosed;
+                        res_dash.Left = (this.pnl_content.Width - res_dash.Width) / 2;
                         res_dash.Show();
                         res_nav.btnDashboard_Res.Normalcolor = Color.FromArgb(233, 233, 233);
                     }
@@ -216,6 +221,7 @@ namespace Sydeso
                         res_prod.TopLevel = false;
                         res_prod.Parent = this.pnl_content;
                         res_prod.FormClosed += Res_prod_FormClosed;
+                        res_prod.Width = this.pnl_content.Width;
                         res_prod.Show();
                         res_nav.btnProducts_Res.Normalcolor = Color.FromArgb(233, 233, 233);
                     }

@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login_DTR));
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
-            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.btnLogin = new Bunifu.Framework.UI.BunifuFlatButton();
             this.borderedPanel2 = new Sydeso.BorderedPanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -43,8 +42,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.customPanel1 = new Sydeso.CustomPanel();
             this.label1 = new System.Windows.Forms.Label();
+            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.pnl_toolbar = new Sydeso.CustomPanel();
             this.btnExit = new System.Windows.Forms.PictureBox();
+            this.customPanel2 = new Sydeso.CustomPanel();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.borderedPanel2.SuspendLayout();
@@ -88,22 +89,6 @@
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
             // 
-            // metroTabPage2
-            // 
-            this.metroTabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.metroTabPage2.HorizontalScrollbarBarColor = true;
-            this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage2.HorizontalScrollbarSize = 10;
-            this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(480, 356);
-            this.metroTabPage2.TabIndex = 1;
-            this.metroTabPage2.Text = "Date Time Record";
-            this.metroTabPage2.UseCustomBackColor = true;
-            this.metroTabPage2.VerticalScrollbarBarColor = true;
-            this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage2.VerticalScrollbarSize = 10;
-            // 
             // btnLogin
             // 
             this.btnLogin.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
@@ -119,7 +104,7 @@
             this.btnLogin.Iconimage_Selected = null;
             this.btnLogin.IconZoom = 90D;
             this.btnLogin.IsTab = false;
-            this.btnLogin.Location = new System.Drawing.Point(269, 249);
+            this.btnLogin.Location = new System.Drawing.Point(269, 290);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
             this.btnLogin.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(193)))), ((int)(((byte)(178)))));
@@ -138,7 +123,7 @@
             this.borderedPanel2.Controls.Add(this.pictureBox2);
             this.borderedPanel2.Controls.Add(this.txtPass);
             this.borderedPanel2.Controls.Add(this.label3);
-            this.borderedPanel2.Location = new System.Drawing.Point(62, 186);
+            this.borderedPanel2.Location = new System.Drawing.Point(62, 212);
             this.borderedPanel2.Name = "borderedPanel2";
             this.borderedPanel2.Padding = new System.Windows.Forms.Padding(2);
             this.borderedPanel2.Size = new System.Drawing.Size(357, 57);
@@ -184,7 +169,7 @@
             this.borderedPanel1.Controls.Add(this.pictureBox1);
             this.borderedPanel1.Controls.Add(this.txtUser);
             this.borderedPanel1.Controls.Add(this.label2);
-            this.borderedPanel1.Location = new System.Drawing.Point(62, 123);
+            this.borderedPanel1.Location = new System.Drawing.Point(62, 137);
             this.borderedPanel1.Name = "borderedPanel1";
             this.borderedPanel1.Padding = new System.Windows.Forms.Padding(2);
             this.borderedPanel1.Size = new System.Drawing.Size(357, 57);
@@ -225,6 +210,7 @@
             // customPanel1
             // 
             this.customPanel1.BackColor = System.Drawing.Color.White;
+            this.customPanel1.Controls.Add(this.customPanel2);
             this.customPanel1.Controls.Add(this.label1);
             this.customPanel1.Location = new System.Drawing.Point(62, 25);
             this.customPanel1.Name = "customPanel1";
@@ -236,11 +222,27 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.label1.Location = new System.Drawing.Point(13, 15);
+            this.label1.Location = new System.Drawing.Point(49, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(259, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "Log in to your Account";
+            // 
+            // metroTabPage2
+            // 
+            this.metroTabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.metroTabPage2.HorizontalScrollbarBarColor = true;
+            this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.HorizontalScrollbarSize = 10;
+            this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage2.Name = "metroTabPage2";
+            this.metroTabPage2.Size = new System.Drawing.Size(480, 356);
+            this.metroTabPage2.TabIndex = 1;
+            this.metroTabPage2.Text = "Date Time Record";
+            this.metroTabPage2.UseCustomBackColor = true;
+            this.metroTabPage2.VerticalScrollbarBarColor = true;
+            this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.VerticalScrollbarSize = 10;
             // 
             // pnl_toolbar
             // 
@@ -267,6 +269,15 @@
             this.btnExit.TabIndex = 1;
             this.btnExit.TabStop = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // customPanel2
+            // 
+            this.customPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
+            this.customPanel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.customPanel2.Location = new System.Drawing.Point(0, 0);
+            this.customPanel2.Name = "customPanel2";
+            this.customPanel2.Size = new System.Drawing.Size(10, 63);
+            this.customPanel2.TabIndex = 1;
             // 
             // Login_DTR
             // 
@@ -313,5 +324,6 @@
         private Bunifu.Framework.UI.BunifuFlatButton btnLogin;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private CustomPanel customPanel2;
     }
 }

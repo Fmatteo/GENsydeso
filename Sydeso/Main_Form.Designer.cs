@@ -31,11 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Form));
             this.pnl_content = new Sydeso.CustomPanel();
             this.pnl_toolbar = new Sydeso.CustomPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pbIcon = new System.Windows.Forms.PictureBox();
             this.btnToggleVoiceCommand = new System.Windows.Forms.PictureBox();
             this.btnSettings = new System.Windows.Forms.PictureBox();
             this.btnShutdown = new System.Windows.Forms.PictureBox();
             this.btnExit = new System.Windows.Forms.PictureBox();
             this.pnl_toolbar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnToggleVoiceCommand)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnShutdown)).BeginInit();
@@ -54,6 +57,8 @@
             // pnl_toolbar
             // 
             this.pnl_toolbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
+            this.pnl_toolbar.Controls.Add(this.label1);
+            this.pnl_toolbar.Controls.Add(this.pbIcon);
             this.pnl_toolbar.Controls.Add(this.btnToggleVoiceCommand);
             this.pnl_toolbar.Controls.Add(this.btnSettings);
             this.pnl_toolbar.Controls.Add(this.btnShutdown);
@@ -66,6 +71,26 @@
             this.pnl_toolbar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnl_toolbar_MouseDown);
             this.pnl_toolbar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnl_toolbar_MouseMove);
             this.pnl_toolbar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnl_toolbar_MouseUp);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(71, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(230, 32);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "APPLICATION NAME";
+            // 
+            // pbIcon
+            // 
+            this.pbIcon.Location = new System.Drawing.Point(25, 10);
+            this.pbIcon.Name = "pbIcon";
+            this.pbIcon.Size = new System.Drawing.Size(40, 40);
+            this.pbIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbIcon.TabIndex = 4;
+            this.pbIcon.TabStop = false;
             // 
             // btnToggleVoiceCommand
             // 
@@ -129,6 +154,8 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Main_Form_Load);
             this.pnl_toolbar.ResumeLayout(false);
+            this.pnl_toolbar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnToggleVoiceCommand)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSettings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnShutdown)).EndInit();
@@ -144,6 +171,8 @@
         private System.Windows.Forms.PictureBox btnToggleVoiceCommand;
         private System.Windows.Forms.PictureBox btnSettings;
         private System.Windows.Forms.PictureBox btnShutdown;
+        private System.Windows.Forms.PictureBox pbIcon;
+        private System.Windows.Forms.Label label1;
     }
 }
 
