@@ -23,7 +23,7 @@ namespace Sydeso
         }
 
         database_helper db = new database_helper();
-        general_helper x = new general_helper(); // Loads the general helper class for notifs, etc..
+
         public Login_DTR()
         {
             InitializeComponent();
@@ -72,17 +72,17 @@ namespace Sydeso
                 if (db.account_login(txtUser.Text, txtPass.Text))
                 {
                     result = txtUser.Text;
-                    x.alert("Notification: ", "Login Success", "success");
+                    db.alert("Notification: ", "Login Success", "success");
                     this.Close();
                 }
                 else
                 {
-                    x.alert("Error: ", "Invalid Username or Password.\nPlease try again..", "danger");
+                    db.alert("Error: ", "Invalid Username or Password.\nPlease try again..", "danger");
                 }
             }
             else
             {
-                x.alert("Error: ", "Please fill up all the required fields to proceed.", "danger");
+                db.alert("Error: ", "Please fill up all the required fields to proceed.", "danger");
             }
         }
     }

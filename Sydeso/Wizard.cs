@@ -23,7 +23,6 @@ namespace Sydeso
         }
 
         speech_helper speech = new speech_helper();
-        general_helper x = new general_helper();
         database_helper db = new database_helper();
         restaurant_helper rh = new restaurant_helper();
 
@@ -67,7 +66,7 @@ namespace Sydeso
                 {
                     speech.CancelSpeaking();
                     speech.Speak("Please input all the necessary fields to proceed.");
-                    x.alert("Error: ", "Please fill up all required fields to proceed.", "danger");
+                    db.alert("Error: ", "Please fill up all required fields to proceed.", "danger");
                 }
             }
             else if (groupBox2.Enabled == true)
@@ -86,7 +85,7 @@ namespace Sydeso
                 {
                     speech.CancelSpeaking();
                     speech.Speak("Please provide the business type, the system needed it.");
-                    x.alert("Error: ", "Please fill up all required fields to proceed.", "danger");
+                    db.alert("Error: ", "Please fill up all required fields to proceed.", "danger");
                 }
             }
             else
@@ -97,7 +96,7 @@ namespace Sydeso
                     db.account_insert(txtFname.Text, txtLname.Text, txtUser.Text, txtPass.Text);
                     rh.account_insert_privileges(txtUser.Text);
                     db.setup_config(txtCompanyName.Text, txtCompanyAddress.Text, txtCompanyPhone.Text, cbBusinessType.SelectedItem.ToString(), pbLogo.ImageLocation);
-                    x.alert("Notification: ", "System configuration success.\nPlease restart the application.", "success");
+                    db.alert("Notification: ", "System configuration success.\nPlease restart the application.", "success");
 
                     speech.CancelSpeaking();
                     speech.SpeakFirst("That is all we need for now. Thank you for choosing System Development Solution as your partner in your business. Please re-launch the application.");

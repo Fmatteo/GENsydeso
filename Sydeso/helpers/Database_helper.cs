@@ -10,6 +10,23 @@ namespace Sydeso
 {
     public class database_helper
     {
+        Notification notif = null;
+
+        public void alert(String title, String message, String type)
+        {
+            if (notif == null)
+            {
+                notif = new Notification(title, message, type);
+                notif.FormClosed += Notif_FormClosed;
+                notif.Show();
+            }
+        }
+
+        private void Notif_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        {
+            notif = null;
+        }
+
         public MySqlConnection con;
         public MySqlCommand cmd;
         public MySqlDataReader dr;
@@ -182,7 +199,35 @@ namespace Sydeso
             Disconnect();
 
             return _get_setup_config;
-        } 
+        }
         #endregion
+
+        public String hookDecimal(String str1)
+        {
+            String str = str1;
+            if (!str.Contains("."))
+            {
+                str += ".00";
+            }
+            else
+            {
+                String[] number = str.Split('.');
+                if (number[1].Length == 0)
+                {
+                    str = number[0] + ".00";
+                }
+
+                else if (number[1].Length == 1)
+                {
+                    str = number[0] + "." + number[1] + "0";
+                }
+
+                else
+                {
+                    str = number[0] + "." + number[1][0] + number[1][1];
+                }
+            }
+            return str;
+        }
     }
 }

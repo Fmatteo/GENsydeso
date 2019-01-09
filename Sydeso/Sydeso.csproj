@@ -73,7 +73,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="helpers\database_helper.cs" />
-    <Compile Include="helpers\general_helper.cs" />
     <Compile Include="helpers\restaurant_helper.cs" />
     <Compile Include="helpers\speech_helper.cs" />
     <Compile Include="Login_DTR.cs">
@@ -99,6 +98,12 @@
     </Compile>
     <Compile Include="pages\restaurant\restaurant_accounts.Designer.cs">
       <DependentUpon>restaurant_accounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_category_add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_category_add.Designer.cs">
+      <DependentUpon>restaurant_category_add.cs</DependentUpon>
     </Compile>
     <Compile Include="pages\restaurant\restaurant_customers.cs">
       <SubType>Form</SubType>
@@ -142,6 +147,12 @@
     <Compile Include="pages\restaurant\restaurant_products.Designer.cs">
       <DependentUpon>restaurant_products.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\restaurant\restaurant_products_new.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_products_new.Designer.cs">
+      <DependentUpon>restaurant_products_new.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\restaurant\restaurant_sales_expenses.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +185,9 @@
     <EmbeddedResource Include="pages\restaurant\restaurant_accounts.resx">
       <DependentUpon>restaurant_accounts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_category_add.resx">
+      <DependentUpon>restaurant_category_add.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_customers.resx">
       <DependentUpon>restaurant_customers.cs</DependentUpon>
     </EmbeddedResource>
@@ -194,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_products.resx">
       <DependentUpon>restaurant_products.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_products_new.resx">
+      <DependentUpon>restaurant_products_new.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_sales_expenses.resx">
       <DependentUpon>restaurant_sales_expenses.cs</DependentUpon>
@@ -236,6 +253,12 @@
     <Content Include="icons\icon_account.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="icons\icon_add.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_add_red.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icons\icon_back.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -249,6 +272,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\icon_dashboard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_delete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_edit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\icon_emp.png">
@@ -278,6 +307,9 @@
     <Content Include="icons\icon_mic_on.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="icons\icon_name.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icons\icon_next.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -290,10 +322,25 @@
     <Content Include="icons\icon_password.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="icons\icon_price.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_print.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icons\icon_product.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="icons\icon_qty.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_reorder.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icons\icon_sales.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_search.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\icon_settings.png">
@@ -305,6 +352,12 @@
     <Content Include="icons\icon_shutdown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="icons\icon_stock_in.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_stock_out.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icons\icon_success.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -312,6 +365,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\icon_thumbnail.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_thumbnail_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\icon_username.png">
