@@ -1,6 +1,6 @@
 ﻿namespace Sydeso
 {
-    partial class restaurant_products_new
+    partial class restaurant_products_update
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(restaurant_products_new));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(restaurant_products_update));
             this.pnl_container = new Sydeso.CustomPanel();
             this.borderedPanel5 = new Sydeso.BorderedPanel();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
@@ -96,7 +96,7 @@
             this.pnl_container.Margin = new System.Windows.Forms.Padding(0);
             this.pnl_container.Name = "pnl_container";
             this.pnl_container.Size = new System.Drawing.Size(400, 360);
-            this.pnl_container.TabIndex = 1;
+            this.pnl_container.TabIndex = 3;
             // 
             // borderedPanel5
             // 
@@ -408,7 +408,7 @@
             this.pnl_toolbar.Location = new System.Drawing.Point(0, 0);
             this.pnl_toolbar.Name = "pnl_toolbar";
             this.pnl_toolbar.Size = new System.Drawing.Size(400, 60);
-            this.pnl_toolbar.TabIndex = 0;
+            this.pnl_toolbar.TabIndex = 2;
             this.pnl_toolbar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnl_toolbar_MouseDown);
             this.pnl_toolbar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnl_toolbar_MouseMove);
             this.pnl_toolbar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnl_toolbar_MouseUp);
@@ -433,11 +433,11 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(21, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(167, 21);
+            this.label1.Size = new System.Drawing.Size(200, 21);
             this.label1.TabIndex = 0;
-            this.label1.Text = "CREATE NEW RECORD";
+            this.label1.Text = "UPDATE EXISTING RECORD";
             // 
-            // restaurant_products_new
+            // restaurant_products_update
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -447,7 +447,7 @@
             this.Controls.Add(this.pnl_toolbar);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "restaurant_products_new";
+            this.Name = "restaurant_products_update";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -479,34 +479,34 @@
 
         #endregion
 
-        private CustomPanel pnl_toolbar;
         private CustomPanel pnl_container;
-        private System.Windows.Forms.Button btnYes;
-        private System.Windows.Forms.Button btnNo;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox btnExit;
-        private System.Windows.Forms.PictureBox pbImage;
-        private System.Windows.Forms.Label label2;
         private BorderedPanel borderedPanel5;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.ComboBox cbCategory;
         private BorderedPanel borderedPanel2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.TextBox txtQty;
         private BorderedPanel borderedPanel3;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.TextBox txtReorder;
         private BorderedPanel borderedPanel4;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.TextBox txtPrice;
         private BorderedPanel borderedPanel1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnYes;
+        private System.Windows.Forms.Button btnNo;
         private BorderedPanel borderedPanel6;
-        private System.Windows.Forms.TextBox txtQty;
-        private System.Windows.Forms.TextBox txtReorder;
-        private System.Windows.Forms.TextBox txtPrice;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.ComboBox cbCategory;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pbImage;
+        private CustomPanel pnl_toolbar;
+        private System.Windows.Forms.PictureBox btnExit;
+        private System.Windows.Forms.Label label1;
     }
 }

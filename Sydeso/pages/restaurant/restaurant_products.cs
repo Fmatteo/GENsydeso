@@ -17,7 +17,7 @@ namespace Sydeso
         private int pageSize;
         private int currentPage = 1;
         private int totalPage = 0;
-        private String id;
+        private String id, name, price;
 
         restaurant_helper rh = new restaurant_helper();
         #endregion
@@ -104,6 +104,8 @@ namespace Sydeso
 
             if (c.Text != "  SEARCH")
                 LoadTable(c.Text, currentPage, pageSize);
+            else
+                LoadTable("", currentPage, pageSize);
             c.SelectionStart = c.Text.Length;
         }
         #endregion
@@ -208,6 +210,24 @@ namespace Sydeso
             {
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
                 id = row.Cells[0].Value.ToString();
+                name = row.Cells[1].Value.ToString();
+                price = row.Cells[4].Value.ToString();
+            }
+        }
+
+        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+                id = row.Cells[0].Value.ToString();
+
+                if (restaurant_products_update._Show(id) == DialogResult.Yes)
+                {
+                    rh.alert("Notification: ", "Updating existing record successfully.", "information");
+                    LoadTable("", currentPage, pageSize);
+                    id = "";
+                }
             }
         }
 
@@ -236,16 +256,36 @@ namespace Sydeso
                         }
                     }
                     else
-                        rh.alert("Error: ", "Please specify the product you want to delete.\nSelect first a product then try again.", "danger");
+                        rh.alert("Error: ", "Please specify the product you want to modify.\nSelect first a product then try again.", "danger");
                     break;
 
                 case "btnStockIn":
+                    if (!string.IsNullOrWhiteSpace(id))
+                    {
+                        if (restaurant_products_stock_in._Show(id) == DialogResult.Yes)
+                        {
+                            rh.alert("Notification: ", "Product quantity updated.", "information");
+                            LoadTable("", currentPage, pageSize);
+                            id = "";
+                        }
+                    }
+                    else
+                        rh.alert("Error: ", "Please specify the product you want to modify.\nSelect first a product then try again.", "danger");
                     break;
 
-                case "btnStockOut":
+                default:
+                    if (!string.IsNullOrWhiteSpace(id))
+                    {
+                        if (restaurant_products_stock_out._Show(id, name, price) == DialogResult.Yes)
+                        {
+                            rh.alert("Notification: ", "Product stock out success.", "information");
+                            LoadTable("", currentPage, pageSize);
+                            id = "";
+                        }
+                    }
+                    else
+                        rh.alert("Error: ", "Please specify the product you want to modify.\nSelect first a product then try again.", "danger");
                     break;
-
-                default: break;
             }
         }
         #endregion

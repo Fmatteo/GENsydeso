@@ -84,3 +84,7 @@ C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_qty.png
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_reorder.png
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_thumbnail_1.png
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_category_add.resources
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_products_stock_in.resources
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_remark.png
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_products_stock_out.resources
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_products_update.resources

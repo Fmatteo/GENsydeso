@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 
 namespace Sydeso
@@ -78,6 +79,30 @@ namespace Sydeso
                 });
             }
             return data;
+        }
+
+        private List<Object> _res_product_detail;
+        public List<Object> res_product_detail(String id)
+        {
+            _res_product_detail = new List<Object>();
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM restaurant_products WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                _res_product_detail.Add(dr["ID"]);
+                _res_product_detail.Add(dr["Name"]);
+                _res_product_detail.Add(dr["Qty"]);
+                _res_product_detail.Add(dr["Reorder"]);
+                _res_product_detail.Add(dr["Price"]);
+                _res_product_detail.Add(dr["Category"]);
+                _res_product_detail.Add((Bitmap)Image.FromStream(new MemoryStream((System.Byte[])dr["Image"])));
+            }
+            dr.Close();
+            Disconnect();
+            return _res_product_detail;
         }
         
         public Boolean res_product_insert(String name, String qty, String reorder, String price, String cat, String path)
@@ -163,10 +188,30 @@ namespace Sydeso
             return true;
         }
 
-        public Boolean res_product_stockin(String id, String qty)
+        public Boolean res_product_stock_in(String id, String qty)
         {
             Connect();
-            cmd = new MySqlCommand("UPDATE restaurant_products SET Qty = @qty WHERE ID = @id", con);
+            cmd = new MySqlCommand("UPDATE restaurant_products SET Qty = Qty + @qty WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@qty", Convert.ToInt32(qty));
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+            return true;
+        }
+
+        public Boolean res_product_stock_out(String id, String name, String qty, String price, String total, String remark)
+        {
+            Connect();
+            cmd = new MySqlCommand("INSERT INTO restaurant_stock_out(Name, Qty, Price, Total, Remark)values(@name, @qty, @price, @total, @remark)", con);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@qty", qty);
+            cmd.Parameters.AddWithValue("@price", price);
+            cmd.Parameters.AddWithValue("@total", total);
+            cmd.Parameters.AddWithValue("@remark", remark);
+            Disconnect();
+
+            Connect();
+            cmd = new MySqlCommand("UPDATE restaurant_products SET Qty = Qty - @qty WHERE ID = @id", con);
             cmd.Parameters.AddWithValue("@qty", qty);
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();

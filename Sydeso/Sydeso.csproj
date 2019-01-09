@@ -153,6 +153,24 @@
     <Compile Include="pages\restaurant\restaurant_products_new.Designer.cs">
       <DependentUpon>restaurant_products_new.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\restaurant\restaurant_products_stock_in.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_products_stock_in.Designer.cs">
+      <DependentUpon>restaurant_products_stock_in.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_products_stock_out.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_products_stock_out.Designer.cs">
+      <DependentUpon>restaurant_products_stock_out.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_products_update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_products_update.Designer.cs">
+      <DependentUpon>restaurant_products_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\restaurant\restaurant_sales_expenses.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,6 +230,15 @@
     <EmbeddedResource Include="pages\restaurant\restaurant_products_new.resx">
       <DependentUpon>restaurant_products_new.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_products_stock_in.resx">
+      <DependentUpon>restaurant_products_stock_in.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_products_stock_out.resx">
+      <DependentUpon>restaurant_products_stock_out.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_products_update.resx">
+      <DependentUpon>restaurant_products_update.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_sales_expenses.resx">
       <DependentUpon>restaurant_sales_expenses.cs</DependentUpon>
     </EmbeddedResource>
@@ -248,7 +275,6 @@
     <Content Include="database\sydeso.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="favicon.ico" />
     <Content Include="icon.ico" />
     <Content Include="icons\icon_account.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -332,6 +358,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\icon_qty.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_remark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\icon_reorder.png">
