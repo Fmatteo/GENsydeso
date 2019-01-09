@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DGVPrinterHelper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,11 +19,14 @@ namespace Sydeso
         private int currentPage = 1;
         private int totalPage = 0;
         private String id, name, price;
+        private List<String> acc_detail;
 
         restaurant_helper rh = new restaurant_helper();
         #endregion
-        public restaurant_products()
+        public restaurant_products(String user)
         {
+            this.acc_detail = rh.account_details(user);
+
             InitializeComponent();
             InitializeColumns();
         }
@@ -212,6 +216,25 @@ namespace Sydeso
                 id = row.Cells[0].Value.ToString();
                 name = row.Cells[1].Value.ToString();
                 price = row.Cells[4].Value.ToString();
+            }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.Rows.Count > 0)
+            {
+                DGVPrinter printer = new DGVPrinter();
+                printer.PageSettings.Landscape = true;
+                printer.Title = "Inventory Report as of Today: ";
+                printer.TitleAlignment = StringAlignment.Near;
+                printer.SubTitle = DateTime.Now.ToString("MMMM dd, yyyy");
+                printer.SubTitleAlignment = StringAlignment.Near;
+                printer.SubTitleSpacing = 20;
+
+                printer.HeaderCellAlignment = StringAlignment.Near;
+                printer.CellAlignment = StringAlignment.Near;
+                printer.Footer = string.Format("Prepared by: {0}", acc_detail[1] + " " + acc_detail[2]);
+                printer.PrintPreviewDataGridView(dataGridView1);
             }
         }
 

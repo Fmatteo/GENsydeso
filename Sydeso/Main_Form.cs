@@ -217,7 +217,7 @@ namespace Sydeso
 
                     if (res_prod == null)
                     {
-                        res_prod = new restaurant_products();
+                        res_prod = new restaurant_products(_user);
                         res_prod.TopLevel = false;
                         res_prod.Parent = this.pnl_content;
                         res_prod.FormClosed += Res_prod_FormClosed;

@@ -73,6 +73,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="helpers\database_helper.cs" />
+    <Compile Include="helpers\DGVPrinter.cs" />
     <Compile Include="helpers\restaurant_helper.cs" />
     <Compile Include="helpers\speech_helper.cs" />
     <Compile Include="Login_DTR.cs">

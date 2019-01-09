@@ -49,7 +49,7 @@
             this.borderedPanel2 = new Sydeso.BorderedPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.cbEntries = new System.Windows.Forms.ComboBox();
-            this.bunifuFlatButton1 = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.btnPrint = new Bunifu.Framework.UI.BunifuFlatButton();
             this.borderedPanel1 = new Sydeso.BorderedPanel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -353,7 +353,7 @@
             this.customPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.customPanel1.BackColor = System.Drawing.Color.White;
             this.customPanel1.Controls.Add(this.borderedPanel2);
-            this.customPanel1.Controls.Add(this.bunifuFlatButton1);
+            this.customPanel1.Controls.Add(this.btnPrint);
             this.customPanel1.Controls.Add(this.borderedPanel1);
             this.customPanel1.Controls.Add(this.customPanel2);
             this.customPanel1.Location = new System.Drawing.Point(30, 27);
@@ -405,32 +405,33 @@
             this.cbEntries.TabIndex = 1;
             this.cbEntries.SelectedIndexChanged += new System.EventHandler(this.cbEntries_SelectedIndexChanged);
             // 
-            // bunifuFlatButton1
+            // btnPrint
             // 
-            this.bunifuFlatButton1.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
-            this.bunifuFlatButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bunifuFlatButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
-            this.bunifuFlatButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bunifuFlatButton1.BorderRadius = 0;
-            this.bunifuFlatButton1.ButtonText = "PRINT";
-            this.bunifuFlatButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bunifuFlatButton1.Iconcolor = System.Drawing.Color.Transparent;
-            this.bunifuFlatButton1.Iconimage = ((System.Drawing.Image)(resources.GetObject("bunifuFlatButton1.Iconimage")));
-            this.bunifuFlatButton1.Iconimage_right = null;
-            this.bunifuFlatButton1.Iconimage_right_Selected = null;
-            this.bunifuFlatButton1.Iconimage_Selected = null;
-            this.bunifuFlatButton1.IconZoom = 70D;
-            this.bunifuFlatButton1.IsTab = false;
-            this.bunifuFlatButton1.Location = new System.Drawing.Point(428, 15);
-            this.bunifuFlatButton1.Name = "bunifuFlatButton1";
-            this.bunifuFlatButton1.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
-            this.bunifuFlatButton1.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(163)))), ((int)(((byte)(148)))));
-            this.bunifuFlatButton1.OnHoverTextColor = System.Drawing.Color.White;
-            this.bunifuFlatButton1.selected = false;
-            this.bunifuFlatButton1.Size = new System.Drawing.Size(123, 44);
-            this.bunifuFlatButton1.TabIndex = 2;
-            this.bunifuFlatButton1.Textcolor = System.Drawing.Color.White;
-            this.bunifuFlatButton1.TextFont = new System.Drawing.Font("Calibri", 11F);
+            this.btnPrint.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPrint.BorderRadius = 0;
+            this.btnPrint.ButtonText = "PRINT";
+            this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrint.Iconcolor = System.Drawing.Color.Transparent;
+            this.btnPrint.Iconimage = ((System.Drawing.Image)(resources.GetObject("btnPrint.Iconimage")));
+            this.btnPrint.Iconimage_right = null;
+            this.btnPrint.Iconimage_right_Selected = null;
+            this.btnPrint.Iconimage_Selected = null;
+            this.btnPrint.IconZoom = 70D;
+            this.btnPrint.IsTab = false;
+            this.btnPrint.Location = new System.Drawing.Point(428, 15);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnPrint.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(163)))), ((int)(((byte)(148)))));
+            this.btnPrint.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnPrint.selected = false;
+            this.btnPrint.Size = new System.Drawing.Size(123, 44);
+            this.btnPrint.TabIndex = 2;
+            this.btnPrint.Textcolor = System.Drawing.Color.White;
+            this.btnPrint.TextFont = new System.Drawing.Font("Calibri", 11F);
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // borderedPanel1
             // 
@@ -537,7 +538,7 @@
         private System.Windows.Forms.Label label1;
         private BorderedPanel borderedPanel1;
         private System.Windows.Forms.TextBox txtSearch;
-        private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButton1;
+        private Bunifu.Framework.UI.BunifuFlatButton btnPrint;
         private CustomPanel customPanel4;
         private BorderedPanel borderedPanel2;
         private System.Windows.Forms.Label label2;
