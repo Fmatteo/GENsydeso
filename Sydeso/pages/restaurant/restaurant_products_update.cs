@@ -113,33 +113,23 @@ namespace Sydeso
                 case "btnYes":
                     if (!string.IsNullOrWhiteSpace(txtName.Text) && !string.IsNullOrWhiteSpace(txtPrice.Text))
                     {
-                        String qty = "", reorder = "";
-                        if (!string.IsNullOrWhiteSpace(txtQty.Text))
+                        if (!rh.res_product_name_exist(product_detail[0].ToString(), txtName.Text))
                         {
-                            if (string.IsNullOrWhiteSpace(txtReorder.Text))
+                            if (cbCategory.SelectedIndex >= 0)
                             {
-                                int getQty;
-                                int.TryParse(txtQty.Text, out getQty);
-
-                                reorder = (getQty / 2).ToString();
+                                if (rh.res_product_update(product_detail[0].ToString(), txtName.Text, txtQty.Text, txtReorder.Text, txtPrice.Text, cbCategory.SelectedItem.ToString(), pbImage.ImageLocation))
+                                    result = DialogResult.Yes; this.Close();
                             }
                             else
                             {
-                                reorder = txtReorder.Text;
+                                if (rh.res_product_update(product_detail[0].ToString(), txtName.Text, txtQty.Text, txtReorder.Text, txtPrice.Text, "", pbImage.ImageLocation))
+                                    result = DialogResult.Yes; this.Close();
                             }
-
-                            qty = txtQty.Text;
-                        }
-
-                        if (cbCategory.SelectedIndex >= 0)
-                        {
-                            //if (rh.res_product_update(txtName.Text, qty, reorder, txtPrice.Text, cbCategory.SelectedItem.ToString(), pbImage.ImageLocation))
-                                result = DialogResult.Yes; this.Close();
                         }
                         else
                         {
-                            if (rh.res_product_insert(txtName.Text, qty, reorder, txtPrice.Text, "", pbImage.ImageLocation))
-                                result = DialogResult.Yes; this.Close();
+                            txtName.Focus(); // Focus to the Textbox..
+                            rh.alert("Error: ", "A product with a same name exists.\nChoose another name for this product.", "danger");
                         }
                     }
                     else

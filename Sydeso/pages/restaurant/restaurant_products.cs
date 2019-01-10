@@ -18,7 +18,7 @@ namespace Sydeso
         private int pageSize;
         private int currentPage = 1;
         private int totalPage = 0;
-        private String id, name, price;
+        private String id, name, price, qty;
         private List<String> acc_detail;
 
         restaurant_helper rh = new restaurant_helper();
@@ -208,6 +208,12 @@ namespace Sydeso
         #endregion
 
         #region CRUD Logics
+
+        /// <summary>
+        /// Update Part of CRUD
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -215,10 +221,17 @@ namespace Sydeso
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
                 id = row.Cells[0].Value.ToString();
                 name = row.Cells[1].Value.ToString();
+                qty = row.Cells[2].Value.ToString();
                 price = row.Cells[4].Value.ToString();
             }
         }
+        
 
+        /// <summary>
+        /// This method will print the data inside the datagridview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPrint_Click(object sender, EventArgs e)
         {
             if (dataGridView1.Rows.Count > 0)
@@ -299,11 +312,18 @@ namespace Sydeso
                 default:
                     if (!string.IsNullOrWhiteSpace(id))
                     {
-                        if (restaurant_products_stock_out._Show(id, name, price) == DialogResult.Yes)
+                        if (!string.IsNullOrWhiteSpace(qty) && qty != "0")
                         {
-                            rh.alert("Notification: ", "Product stock out success.", "information");
-                            LoadTable("", currentPage, pageSize);
-                            id = "";
+                            if (restaurant_products_stock_out._Show(id, name, price) == DialogResult.Yes)
+                            {
+                                rh.alert("Notification: ", "Product stock out success.", "information");
+                                LoadTable("", currentPage, pageSize);
+                                id = "";
+                            }
+                        }
+                        else
+                        {
+                            rh.alert("Error: ", "The selected item currently does not have stock.\nPlease select the product with stocks to proceed.", "danger");
                         }
                     }
                     else

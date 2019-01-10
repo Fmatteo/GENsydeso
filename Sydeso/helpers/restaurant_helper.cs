@@ -81,6 +81,23 @@ namespace Sydeso
             return data;
         }
 
+        public Boolean res_product_name_exist(String id, String name)
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM restaurant_products WHERE Name = @name AND ID != @id", con);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return true;
+            }
+            dr.Close();
+            Disconnect();
+            return false;
+        }
+
         private List<Object> _res_product_detail;
         public List<Object> res_product_detail(String id)
         {
@@ -208,6 +225,7 @@ namespace Sydeso
             cmd.Parameters.AddWithValue("@price", price);
             cmd.Parameters.AddWithValue("@total", total);
             cmd.Parameters.AddWithValue("@remark", remark);
+            cmd.ExecuteNonQuery();
             Disconnect();
 
             Connect();

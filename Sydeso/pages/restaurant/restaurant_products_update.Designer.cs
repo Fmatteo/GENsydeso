@@ -161,6 +161,7 @@
             // 
             this.txtQty.BackColor = System.Drawing.Color.White;
             this.txtQty.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtQty.Enabled = false;
             this.txtQty.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtQty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
             this.txtQty.Location = new System.Drawing.Point(31, 5);
@@ -195,6 +196,7 @@
             // 
             this.txtReorder.BackColor = System.Drawing.Color.White;
             this.txtReorder.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtReorder.Enabled = false;
             this.txtReorder.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtReorder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
             this.txtReorder.Location = new System.Drawing.Point(31, 5);
