@@ -42,7 +42,10 @@ namespace Sydeso
             update.txtReorder.Text = product_detail[3].ToString();
             update.txtPrice.Text = rh.hookDecimal(product_detail[4].ToString());
             update.cbCategory.SelectedItem = product_detail[5].ToString();
-            update.pbImage.Image = (Image)product_detail[6];
+
+            if (product_detail[6].ToString() != "")
+                update.pbImage.Image = (Image)product_detail[6];
+
             update.ShowDialog();
             return result;
         }

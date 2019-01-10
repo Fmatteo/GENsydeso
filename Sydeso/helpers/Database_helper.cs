@@ -229,5 +229,11 @@ namespace Sydeso
             }
             return str;
         }
+
+        public String FormatLabel(int num)
+        {
+            String temp = String.Format("{0:n0}", num);
+            return temp;
+        }
     }
 }

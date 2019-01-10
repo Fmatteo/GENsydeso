@@ -115,7 +115,15 @@ namespace Sydeso
                 _res_product_detail.Add(dr["Reorder"]);
                 _res_product_detail.Add(dr["Price"]);
                 _res_product_detail.Add(dr["Category"]);
-                _res_product_detail.Add((Bitmap)Image.FromStream(new MemoryStream((System.Byte[])dr["Image"])));
+
+                try
+                {
+                    _res_product_detail.Add((Bitmap)Image.FromStream(new MemoryStream((System.Byte[])dr["Image"])));
+                }
+                catch (Exception)
+                {
+                    _res_product_detail.Add("");
+                }
             }
             dr.Close();
             Disconnect();
@@ -207,8 +215,15 @@ namespace Sydeso
 
         public Boolean res_product_stock_in(String id, String qty)
         {
+            List<Object> prod_details = res_product_detail(id);
+            String query = "";
+            if (!string.IsNullOrWhiteSpace(prod_details[2].ToString()))
+                query = "UPDATE restaurant_products SET Qty = Qty + @qty WHERE ID = @id";
+            else
+                query = "UPDATE restaurant_products SET Qty = @qty, Reorder = @qty/2 WHERE ID = @id";
+
             Connect();
-            cmd = new MySqlCommand("UPDATE restaurant_products SET Qty = Qty + @qty WHERE ID = @id", con);
+            cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@qty", Convert.ToInt32(qty));
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
@@ -278,6 +293,38 @@ namespace Sydeso
             dr.Close();
             Disconnect();
             return _res_category_view;
+        }
+        #endregion
+
+        #region restaurant_dashboard
+        public int res_stock_reorder()
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT COUNT(*) as reorder FROM restaurant_products WHERE Qty <= Reorder", con);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return Convert.ToInt32(dr["reorder"]);
+            }
+            dr.Close();
+            Disconnect();
+            return 0;
+        }
+
+        public int res_stock_empty()
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT COUNT(*) as empty FROM restaurant_products WHERE Qty = 0", con);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return Convert.ToInt32(dr["empty"]);
+            }
+            dr.Close();
+            Disconnect();
+            return 0;
         }
         #endregion
     }
