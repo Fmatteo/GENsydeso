@@ -132,12 +132,16 @@ namespace Sydeso
             cmd.Parameters.Add(new MySqlParameter("search", search + "%"));
             dr = cmd.ExecuteReader();
 
+            double total = 0;
             while (dr.Read())
             {
                 data.Rows.Add(new Object[] {
-                    dr[0], dr[1], dr[2], dr[3], hookDecimal(dr[4].ToString()), dr[5]
+                    dr[0], dr[1], dr[2], dr[3], dr[5], hookDecimal(dr[4].ToString()), hookDecimal((Convert.ToDouble(dr[2]) * Convert.ToDouble(dr[4])).ToString()) 
                 });
+
+                total += Convert.ToDouble(dr[2]) * Convert.ToDouble(dr[4]);
             }
+            data.Rows.Add("", "", "", "", "", "Grand Total: ", hookDecimal(total.ToString()));
             return data;
         }
 

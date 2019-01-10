@@ -37,12 +37,13 @@ namespace Sydeso
         /// </summary>
         private void InitializeColumns()
         {
-            dt.Columns.Add("Product Code", typeof(int));
+            dt.Columns.Add("Product Code");
             dt.Columns.Add("Product Name");
-            dt.Columns.Add("Qty.", typeof(int));
-            dt.Columns.Add("Reorder Point", typeof(int));
-            dt.Columns.Add("Price");
+            dt.Columns.Add("Qty.");
+            dt.Columns.Add("Reorder Point");
             dt.Columns.Add("Category");
+            dt.Columns.Add("Price");
+            dt.Columns.Add("Amount");
         }
 
         /// <summary>
@@ -225,7 +226,21 @@ namespace Sydeso
                 price = row.Cells[4].Value.ToString();
             }
         }
-        
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells["Price"].Value.ToString() == "Grand Total: ")
+                {
+                    row.DefaultCellStyle.BackColor = Color.FromArgb(205, 49, 49);
+                    row.DefaultCellStyle.ForeColor = Color.White;
+                    row.DefaultCellStyle.SelectionBackColor = Color.FromArgb(205, 49, 49);
+                    row.DefaultCellStyle.SelectionForeColor = Color.White;
+                }
+            }
+        }
+
 
         /// <summary>
         /// This method will print the data inside the datagridview
