@@ -9,22 +9,6 @@ namespace Sydeso
 {
     class restaurant_helper : database_helper
     {
-        /*private MySqlConnection con;
-        private MySqlCommand cmd;
-        private MySqlDataReader dr;
-
-        private void Connect()
-        {
-            con = new MySqlConnection("server=localhost; user=root; database=sydeso");
-            con.Open();
-        }
-
-        private void Disconnect()
-        {
-            con.Close();
-            con.Dispose();
-        }*/
-
         #region restaurant_accounts
         public void account_insert_privileges(String user)
         {
