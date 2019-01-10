@@ -85,6 +85,23 @@ namespace Sydeso
 
         public Boolean account_update_privileges(System.Windows.Forms.DataGridView data)
         {
+            Connect();
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                cmd = new MySqlCommand("UPDATE restaurant_accounts_privileges SET Dashboard = @dash, Products = @prod, Order_POS = @order, Sales_Expenses = @sales, Tables = @table, Employees = @emp, Customers = @cust, Accounts = @acc, History = @hist WHERE Account_ID = @id", con);
+                cmd.Parameters.AddWithValue("", Convert.ToBoolean(data[2, i].Value.ToString()) ? 1 : 0);
+                cmd.Parameters.AddWithValue("", Convert.ToBoolean(data[3, i].Value.ToString()) ? 1 : 0);
+                cmd.Parameters.AddWithValue("", Convert.ToBoolean(data[4, i].Value.ToString()) ? 1 : 0);
+                cmd.Parameters.AddWithValue("", Convert.ToBoolean(data[5, i].Value.ToString()) ? 1 : 0);
+                cmd.Parameters.AddWithValue("", Convert.ToBoolean(data[6, i].Value.ToString()) ? 1 : 0);
+                cmd.Parameters.AddWithValue("", Convert.ToBoolean(data[7, i].Value.ToString()) ? 1 : 0);
+                cmd.Parameters.AddWithValue("", Convert.ToBoolean(data[8, i].Value.ToString()) ? 1 : 0);
+                cmd.Parameters.AddWithValue("", Convert.ToBoolean(data[9, i].Value.ToString()) ? 1 : 0);
+                cmd.Parameters.AddWithValue("", Convert.ToBoolean(data[10, i].Value.ToString()) ? 1 : 0);
+                cmd.Parameters.AddWithValue("", Convert.ToBoolean(data[0, i].Value.ToString()) ? 1 : 0);
+                cmd.ExecuteNonQuery();
+            }
+            Disconnect();
             return true;
         }
         #endregion

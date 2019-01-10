@@ -87,3 +87,4 @@ C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.Wizard.resources
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.csproj.GenerateResource.Cache
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.exe
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.pdb
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.csprojResolveAssemblyReference.cache

@@ -109,6 +109,39 @@ namespace Sydeso
             Disconnect();
             return _account_details;
         }
+
+        public Boolean account_update(String id, String fname, String lname, String user, String pass)
+        {
+            if (account_username_exist(id, user))
+                return false;
+
+            Connect();
+            cmd = new MySqlCommand("UPDATE system_accounts SET Firstname = @fname, Lastname = @lname, Username = @user, Password = @pass WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@fname", fname);
+            cmd.Parameters.AddWithValue("@lname", lname);
+            cmd.Parameters.AddWithValue("@user", user);
+            cmd.Parameters.AddWithValue("@pass", hashPass(pass));
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+
+            return true;
+        }
+
+        public Boolean account_username_exist(String id, String user)
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT Username FROM system_accounts WHERE Username = @user AND ID != @id", con);
+            cmd.Parameters.AddWithValue("@user", user);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            { return true; }
+            dr.Close();
+            Disconnect();
+            return false;
+        }
         #endregion
 
         #region System Config

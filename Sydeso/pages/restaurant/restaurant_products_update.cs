@@ -46,6 +46,9 @@ namespace Sydeso
             if (product_detail[6].ToString() != "")
                 update.pbImage.Image = (Image)product_detail[6];
 
+            if (string.IsNullOrWhiteSpace(product_detail[2].ToString()))
+                update.txtReorder.Enabled = false;
+
             update.ShowDialog();
             return result;
         }
