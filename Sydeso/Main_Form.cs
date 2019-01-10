@@ -23,12 +23,20 @@ namespace Sydeso
         }
 
         #region Variables
+        // Helpers
         database_helper db = new database_helper();
         speech_helper speech = new speech_helper();
+        restaurant_helper rh = new restaurant_helper();
+
         List<Object> config;
         List<String> account_details;
+
         private String _user;
+
+        // Restaurant Variables
         restaurant_nav res_nav = new restaurant_nav();
+        private List<Boolean> res_priv;
+        private List<Control> res_navs = new List<Control>();
         #endregion
 
         public Main_Form()
@@ -68,6 +76,9 @@ namespace Sydeso
             switch (config[4].ToString())
             {
                 case "Restaurant":
+                    // Get the account privileges base on the user
+                    res_priv = rh.account_privileges_detail(account_details[0]);
+
                     res_nav.Parent = this;
                     res_nav.Dock = DockStyle.Left;
                     res_nav.BringToFront();
@@ -75,7 +86,18 @@ namespace Sydeso
 
                     foreach (Control c in res_nav.pnl_sidemenu.Controls)
                     {
-                        c.Click += Menu_Item_Click;
+                        if (c is Bunifu.Framework.UI.BunifuFlatButton)
+                        {
+                            c.Click += Menu_Item_Click;
+                            res_navs.Add(c);
+                        }   
+                    }
+
+                    // Checks the account privileges if they can access each and every module.
+                    for (int i = 0; i < res_priv.Count - 1; i++)
+                    {
+                        if (!res_priv[i])
+                            res_navs[i].Visible = false;
                     }
 
                     break;
@@ -130,7 +152,7 @@ namespace Sydeso
             switch (config[4].ToString())
             {
                 case "Restaurant":
-                    if (res_dash == null)
+                    if (res_dash == null && res_priv[0])
                     {
                         res_dash = new restaurant_dashboard();
                         res_dash.TopLevel = false;

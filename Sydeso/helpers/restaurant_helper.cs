@@ -28,6 +28,65 @@ namespace Sydeso
             cmd.ExecuteNonQuery();
             Disconnect();
         }
+
+        private List<Boolean> _account_privileges_detail;
+        public List<Boolean> account_privileges_detail(String id)
+        {
+            _account_privileges_detail = new List<Boolean>();
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM restaurant_accounts_privileges WHERE Account_ID = @id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                _account_privileges_detail.Add(Convert.ToBoolean(dr[2])); // Dashboard up to..
+                _account_privileges_detail.Add(Convert.ToBoolean(dr[3]));
+                _account_privileges_detail.Add(Convert.ToBoolean(dr[4]));
+                _account_privileges_detail.Add(Convert.ToBoolean(dr[5]));
+                _account_privileges_detail.Add(Convert.ToBoolean(dr[6]));
+                _account_privileges_detail.Add(Convert.ToBoolean(dr[7]));
+                _account_privileges_detail.Add(Convert.ToBoolean(dr[8]));
+                _account_privileges_detail.Add(Convert.ToBoolean(dr[9]));
+                _account_privileges_detail.Add(Convert.ToBoolean(dr[10])); // History
+            }
+            dr.Close();
+            Disconnect();
+            return _account_privileges_detail;
+        }
+
+        public DataTable account_view(DataTable data, String id, String search)
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT system_accounts.ID, system_accounts.Firstname, system_accounts.Lastname, restaurant_accounts_privileges.Dashboard, restaurant_accounts_privileges.Products, restaurant_accounts_privileges.Order_POS, restaurant_accounts_privileges.Sales_Expenses, restaurant_accounts_privileges.Tables, restaurant_accounts_privileges.Employees, restaurant_accounts_privileges.Customers, restaurant_accounts_privileges.Accounts, restaurant_accounts_privileges.History INNER JOIN restaurant_accounts_privileges ON system_accounts.ID = restaurant_accounts_privileges.Account_ID WHERE system_accounts.ID != @id AND (system_accounts.Firstname LIKE @search OR system_accounts.Lastname LIKE @search OR system_accounts.Account_ID LIKE @search)", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@search", search + "%");
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                data.Rows.Add(new Object[] {
+                    dr[0], dr[1] + " " + dr[2],
+                    Convert.ToBoolean(dr[3]),
+                    Convert.ToBoolean(dr[4]),
+                    Convert.ToBoolean(dr[5]),
+                    Convert.ToBoolean(dr[6]),
+                    Convert.ToBoolean(dr[7]),
+                    Convert.ToBoolean(dr[8]),
+                    Convert.ToBoolean(dr[9]),
+                    Convert.ToBoolean(dr[10]),
+                    Convert.ToBoolean(dr[11])
+                });
+            }
+            dr.Close();
+            Disconnect();
+            return data;
+        }
+
+        public Boolean account_update_privileges(System.Windows.Forms.DataGridView data)
+        {
+            return true;
+        }
         #endregion
 
         #region restaurant_products
