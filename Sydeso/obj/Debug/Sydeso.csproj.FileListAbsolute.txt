@@ -88,3 +88,6 @@ C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.csproj.GenerateResource.Cache
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.exe
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.pdb
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.csprojResolveAssemblyReference.cache
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_accounts_new.resources
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_hide_red.png
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_show_red.png

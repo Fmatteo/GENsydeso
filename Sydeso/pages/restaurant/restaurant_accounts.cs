@@ -240,7 +240,10 @@ namespace Sydeso
             switch (c.Name)
             {
                 case "btnNew":
-                    
+                    if (restaurant_accounts_new._Show() == DialogResult.Yes)
+                    {
+                        LoadTable("", currentPage, pageSize);
+                    }
                     break;
 
                 default:

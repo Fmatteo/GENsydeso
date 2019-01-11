@@ -57,8 +57,11 @@ namespace Sydeso
         }
 
         #region System Accounts
-        public void account_insert(String fname, String lname, String user, String pass)
+        public Boolean account_insert(String fname, String lname, String user, String pass)
         {
+            if (account_username_exist("0", user))
+                return false;
+
             Connect();
             cmd = new MySqlCommand("INSERT INTO system_accounts(Firstname, Lastname, Username, Password)values(@fname, @lname, @user, @pass)", con);
             cmd.Parameters.AddWithValue("@fname", fname);
@@ -67,6 +70,8 @@ namespace Sydeso
             cmd.Parameters.AddWithValue("@pass", hashPass(pass));
             cmd.ExecuteNonQuery();
             Disconnect();
+
+            return true;
         }
 
         public Boolean account_login(String user, String pass)

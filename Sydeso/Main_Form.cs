@@ -412,6 +412,7 @@ namespace Sydeso
                         res_acc.TopLevel = false;
                         res_acc.Parent = this.pnl_content;
                         res_acc.FormClosed += Res_acc_FormClosed;
+                        res_acc.Width = this.pnl_content.Width;
                         res_acc.Show();
                         res_nav.btnAccounts_Res.Normalcolor = Color.FromArgb(233, 233, 233);
                     }

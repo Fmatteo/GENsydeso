@@ -238,6 +238,25 @@ namespace Sydeso
                     row.DefaultCellStyle.SelectionBackColor = Color.FromArgb(205, 49, 49);
                     row.DefaultCellStyle.SelectionForeColor = Color.White;
                 }
+
+                if (!string.IsNullOrWhiteSpace(row.Cells["Qty."].Value.ToString()))
+                {
+                    if (Convert.ToInt32(row.Cells["Qty."].Value) <= Convert.ToInt32(row.Cells["Reorder Point"].Value))
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Yellow;
+                        row.DefaultCellStyle.ForeColor = Color.Black;
+                        row.DefaultCellStyle.SelectionBackColor = Color.Yellow;
+                        row.DefaultCellStyle.SelectionForeColor = Color.Black;
+                    }
+
+                    if (row.Cells["Qty."].Value.ToString() == "0")
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Teal;
+                        row.DefaultCellStyle.ForeColor = Color.White;
+                        row.DefaultCellStyle.SelectionBackColor = Color.Teal;
+                        row.DefaultCellStyle.SelectionForeColor = Color.White;
+                    }
+                }
             }
         }
 

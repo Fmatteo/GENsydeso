@@ -100,6 +100,12 @@
     <Compile Include="pages\restaurant\restaurant_accounts.Designer.cs">
       <DependentUpon>restaurant_accounts.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\restaurant\restaurant_accounts_new.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_accounts_new.Designer.cs">
+      <DependentUpon>restaurant_accounts_new.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\restaurant\restaurant_category_add.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_accounts.resx">
       <DependentUpon>restaurant_accounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_accounts_new.resx">
+      <DependentUpon>restaurant_accounts_new.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_category_add.resx">
       <DependentUpon>restaurant_category_add.cs</DependentUpon>
@@ -316,6 +325,9 @@
     <Content Include="icons\icon_hide.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="icons\icon_hide_red.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icons\icon_history.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -377,6 +389,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\icon_show.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_show_red.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\icon_shutdown.png">
