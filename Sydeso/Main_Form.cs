@@ -408,7 +408,7 @@ namespace Sydeso
 
                     if (res_acc == null)
                     {
-                        res_acc = new restaurant_accounts();
+                        res_acc = new restaurant_accounts(_user);
                         res_acc.TopLevel = false;
                         res_acc.Parent = this.pnl_content;
                         res_acc.FormClosed += Res_acc_FormClosed;
@@ -516,6 +516,11 @@ namespace Sydeso
             if (res_prod != null)
             {
                 res_prod.Width = this.pnl_content.Width;
+            }
+
+            if (res_acc != null)
+            {
+                res_acc.Width = this.pnl_content.Width;
             }
         }
 

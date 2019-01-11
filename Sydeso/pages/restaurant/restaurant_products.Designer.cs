@@ -510,6 +510,7 @@
             this.Controls.Add(this.customPanel5);
             this.Controls.Add(this.customPanel4);
             this.Controls.Add(this.customPanel1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "restaurant_products";
             this.Load += new System.EventHandler(this.restaurant_products_Load);
@@ -539,7 +540,6 @@
         private System.Windows.Forms.Label label1;
         private BorderedPanel borderedPanel1;
         private System.Windows.Forms.TextBox txtSearch;
-        private Bunifu.Framework.UI.BunifuFlatButton btnPrint;
         private CustomPanel customPanel4;
         private BorderedPanel borderedPanel2;
         private System.Windows.Forms.Label label2;
@@ -557,5 +557,6 @@
         private Bunifu.Framework.UI.BunifuFlatButton btnStockIn;
         private Bunifu.Framework.UI.BunifuFlatButton btnDelete;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private Bunifu.Framework.UI.BunifuFlatButton btnPrint;
     }
 }

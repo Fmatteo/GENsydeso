@@ -55,10 +55,29 @@ namespace Sydeso
             return _account_privileges_detail;
         }
 
-        public DataTable account_view(DataTable data, String id, String search)
+        public DataTable account_view(DataTable data, String id, String search, int page, int pageSize)
         {
+            String query = "";
+
+            if (pageSize != -1)
+            {
+                if (page == 1)
+                {
+                    query = "SELECT system_accounts.ID, system_accounts.Firstname, system_accounts.Lastname, restaurant_accounts_privileges.Dashboard, restaurant_accounts_privileges.Products, restaurant_accounts_privileges.Order_POS, restaurant_accounts_privileges.Sales_Expenses, restaurant_accounts_privileges.Tables, restaurant_accounts_privileges.Employees, restaurant_accounts_privileges.Customers, restaurant_accounts_privileges.Accounts, restaurant_accounts_privileges.History FROM system_accounts INNER JOIN restaurant_accounts_privileges ON system_accounts.ID = restaurant_accounts_privileges.Account_ID WHERE system_accounts.ID != @id AND (system_accounts.Firstname LIKE @search OR system_accounts.Lastname LIKE @search OR system_accounts.ID LIKE @search) ORDER BY system_accounts.Firstname LIMIT " + pageSize;
+                }
+                else
+                {
+                    int prev = (page - 1) * pageSize;
+                    query = "SELECT system_accounts.ID, system_accounts.Firstname, system_accounts.Lastname, restaurant_accounts_privileges.Dashboard, restaurant_accounts_privileges.Products, restaurant_accounts_privileges.Order_POS, restaurant_accounts_privileges.Sales_Expenses, restaurant_accounts_privileges.Tables, restaurant_accounts_privileges.Employees, restaurant_accounts_privileges.Customers, restaurant_accounts_privileges.Accounts, restaurant_accounts_privileges.History FROM system_accounts INNER JOIN restaurant_accounts_privileges ON system_accounts.ID = restaurant_accounts_privileges.Account_ID WHERE system_accounts.ID != @id AND (system_accounts.Firstname LIKE @search OR system_accounts.Lastname LIKE @search OR system_accounts.ID LIKE @search) ORDER BY system_accounts.Firstname LIMIT " + prev + ", " + pageSize;
+                }
+            }
+            else
+            {
+                query = "SELECT system_accounts.ID, system_accounts.Firstname, system_accounts.Lastname, restaurant_accounts_privileges.Dashboard, restaurant_accounts_privileges.Products, restaurant_accounts_privileges.Order_POS, restaurant_accounts_privileges.Sales_Expenses, restaurant_accounts_privileges.Tables, restaurant_accounts_privileges.Employees, restaurant_accounts_privileges.Customers, restaurant_accounts_privileges.Accounts, restaurant_accounts_privileges.History FROM system_accounts INNER JOIN restaurant_accounts_privileges ON system_accounts.ID = restaurant_accounts_privileges.Account_ID WHERE system_accounts.ID != @id AND (system_accounts.Firstname LIKE @search OR system_accounts.Lastname LIKE @search OR system_accounts.ID LIKE @search) ORDER BY system_accounts.Firstname";
+            }
+
             Connect();
-            cmd = new MySqlCommand("SELECT system_accounts.ID, system_accounts.Firstname, system_accounts.Lastname, restaurant_accounts_privileges.Dashboard, restaurant_accounts_privileges.Products, restaurant_accounts_privileges.Order_POS, restaurant_accounts_privileges.Sales_Expenses, restaurant_accounts_privileges.Tables, restaurant_accounts_privileges.Employees, restaurant_accounts_privileges.Customers, restaurant_accounts_privileges.Accounts, restaurant_accounts_privileges.History INNER JOIN restaurant_accounts_privileges ON system_accounts.ID = restaurant_accounts_privileges.Account_ID WHERE system_accounts.ID != @id AND (system_accounts.Firstname LIKE @search OR system_accounts.Lastname LIKE @search OR system_accounts.Account_ID LIKE @search)", con);
+            cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@id", id);
             cmd.Parameters.AddWithValue("@search", search + "%");
             dr = cmd.ExecuteReader();
@@ -82,6 +101,10 @@ namespace Sydeso
             Disconnect();
             return data;
         }
+
+
+        // UPDATE THIS NIGGA
+
 
         public Boolean account_update_privileges(System.Windows.Forms.DataGridView data)
         {

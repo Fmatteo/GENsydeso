@@ -223,7 +223,7 @@ namespace Sydeso
                 id = row.Cells[0].Value.ToString();
                 name = row.Cells[1].Value.ToString();
                 qty = row.Cells[2].Value.ToString();
-                price = row.Cells[4].Value.ToString();
+                price = row.Cells[5].Value.ToString();
             }
         }
 

@@ -72,12 +72,21 @@ namespace Sydeso
                     {
                         if (cbRemark.SelectedIndex >= 0)
                         {
-                            double total;
-                            total = Convert.ToDouble(txtQty.Text) * Convert.ToDouble(_price);
+                            double total, qty;
+                            double.TryParse(txtQty.Text, out qty);
 
-                            if (rh.res_product_stock_out(_id, _name, txtQty.Text, _price, total.ToString(), cbRemark.SelectedItem.ToString()))
+                            if (Convert.ToInt32(qty) <= Convert.ToInt32(rh.res_product_detail(_id)[2]))
                             {
-                                result = DialogResult.Yes; this.Close();
+                                total = qty * Convert.ToDouble(_price);
+
+                                if (rh.res_product_stock_out(_id, _name, txtQty.Text, _price, total.ToString(), cbRemark.SelectedItem.ToString()))
+                                {
+                                    result = DialogResult.Yes; this.Close();
+                                }
+                            }
+                            else
+                            {
+                                rh.alert("Error: ", "The input number is bigger than the actual number of stock.", "danger");
                             }
                         }
                         else
