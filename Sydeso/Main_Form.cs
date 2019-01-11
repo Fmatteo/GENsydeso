@@ -356,6 +356,7 @@ namespace Sydeso
                         res_emp.TopLevel = false;
                         res_emp.Parent = this.pnl_content;
                         res_emp.FormClosed += Res_emp_FormClosed;
+                        res_emp.Width = this.pnl_content.Width;
                         res_emp.Show();
                         res_nav.btnEmployees_Res.Normalcolor = Color.FromArgb(233, 233, 233);
                     }
@@ -517,6 +518,11 @@ namespace Sydeso
             if (res_prod != null)
             {
                 res_prod.Width = this.pnl_content.Width;
+            }
+
+            if (res_emp != null)
+            {
+                res_emp.Width = this.pnl_content.Width;
             }
 
             if (res_acc != null)

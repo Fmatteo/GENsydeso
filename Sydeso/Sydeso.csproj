@@ -136,6 +136,24 @@
     <Compile Include="pages\restaurant\restaurant_employees.Designer.cs">
       <DependentUpon>restaurant_employees.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\restaurant\restaurant_employees_new.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_employees_new.Designer.cs">
+      <DependentUpon>restaurant_employees_new.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_employees_update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_employees_update.Designer.cs">
+      <DependentUpon>restaurant_employees_update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_emp_detail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_emp_detail.Designer.cs">
+      <DependentUpon>restaurant_emp_detail.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\restaurant\restaurant_history.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +251,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_employees.resx">
       <DependentUpon>restaurant_employees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_employees_new.resx">
+      <DependentUpon>restaurant_employees_new.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_employees_update.resx">
+      <DependentUpon>restaurant_employees_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_emp_detail.resx">
+      <DependentUpon>restaurant_emp_detail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_history.resx">
       <DependentUpon>restaurant_history.cs</DependentUpon>

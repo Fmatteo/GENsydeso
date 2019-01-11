@@ -425,7 +425,191 @@ namespace Sydeso
         #endregion
 
         #region restaurant_employees
+        public Boolean res_emp_username_exist(String id, String user)
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT Username FROM restaurant_employee WHERE Username = @user AND ID != @id", con);
+            cmd.Parameters.AddWithValue("@user", user);
+            cmd.Parameters.AddWithValue("id", id);
+            dr = cmd.ExecuteReader();
 
+            if (dr.Read())
+            {
+                return true;
+            }
+            dr.Close();
+            Disconnect();
+            return false;
+        }
+
+        public Boolean res_emp_create(String fname, String lname, String user, String pass, String path)
+        {
+            if (res_emp_username_exist("0", user))
+                return false;
+
+            String query = "";
+
+            if (!string.IsNullOrWhiteSpace(path))
+                query = "INSERT INTO restaurant_employee(Firstname, Lastname, Username, Password, Image)values(@fname, @lname, @user, @pass, @image)";
+            else
+                query = "INSERT INTO restaurant_employee(Firstname, Lastname, Username, Password)values(@fname, @lname, @user, @pass)";
+
+            Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@fname", fname);
+            cmd.Parameters.AddWithValue("@lname", lname);
+            cmd.Parameters.AddWithValue("@user", user);
+            cmd.Parameters.AddWithValue("@pass", hashPass(pass));
+
+            if (!string.IsNullOrWhiteSpace(path))
+                cmd.Parameters.AddWithValue("@image", imageToByteArray(ResizeImage(Image.FromFile(path), 120, 135)));
+
+            cmd.ExecuteNonQuery();
+            Disconnect();
+            return true;
+        }
+
+        private List<restaurant_emp_detail> emp_details;
+        public List<restaurant_emp_detail> res_emp_read(String search, int page, int pageSize)
+        {
+            emp_details = new List<restaurant_emp_detail>();
+
+            String query = "";
+
+            if (page != -1)
+            {
+                if (page == 1)
+                {
+                    query = "SELECT * FROM restaurant_employee WHERE ID Like @search OR Firstname LIKE @search OR Lastname LIKE @search ORDER BY Firstname LIMIT " + pageSize;
+                }
+                else
+                {
+                    int prev = (page - 1) * pageSize;
+                    query = "SELECT * FROM restaurant_employee WHERE ID Like @search OR Firstname LIKE @search OR Lastname LIKE @search ORDER BY Firstname LIMIT " + prev + ", " + pageSize;
+                }
+            }
+            else
+            {
+                query = "SELECT * FROM restaurant_employee WHERE ID Like @search OR Firstname LIKE @search OR Lastname LIKE @search ORDER BY Firstname";
+            }
+            Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@search", search + "%");
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                restaurant_emp_detail list = new restaurant_emp_detail();
+                list.emp_id = dr[0].ToString();
+                list.emp_name = dr[1].ToString() + " " + dr[2].ToString();
+                list.emp_user = dr[3].ToString();
+
+                try
+                {
+                    list.emp_image = byteArrayToImage((byte[])dr[5]);
+                }
+                catch (Exception)
+                {
+                    list.emp_image = null;
+                }
+                emp_details.Add(list);
+            }
+            dr.Close();
+            Disconnect();
+            return emp_details;
+        }
+
+        public Boolean res_emp_update(String id, String fname, String lname, String user, String pass, String path)
+        {
+            if (res_emp_username_exist(id, user))
+                return false;
+
+            String query = "";
+
+            if (!string.IsNullOrWhiteSpace(pass))
+                query = "UPDATE restaurant_employee SET Firstname = @fname, Lastname = @lname, Username = @user, Password = @pass";
+            else
+                query = "UPDATE restaurant_employee SET Firstname = @fname, Lastname = @lname, Username = @user";
+
+            if (!string.IsNullOrWhiteSpace(path))
+                query += ", Image = @image";
+
+            query += " WHERE ID = @id";
+
+            Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@fname", fname);
+            cmd.Parameters.AddWithValue("@lname", lname);
+            cmd.Parameters.AddWithValue("@user", user);
+
+            if (!string.IsNullOrWhiteSpace(pass))
+                cmd.Parameters.AddWithValue("@pass", hashPass(pass));
+
+            if (!string.IsNullOrWhiteSpace(path))
+                cmd.Parameters.AddWithValue("@image", imageToByteArray(ResizeImage(Image.FromFile(path), 120, 135)));
+
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+            return true;
+        }
+
+        public Boolean res_emp_delete(String id)
+        {
+            Connect();
+            cmd = new MySqlCommand("DELETE FROM restaurant_employee WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+            return true;
+        }
+
+        private List<Object> emp_details_id;
+        public List<Object> res_emp_read_id(String id)
+        {
+            emp_details_id = new List<Object>();
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM restaurant_employee WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                restaurant_emp_detail list = new restaurant_emp_detail();
+
+                emp_details_id.Add(dr[0]);
+                emp_details_id.Add(dr[1]);
+                emp_details_id.Add(dr[2]);
+                emp_details_id.Add(dr[3]);
+
+                try
+                {
+                    emp_details_id.Add(byteArrayToImage((byte[])dr[5]));
+                }
+                catch (Exception)
+                {
+                    emp_details_id.Add("");
+                }
+            }
+            dr.Close();
+            Disconnect();
+            return emp_details_id;
+        }
+
+        public int res_emp_count()
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT COUNT(*) as count_emp FROM restaurant_employee", con);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return Convert.ToInt32(dr[0]);
+            }
+            dr.Close();
+            Disconnect();
+            return 0;
+        }
         #endregion
     }
 }

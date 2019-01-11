@@ -12,6 +12,16 @@ namespace Sydeso
 {
     public partial class restaurant_accounts : Form
     {
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle = cp.ExStyle | 0x2000000;
+                return cp;
+            }
+        }
+
         private DataTable dt = new DataTable();
         private int pageSize;
         private int currentPage = 1;
