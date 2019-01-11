@@ -18,6 +18,8 @@ namespace Sydeso
         private int totalPage = 0;
         private List<String> acc_detail;
 
+
+        private String id;
         restaurant_helper rh = new restaurant_helper();
 
         public restaurant_accounts(String user)
@@ -220,7 +222,8 @@ namespace Sydeso
         {
             if (e.RowIndex >= 0)
             {
-                
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+                id = row.Cells[0].Value.ToString();
             }
         }
 
@@ -229,7 +232,14 @@ namespace Sydeso
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
-                
+                id = row.Cells[0].Value.ToString();
+
+                if (restaurant_accounts_update._Show(id) == DialogResult.Yes)
+                {
+                    rh.alert("Notification: ", "Updating account details and privileges successfully. ", "information");
+                    LoadTable("", currentPage, pageSize);
+                    id = "";
+                }
             }
         }
 
@@ -242,11 +252,27 @@ namespace Sydeso
                 case "btnNew":
                     if (restaurant_accounts_new._Show() == DialogResult.Yes)
                     {
+                        rh.alert("Notification: ", "Account created successfully.", "information");
                         LoadTable("", currentPage, pageSize);
                     }
                     break;
 
                 default:
+                    if (!string.IsNullOrWhiteSpace(id))
+                    {
+                        if (id != acc_detail[0])
+                        {
+                            rh.account_delete(id);
+                            rh.account_delete_privileges(id);
+                            rh.alert("Notification: ", "Account deleted successfully.", "information");
+                            LoadTable("", currentPage, pageSize);
+                            id = "";
+                        }
+                        else
+                            rh.alert("Error: ", "Cannot delete the user, currently login.", "danger");
+                    }
+                    else
+                        rh.alert("Error: ", "Please specify the account you want to modify.\nSelect first a account then try again.", "danger");
                     break;
             }
         }

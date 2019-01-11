@@ -106,6 +106,12 @@
     <Compile Include="pages\restaurant\restaurant_accounts_new.Designer.cs">
       <DependentUpon>restaurant_accounts_new.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\restaurant\restaurant_accounts_update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_accounts_update.Designer.cs">
+      <DependentUpon>restaurant_accounts_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\restaurant\restaurant_category_add.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,6 +218,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_accounts_new.resx">
       <DependentUpon>restaurant_accounts_new.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_accounts_update.resx">
+      <DependentUpon>restaurant_accounts_update.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_category_add.resx">
       <DependentUpon>restaurant_category_add.cs</DependentUpon>

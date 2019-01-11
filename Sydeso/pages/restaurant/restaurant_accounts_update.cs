@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Sydeso
 {
-    public partial class restaurant_accounts_new : Form
+    public partial class restaurant_accounts_update : Form
     {
         protected override CreateParams CreateParams
         {
@@ -22,18 +22,37 @@ namespace Sydeso
             }
         }
 
-        public restaurant_accounts_new()
+        public restaurant_accounts_update()
         {
             InitializeComponent();
         }
 
-        static restaurant_accounts_new add; static DialogResult result = DialogResult.No;
-        restaurant_helper rh = new restaurant_helper();
+        static restaurant_accounts_update update; static DialogResult result = DialogResult.No;
+        static restaurant_helper rh = new restaurant_helper();
+        private static List<String> acc;
+        private static List<Boolean> priv;
 
-        public static DialogResult _Show()
+        public static DialogResult _Show(String id)
         {
-            add = new restaurant_accounts_new();
-            add.ShowDialog();
+            update = new restaurant_accounts_update();
+            acc = rh.account_details_by_id(id);
+            priv = rh.account_privileges_detail(id);
+
+            update.txtFname.Text = acc[1];
+            update.txtLname.Text = acc[2];
+            update.txtUser.Text = acc[3];
+
+            update.cbDash.Checked = priv[0];
+            update.cbProd.Checked = priv[1];
+            update.cbOrder.Checked = priv[2];
+            update.cbSales.Checked = priv[3];
+            update.cbTables.Checked = priv[4];
+            update.cbEmp.Checked = priv[5];
+            update.cbCust.Checked = priv[6];
+            update.cbAcc.Checked = priv[7];
+            update.cbHis.Checked = priv[8];
+
+            update.ShowDialog();
             return result;
         }
 
@@ -72,22 +91,20 @@ namespace Sydeso
                     break;
 
                 case "btnYes":
-                    if (!string.IsNullOrWhiteSpace(txtUser.Text) && !string.IsNullOrWhiteSpace(txtPass.Text) && !string.IsNullOrWhiteSpace(txtFname.Text) && !string.IsNullOrWhiteSpace(txtLname.Text))
+                    if (!string.IsNullOrWhiteSpace(txtUser.Text))
                     {
-                        if (rh.account_insert(txtFname.Text, txtLname.Text, txtUser.Text, txtPass.Text))
+                        if (rh.account_update(acc[0], txtFname.Text, txtLname.Text, txtUser.Text, txtPass.Text))
                         {
-                            rh.account_insert_privileges(txtUser.Text);
-                            result = DialogResult.Yes; this.Close();
+                            if (rh.account_update_privileges(acc[0], cbDash.Checked, cbProd.Checked, cbOrder.Checked, cbSales.Checked, cbTables.Checked, cbEmp.Checked, cbCust.Checked, cbAcc.Checked, cbHis.Checked))
+                            {
+                                result = DialogResult.Yes; this.Close();
+                            }
                         }
                         else
                         {
                             txtUser.Focus();
                             rh.alert("Error: ", "Username already taken.\nPlease pick another one.", "danger");
                         }
-                    }
-                    else
-                    {
-                        rh.alert("Error: ", "Please fill up the required fields to proceed.", "danger");
                     }
                     break;
 
@@ -121,7 +138,7 @@ namespace Sydeso
                 txtPass.PasswordChar = '•';
                 pbEye.Image = Image.FromFile(Application.StartupPath + "/icons/icon_hide_red.png");
             }
-        } 
+        }
         #endregion
     }
 }

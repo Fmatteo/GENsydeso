@@ -91,3 +91,4 @@ C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.csprojResolveAssemblyReference
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_accounts_new.resources
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_hide_red.png
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_show_red.png
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_accounts_update.resources

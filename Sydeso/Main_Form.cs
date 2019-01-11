@@ -94,7 +94,7 @@ namespace Sydeso
                     }
 
                     // Checks the account privileges if they can access each and every module.
-                    for (int i = 0; i < res_priv.Count - 1; i++)
+                    for (int i = 0; i < res_priv.Count; i++)
                     {
                         if (!res_priv[i])
                             res_navs[i].Visible = false;

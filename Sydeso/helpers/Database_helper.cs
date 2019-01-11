@@ -117,19 +117,38 @@ namespace Sydeso
 
         public Boolean account_update(String id, String fname, String lname, String user, String pass)
         {
+            String query = "";
             if (account_username_exist(id, user))
                 return false;
 
+            if (!string.IsNullOrWhiteSpace(pass))
+                query = "UPDATE system_accounts SET Firstname = @fname, Lastname = @lname, Username = @user, Password = @pass WHERE ID = @id";
+            else
+                query = "UPDATE system_accounts SET Firstname = @fname, Lastname = @lname, Username = @user WHERE ID = @id";
+
             Connect();
-            cmd = new MySqlCommand("UPDATE system_accounts SET Firstname = @fname, Lastname = @lname, Username = @user, Password = @pass WHERE ID = @id", con);
+            cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@fname", fname);
             cmd.Parameters.AddWithValue("@lname", lname);
             cmd.Parameters.AddWithValue("@user", user);
-            cmd.Parameters.AddWithValue("@pass", hashPass(pass));
+
+            if (!string.IsNullOrWhiteSpace(pass))
+                cmd.Parameters.AddWithValue("@pass", hashPass(pass));
+
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
             Disconnect();
 
+            return true;
+        }
+
+        public Boolean account_delete(String id)
+        {
+            Connect();
+            cmd = new MySqlCommand("DELETE FROM system_accounts WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            Disconnect();
             return true;
         }
 
@@ -146,6 +165,27 @@ namespace Sydeso
             dr.Close();
             Disconnect();
             return false;
+        }
+
+        private List<String> _account_details_by_id;
+        public List<String> account_details_by_id(String id)
+        {
+            _account_details_by_id = new List<String>();
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM system_accounts WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                _account_details_by_id.Add(dr["ID"].ToString());
+                _account_details_by_id.Add(dr["Firstname"].ToString());
+                _account_details_by_id.Add(dr["Lastname"].ToString());
+                _account_details_by_id.Add(dr["Username"].ToString());
+            }
+            dr.Close();
+            Disconnect();
+            return _account_details_by_id;
         }
         #endregion
 
