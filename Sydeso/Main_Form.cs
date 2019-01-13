@@ -54,7 +54,7 @@ namespace Sydeso
             #endregion
             #region Initialize Login
 
-            _user = Login_DTR._Show();
+            _user = Login._Show();
             if (string.IsNullOrWhiteSpace(_user))
             {
                 Environment.Exit(0);
@@ -352,7 +352,7 @@ namespace Sydeso
 
                     if (res_emp == null)
                     {
-                        res_emp = new restaurant_employees();
+                        res_emp = new restaurant_employees(_user);
                         res_emp.TopLevel = false;
                         res_emp.Parent = this.pnl_content;
                         res_emp.FormClosed += Res_emp_FormClosed;

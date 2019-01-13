@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DGVPrinterHelper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Sydeso
 {
-    public partial class restaurant_employees : Form
+    public partial class DateTimeRecord_View : Form
     {
         protected override CreateParams CreateParams
         {
@@ -22,26 +23,72 @@ namespace Sydeso
             }
         }
 
+        private DataTable dt = new DataTable();
         private int pageSize;
         private int currentPage = 1;
         private int totalPage = 0;
+        private List<String> acc_detail;
 
-        private String id, user;
-        restaurant_helper rh = new restaurant_helper();
+        database_helper db = new database_helper();
 
-        public restaurant_employees(String user)
+        public DateTimeRecord_View(String user)
         {
-            this.user = user;
+            this.acc_detail = db.account_details(user);
+
             InitializeComponent();
+            InitializeColumns();
         }
 
+        private void DateTimeRecord_View_Load(object sender, EventArgs e)
+        {
+            txtPage.ContextMenu = new ContextMenu();
+            cbEntries.SelectedIndex = 0;
+            pageSize = Convert.ToInt32(cbEntries.SelectedItem.ToString());
+
+            LoadTable("", currentPage, pageSize);
+        }
+
+        #region Draggable
+        private bool move;
+        private Point lastPoint;
+        private void pnl_toolbar_MouseDown(object sender, MouseEventArgs e)
+        {
+            move = true;
+            lastPoint = e.Location;
+        }
+
+        private void pnl_toolbar_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (move)
+            {
+                this.Location = new Point((this.Location.X - lastPoint.X) + e.X, (this.Location.Y - lastPoint.Y) + e.Y);
+            }
+        }
+
+        private void pnl_toolbar_MouseUp(object sender, MouseEventArgs e)
+        {
+            move = false;
+        }
+        #endregion
+
         #region LoadTable
+        /// <summary>
+        /// Initializes the Columns inside the DataTable
+        /// </summary>
+        private void InitializeColumns()
+        {
+            dt.Columns.Add("Employee Name");
+            dt.Columns.Add("Time In");
+            dt.Columns.Add("Time Out");
+            dt.Columns.Add("Date");
+        }
+
         /// <summary>
         /// Calculate the number of pages
         /// </summary>
         private void CalculatePages()
         {
-            int rowCount = rh.res_emp_count();
+            int rowCount = dt.Rows.Count;
             totalPage = rowCount / pageSize;
 
             if (rowCount % pageSize > 0)
@@ -52,7 +99,7 @@ namespace Sydeso
             else
                 lblTotalPage.Text = "/" + totalPage;
 
-            lblTotalPage.Left = customPanel6.Width;
+            lblTotalPage.Left = dataGridView1.Width;
             txtPage.Left = lblTotalPage.Location.X - txtPage.Width - 2;
         }
 
@@ -64,83 +111,15 @@ namespace Sydeso
         /// <param name="pageSize"></param>
         private void LoadTable(String search, int page, int pageSize)
         {
-            this.SuspendLayout();
-            customPanel6.Controls.Clear();
+            dt.Clear();
+            dataGridView1.DataSource = db.dtr_view(dt, search, page, pageSize);
 
-            List<restaurant_emp_detail> data = rh.res_emp_read(search, page, pageSize);
-            int offX = 0, offY = 0, count = 0;
-
-            for(int i = 0; i < data.Count; i++)
-            {
-                data[i].Cursor = Cursors.Hand;
-                data[i].Click += emp_click;
-                data[i].DoubleClick += emp_doubleclick;
-                data[i].Location = new Point(offX, offY);
-                offX += data[i].Width;
-                count++;
-                if (count == (customPanel6.Width / data[i].Width))
-                {
-                    offY += data[i].Height;
-                    offX = 0;
-                    count = 0;
-                }
-
-                if (i % 2 == 0)
-                {
-                    data[i].BackColor = Color.FromArgb(210, 210, 209);
-                }
-
-                customPanel6.Controls.Add(data[i]);
-            }
+            dataGridView1.CurrentCell = null;
 
             // Calls the method to calculate the pages..
-            this.ResumeLayout();
             CalculatePages();
         }
-
-        private void emp_doubleclick(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrWhiteSpace(id))
-            {
-                if (restaurant_employees_update._Show(id) == DialogResult.Yes)
-                {
-                    rh.alert("Notification: ", "Employee updated successfully.", "information");
-                    LoadTable("", currentPage, pageSize);
-                    id = "";
-                }
-            }
-            else
-            {
-                rh.alert("Error: ", "Please specify the account you want to modify.\nSelect first a account then try again.", "danger");
-            }
-        }
-
-        private void emp_click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < customPanel6.Controls.Count; i++)
-            {
-                customPanel6.Controls[i].BackColor = Color.FromArgb(220, 220, 219);
-
-                if (i % 2 == 0)
-                {
-                    customPanel6.Controls[i].BackColor = Color.FromArgb(210, 210, 209);
-                }
-            }
-
-            restaurant_emp_detail c = sender as restaurant_emp_detail;
-            c.BackColor = Color.LightYellow;
-
-            id = c.emp_id;
-        }
-
         #endregion
-
-        private void restaurant_employees_Load(object sender, EventArgs e)
-        {
-            txtPage.ContextMenu = new ContextMenu();
-            cbEntries.SelectedIndex = 0;
-            pageSize = Convert.ToInt32(cbEntries.SelectedItem.ToString());
-        }
 
         #region Placeholder Logics
         private void placeholder_keydown(object sender, KeyEventArgs e)
@@ -257,51 +236,28 @@ namespace Sydeso
         }
         #endregion
 
-        #region CRUD Logics
-
-        /// <summary>
-        /// Update Part of CRUD
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-
-        private void crud_button_click(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
-            Control c = sender as Control;
+            this.Close();
+        }
 
-            switch (c.Name)
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.Rows.Count > 0)
             {
-                case "btnNew":
-                    if (restaurant_employees_new._Show() == DialogResult.Yes)
-                    {
-                        rh.alert("Notification: ", "Employee created successfully.", "information");
-                        LoadTable("", currentPage, pageSize);
-                    }
-                    break;
+                DGVPrinter printer = new DGVPrinter();
+                printer.PageSettings.Landscape = true;
+                printer.Title = "Inventory Report as of Today: ";
+                printer.TitleAlignment = StringAlignment.Near;
+                printer.SubTitle = DateTime.Now.ToString("MMMM dd, yyyy");
+                printer.SubTitleAlignment = StringAlignment.Near;
+                printer.SubTitleSpacing = 20;
 
-                default:
-                    if (!string.IsNullOrWhiteSpace(id))
-                    {
-                        rh.res_emp_delete(id);
-                        rh.alert("Notification: ", "Employee deleted successfully.", "information");
-                        LoadTable("", currentPage, pageSize);
-                        id = "";
-                    }
-                    else
-                        rh.alert("Error: ", "Please specify the account you want to modify.\nSelect first a account then try again.", "danger");
-                    break;
+                printer.HeaderCellAlignment = StringAlignment.Near;
+                printer.CellAlignment = StringAlignment.Near;
+                printer.Footer = string.Format("Prepared by: {0}", acc_detail[1] + " " + acc_detail[2]);
+                printer.PrintPreviewDataGridView(dataGridView1);
             }
-        }
-        #endregion
-
-        private void restaurant_employees_SizeChanged(object sender, EventArgs e)
-        {
-            LoadTable("", currentPage, pageSize);
-        }
-
-        private void btnDTR_Click(object sender, EventArgs e)
-        {
-            new DateTimeRecord_View(user).ShowDialog();
         }
     }
 }

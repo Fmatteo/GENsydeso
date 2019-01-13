@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Sydeso
 {
-    public partial class Login_DTR : Form
+    public partial class Login : Form
     {
         protected override CreateParams CreateParams
         {
@@ -24,15 +24,15 @@ namespace Sydeso
 
         database_helper db = new database_helper();
 
-        public Login_DTR()
+        public Login()
         {
             InitializeComponent();
         }
 
-        static Login_DTR login; static String result = "";
+        static Login login; static String result = "";
         public static String _Show()
         {
-            login = new Login_DTR();
+            login = new Login();
             login.ShowDialog();
             return result;
         }
@@ -84,6 +84,11 @@ namespace Sydeso
             {
                 db.alert("Error: ", "Please fill up all the required fields to proceed.", "danger");
             }
+        }
+
+        private void btnDTR_Click(object sender, EventArgs e)
+        {
+            new DateTimeRecord().ShowDialog();
         }
     }
 }

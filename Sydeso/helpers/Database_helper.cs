@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -282,6 +283,7 @@ namespace Sydeso
         }
         #endregion
 
+        #region General Functions
         public String hookDecimal(String str1)
         {
             String str = str1;
@@ -354,5 +356,152 @@ namespace Sydeso
             Image returnImage = Image.FromStream(ms);
             return returnImage;
         }
+        #endregion
+
+        #region DateTimeRecord
+        private Boolean dtr_login(String user, String pass)
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM restaurant_employee WHERE Username = @user AND Password = @pass", con);
+            cmd.Parameters.AddWithValue("@user", user);
+            cmd.Parameters.AddWithValue("@pass", hashPass(pass));
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return true;
+            }
+            dr.Close();
+            Disconnect();
+            return false;
+        }
+
+        private String dtr_get_id_by_user(String user)
+        {
+            String id = "";
+            Connect();
+            cmd = new MySqlCommand("SELECT ID FROM restaurant_employee WHERE Username = @user", con);
+            cmd.Parameters.AddWithValue("@user", user);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                id = dr[0].ToString();
+            }
+            dr.Close();
+            Disconnect();
+            return id;
+        }
+
+        private Boolean dtr_exists_time_in(String id, String date)
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM restaurant_employee_time_in_out WHERE Employee_ID = @id AND Date = @date", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@date", date);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return true;
+            }
+            dr.Close();
+            Disconnect();
+            return false;
+        }
+
+        public void dtr_time_in(String user, String pass)
+        {
+            if (!dtr_login(user, pass))
+            {
+                alert("Error: ", "Incorrect username or password.\nPlease try again.", "danger");
+                return;
+            }
+
+            String id = dtr_get_id_by_user(user);
+            String dateNow = DateTime.Now.ToString("yyyy-MM-dd");
+
+            if (dtr_exists_time_in(id, dateNow))
+            {
+                alert("Error: ", "This account has already checked in for today.", "danger");
+                return;
+            } 
+            
+            Connect();
+            cmd = new MySqlCommand("INSERT INTO restaurant_employee_time_in_out(Employee_ID, Timein, Date)VALUES(@id, @in, @date)", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@in", DateTime.Now.ToString("hh:mm:ss tt"));
+            cmd.Parameters.AddWithValue("@date", dateNow);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+
+            alert("Notification: ", "Checking in successfully, have a nice day.", "success");
+        }
+
+        public void dtr_time_out(String user, String pass)
+        {
+            if (!dtr_login(user, pass))
+            {
+                alert("Error: ", "Incorrect username or password.\nPlease try again.", "danger");
+                return;
+            }
+
+            String id = dtr_get_id_by_user(user);
+            String dateNow = DateTime.Now.ToString("yyyy-MM-dd");
+
+            if (!dtr_exists_time_in(id, dateNow))
+            {
+                alert("Error: ", "This account has not yet checked in for today.", "danger");
+                return;
+            }
+
+            Connect();
+            cmd = new MySqlCommand("UPDATE restaurant_employee_time_in_out SET Timeout = @out WHERE Employee_ID = @id AND Date = @date", con);
+            cmd.Parameters.AddWithValue("@out", DateTime.Now.ToString("hh:mm:ss tt"));
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@date", dateNow);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+
+            alert("Notification: ", "Checking out successfully, see you tomorrow.", "success");
+        }
+
+        public DataTable dtr_view(DataTable data, String search, int page, int pageSize)
+        {
+            String query = "";
+
+            if (pageSize != -1)
+            {
+                if (page == 1)
+                {
+                    query = "SELECT restaurant_employee.Firstname, restaurant_employee.Lastname, restaurant_employee_time_in_out.Timein, restaurant_employee_time_in_out.Timeout, restaurant_employee_time_in_out.Date FROM restaurant_employee INNER JOIN restaurant_employee_time_in_out ON restaurant_employee.ID = restaurant_employee_time_in_out.Employee_ID WHERE (restaurant_employee.Firstname LIKE @search OR restaurant_employee.Lastname LIKE @search OR restaurant_employee_time_in_out.Timein LIKE @search OR restaurant_employee_time_in_out.Timeout LIKE @search OR MONTHNAME(restaurant_employee_time_in_out.Date) LIKE @search) ORDER BY restaurant_employee_time_in_out.Date, restaurant_employee.Firstname LIMIT " + pageSize;
+                }
+                else
+                {
+                    int prev = (page - 1) * pageSize;
+                    query = "SELECT restaurant_employee.Firstname, restaurant_employee.Lastname, restaurant_employee_time_in_out.Timein, restaurant_employee_time_in_out.Timeout, restaurant_employee_time_in_out.Date FROM restaurant_employee INNER JOIN restaurant_employee_time_in_out ON restaurant_employee.ID = restaurant_employee_time_in_out.Employee_ID WHERE (restaurant_employee.Firstname LIKE @search OR restaurant_employee.Lastname LIKE @search OR restaurant_employee_time_in_out.Timein LIKE @search OR restaurant_employee_time_in_out.Timeout LIKE @search OR MONTHNAME(restaurant_employee_time_in_out.Date) LIKE @search) ORDER BY restaurant_employee_time_in_out.Date, restaurant_employee.Firstname LIMIT " + prev + ", " + pageSize;
+                }
+            }
+            else
+            {
+                query = "SELECT restaurant_employee.Firstname, restaurant_employee.Lastname, restaurant_employee_time_in_out.Timein, restaurant_employee_time_in_out.Timeout, restaurant_employee_time_in_out.Date FROM restaurant_employee INNER JOIN restaurant_employee_time_in_out ON restaurant_employee.ID = restaurant_employee_time_in_out.Employee_ID WHERE (restaurant_employee.Firstname LIKE @search OR restaurant_employee.Lastname LIKE @search OR restaurant_employee_time_in_out.Timein LIKE @search OR restaurant_employee_time_in_out.Timeout LIKE @search OR MONTHNAME(restaurant_employee_time_in_out.Date) LIKE @search) ORDER BY restaurant_employee_time_in_out.Date, restaurant_employee.Firstname";
+            }
+
+            Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@search", search + "%");
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                data.Rows.Add(new Object[] {
+                    dr[0] + " " + dr[1], dr[2], dr[3], Convert.ToDateTime(dr[4]).ToString("MMMM dd, yyyy")
+                });
+            }
+            dr.Close();
+            Disconnect();
+            return data;
+        }
+        #endregion
     }
 }

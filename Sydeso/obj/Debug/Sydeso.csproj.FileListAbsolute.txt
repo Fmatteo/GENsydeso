@@ -60,11 +60,6 @@ C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_username.png
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\Sydeso.exe.config
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\Sydeso.exe
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\Sydeso.pdb
-C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\Bunifu_UI_v1.4.dll
-C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\MySql.Data.dll
-C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\Google.Protobuf.dll
-C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\MySql.Data.xml
-C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.Login_DTR.resources
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.Main_Form.resources
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.Notification.resources
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_accounts.resources
@@ -95,3 +90,8 @@ C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_accounts_update.res
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_emp_detail.resources
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_employees_new.resources
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_employees_update.resources
+C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.Login.resources
+C:\Xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_dtr.png
+C:\Xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_view.png
+C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.DateTimeRecord.resources
+C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.DateTimeRecord_View.resources

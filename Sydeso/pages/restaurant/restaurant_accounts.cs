@@ -28,7 +28,6 @@ namespace Sydeso
         private int totalPage = 0;
         private List<String> acc_detail;
 
-
         private String id;
         restaurant_helper rh = new restaurant_helper();
 

@@ -173,7 +173,9 @@ namespace Sydeso
 
                 total += Convert.ToDouble(qty) * Convert.ToDouble(dr[4]);
             }
-            data.Rows.Add("", "", "", "", "", "Grand Total: ", hookDecimal(total.ToString()));
+
+            if (total != 0)
+                data.Rows.Add("", "", "", "", "", "Grand Total: ", hookDecimal(total.ToString()));
             return data;
         }
 

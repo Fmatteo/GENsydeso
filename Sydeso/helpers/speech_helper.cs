@@ -6,7 +6,7 @@ using System.Speech.Synthesis;
 
 namespace Sydeso
 {
-    public class speech_helper
+    public class speech_helper : database_helper
     {
         SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer();
         SpeechRecognitionEngine recEngine;
@@ -30,20 +30,27 @@ namespace Sydeso
         public void StartRecognizing(List<String> user)
         {
             _user_details = user;
-            recEngine = new SpeechRecognitionEngine();
-            Choices commands = new Choices();
-            commands.Add(new string[] { "Hello", "How are you" });
+            try
+            {
+                recEngine = new SpeechRecognitionEngine();
+                Choices commands = new Choices();
+                commands.Add(new string[] { "Hello", "How are you" });
 
-            GrammarBuilder gb = new GrammarBuilder();
-            gb.Append(commands);
+                GrammarBuilder gb = new GrammarBuilder();
+                gb.Append(commands);
 
-            Grammar grammar = new Grammar(gb);
+                Grammar grammar = new Grammar(gb);
 
-            recEngine.LoadGrammarAsync(grammar);
-            recEngine.SetInputToDefaultAudioDevice();
+                recEngine.LoadGrammarAsync(grammar);
+                recEngine.SetInputToDefaultAudioDevice();
 
-            recEngine.RecognizeAsync(RecognizeMode.Multiple);
-            recEngine.SpeechRecognized += RecEngine_SpeechRecognized;
+                recEngine.RecognizeAsync(RecognizeMode.Multiple);
+                recEngine.SpeechRecognized += RecEngine_SpeechRecognized;
+            }
+            catch (Exception)
+            {
+                alert("Error: ", "Speech API is not properly installed.\nVoice Commands cannot use.", "danger");
+            }
         }
 
         private void RecEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
@@ -67,10 +74,15 @@ namespace Sydeso
 
         public void StopRecognizing()
         {
-            recEngine.RecognizeAsyncCancel();
-            recEngine.RecognizeAsyncStop();
-            recEngine.UnloadAllGrammars();
-            recEngine = null;
+            try
+            {
+                recEngine.RecognizeAsyncCancel();
+                recEngine.RecognizeAsyncStop();
+                recEngine.UnloadAllGrammars();
+                recEngine = null;
+            }
+            catch (Exception)
+            { }
         }
     }
 }

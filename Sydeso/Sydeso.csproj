@@ -72,15 +72,27 @@
     <Compile Include="custom controls\CustomPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DateTimeRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DateTimeRecord.Designer.cs">
+      <DependentUpon>DateTimeRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DateTimeRecord_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DateTimeRecord_View.Designer.cs">
+      <DependentUpon>DateTimeRecord_View.cs</DependentUpon>
+    </Compile>
     <Compile Include="helpers\database_helper.cs" />
     <Compile Include="helpers\DGVPrinter.cs" />
     <Compile Include="helpers\restaurant_helper.cs" />
     <Compile Include="helpers\speech_helper.cs" />
-    <Compile Include="Login_DTR.cs">
+    <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login_DTR.Designer.cs">
-      <DependentUpon>Login_DTR.cs</DependentUpon>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Main_Form.cs">
       <SubType>Form</SubType>
@@ -222,8 +234,14 @@
     <Compile Include="Wizard.Designer.cs">
       <DependentUpon>Wizard.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Login_DTR.resx">
-      <DependentUpon>Login_DTR.cs</DependentUpon>
+    <EmbeddedResource Include="DateTimeRecord.resx">
+      <DependentUpon>DateTimeRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DateTimeRecord_View.resx">
+      <DependentUpon>DateTimeRecord_View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main_Form.resx">
       <DependentUpon>Main_Form.cs</DependentUpon>
@@ -322,6 +340,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icon.ico" />
+    <Content Include="icons\icon_dtr.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_view.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icons\icon_account.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
