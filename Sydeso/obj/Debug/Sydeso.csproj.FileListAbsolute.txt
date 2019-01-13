@@ -95,3 +95,6 @@ C:\Xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_dtr.png
 C:\Xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_view.png
 C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.DateTimeRecord.resources
 C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.DateTimeRecord_View.resources
+C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_customer_create.resources
+C:\Xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_calendar.png
+C:\Xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_phone.png

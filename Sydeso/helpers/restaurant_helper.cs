@@ -613,5 +613,112 @@ namespace Sydeso
             return 0;
         }
         #endregion
+
+        #region restaurant_customers
+        private Boolean res_cust_email_exist(String id, String email)
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM restaurant_customers WHERE Email_Address = @email AND ID != @id", con);
+            cmd.Parameters.AddWithValue("@email", email);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                alert("Error: ", "Email is already in use.\nPlease pick another one.", "danger");
+                return true;
+            }
+            dr.Close();
+            Disconnect();
+            return false;
+        }
+
+        public void res_cust_create(String name, String bday, String num, String email)
+        {
+            if (res_cust_email_exist("0", email))
+                return;
+
+            Connect();
+            cmd = new MySqlCommand("INSERT INTO restaurant_customers(Name, Birthdate, Phone_Number, Email_Address)values(@name, @bday, @num, @email)", con);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@bday", bday);
+            cmd.Parameters.AddWithValue("@num", num);
+            cmd.Parameters.AddWithValue("@email", email);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+
+            alert("Notification: ", "Creating record of a customer successfully.", "information");
+        }
+
+        public DataTable res_cust_read(DataTable data, String search, int page, int pageSize)
+        {
+            String query = "";
+
+            if (page != -1)
+            {
+                if (page == 1)
+                {
+                    query = "SELECT * FROM restaurant_customers WHERE ID Like @search OR Name Like @search OR Email_Address Like @search ORDER BY Name LIMIT " + pageSize;
+                }
+                else
+                {
+                    int prev = (page - 1) * pageSize;
+                    query = "SELECT * FROM restaurant_customers WHERE ID Like @search OR Name Like @search OR Email_Address Like @search ORDER BY Name LIMIT " + prev + ", " + pageSize;
+                }
+            }
+            else
+            {
+                query = "SELECT * FROM restaurant_customers WHERE ID Like @search OR Name Like @search OR Email_Address Like @search ORDER BY Name";
+            }
+            Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@search", search + "%");
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                data.Rows.Add(new Object[] {
+                    dr[0], dr[1], Convert.ToDateTime(dr[2]).ToString("MMMM dd, yyyy"), dr[3], dr[4]
+                });
+            }
+            dr.Close();
+            Disconnect();
+            return data;
+        }
+
+        public void res_cust_update(String id, String name, String bday, String num, String email)
+        {
+            if (res_cust_email_exist(id, email))
+                return;
+
+            Connect();
+            cmd = new MySqlCommand("UPDATE restaurant_customers SET Name = @name, Birthdate = @bday, Phone_Number = @num, Email_Address = @email WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@bday", bday);
+            cmd.Parameters.AddWithValue("@num", num);
+            cmd.Parameters.AddWithValue("@email", email);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+
+            alert("Notification: ", "Updating an existing customer record successfully.", "information");
+        }
+
+        public void res_cust_delete(String id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                alert("Error: ", "Please specify the product you want to modify.\nSelect first a product then try again.", "danger");
+                return;
+            }
+
+            Connect();
+            cmd = new MySqlCommand("DELETE FROM restaurant_customers WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+
+            alert("Notification: ", "Deleting a customer record successfully.", "information");
+        }
+        #endregion
     }
 }

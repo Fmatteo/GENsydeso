@@ -247,7 +247,7 @@ namespace Sydeso
             {
                 DGVPrinter printer = new DGVPrinter();
                 printer.PageSettings.Landscape = true;
-                printer.Title = "Inventory Report as of Today: ";
+                printer.Title = "Date Time Record Report as of Today: ";
                 printer.TitleAlignment = StringAlignment.Near;
                 printer.SubTitle = DateTime.Now.ToString("MMMM dd, yyyy");
                 printer.SubTitleAlignment = StringAlignment.Near;
