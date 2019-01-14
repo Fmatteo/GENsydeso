@@ -949,7 +949,7 @@ namespace Sydeso
             Connect();
             cmd = new MySqlCommand("SELECT * FROM restaurant_table_booking WHERE Table_ID = @id AND Date = @date", con);
             cmd.Parameters.AddWithValue("@id", id);
-            cmd.Parameters.AddWithValue("@date", Convert.ToDateTime(date));
+            cmd.Parameters.AddWithValue("@date", date);
             dr = cmd.ExecuteReader();
 
             if (dr.Read())
@@ -981,7 +981,7 @@ namespace Sydeso
             cmd.Parameters.AddWithValue("@tid", id);
             cmd.Parameters.AddWithValue("@cid", cust_detail[0].Trim());
             cmd.Parameters.AddWithValue("@cname", name.Replace(cust_detail[0] + ": ", "").Trim());
-            cmd.Parameters.AddWithValue("@date", Convert.ToDateTime(date));
+            cmd.Parameters.AddWithValue("@date", date);
             cmd.ExecuteNonQuery();
             Disconnect();
 

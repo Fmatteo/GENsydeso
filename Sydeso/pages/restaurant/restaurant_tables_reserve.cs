@@ -107,7 +107,7 @@ namespace Sydeso
                         name = txtName.Text;
                     }
 
-                        if (rh.res_table_reserve(_id, name, datePicker.Value.ToString("dd-MM-yyyy")))
+                        if (rh.res_table_reserve(_id, name, datePicker.Value.ToString("yyyy-MM-dd")))
                         {
                             result = DialogResult.Yes; this.Close();
                         }
