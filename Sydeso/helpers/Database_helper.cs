@@ -393,7 +393,7 @@ namespace Sydeso
             return id;
         }
 
-        private Boolean dtr_exists_time_in(String id, DateTime date)
+        private Boolean dtr_exists_time_in(String id, String date)
         {
             Connect();
             cmd = new MySqlCommand("SELECT * FROM restaurant_employee_time_in_out WHERE Employee_ID = @id AND Date = @date", con);
@@ -419,8 +419,9 @@ namespace Sydeso
             }
 
             String id = dtr_get_id_by_user(user);
+            String dateNow = DateTime.Now.ToString("yyyy-MM-dd");
 
-            if (dtr_exists_time_in(id, DateTime.Now))
+            if (dtr_exists_time_in(id, dateNow))
             {
                 alert("Error: ", "This account has already checked in for today.", "danger");
                 return;
@@ -430,7 +431,7 @@ namespace Sydeso
             cmd = new MySqlCommand("INSERT INTO restaurant_employee_time_in_out(Employee_ID, Timein, Date)VALUES(@id, @in, @date)", con);
             cmd.Parameters.AddWithValue("@id", id);
             cmd.Parameters.AddWithValue("@in", DateTime.Now.ToString("hh:mm:ss tt"));
-            cmd.Parameters.AddWithValue("@date", DateTime.Now);
+            cmd.Parameters.AddWithValue("@date", dateNow);
             cmd.ExecuteNonQuery();
             Disconnect();
 
@@ -446,8 +447,9 @@ namespace Sydeso
             }
 
             String id = dtr_get_id_by_user(user);
+            String dateNow = DateTime.Now.ToString("yyyy-MM-dd");
 
-            if (!dtr_exists_time_in(id, DateTime.Now))
+            if (!dtr_exists_time_in(id, dateNow))
             {
                 alert("Error: ", "This account has not yet checked in for today.", "danger");
                 return;
@@ -457,7 +459,7 @@ namespace Sydeso
             cmd = new MySqlCommand("UPDATE restaurant_employee_time_in_out SET Timeout = @out WHERE Employee_ID = @id AND Date = @date", con);
             cmd.Parameters.AddWithValue("@out", DateTime.Now.ToString("hh:mm:ss tt"));
             cmd.Parameters.AddWithValue("@id", id);
-            cmd.Parameters.AddWithValue("@date", DateTime.Now);
+            cmd.Parameters.AddWithValue("@date", dateNow);
             cmd.ExecuteNonQuery();
             Disconnect();
 
@@ -472,23 +474,24 @@ namespace Sydeso
             {
                 if (page == 1)
                 {
-                    query = "SELECT restaurant_employee.Firstname, restaurant_employee.Lastname, restaurant_employee_time_in_out.Timein, restaurant_employee_time_in_out.Timeout, restaurant_employee_time_in_out.Date FROM restaurant_employee INNER JOIN restaurant_employee_time_in_out ON restaurant_employee.ID = restaurant_employee_time_in_out.Employee_ID WHERE Date BETWEEN @start AND @end ORDER BY restaurant_employee_time_in_out.Date, restaurant_employee.Firstname LIMIT " + pageSize;
+                    //WHERE Date BETWEEN @start AND @end
+                    query = "SELECT restaurant_employee.Firstname, restaurant_employee.Lastname, restaurant_employee_time_in_out.Timein, restaurant_employee_time_in_out.Timeout, restaurant_employee_time_in_out.Date FROM restaurant_employee INNER JOIN restaurant_employee_time_in_out ON restaurant_employee.ID = restaurant_employee_time_in_out.Employee_ID ORDER BY restaurant_employee_time_in_out.Date, restaurant_employee.Firstname LIMIT " + pageSize;
                 }
                 else
                 {
                     int prev = (page - 1) * pageSize;
-                    query = "SELECT restaurant_employee.Firstname, restaurant_employee.Lastname, restaurant_employee_time_in_out.Timein, restaurant_employee_time_in_out.Timeout, restaurant_employee_time_in_out.Date FROM restaurant_employee INNER JOIN restaurant_employee_time_in_out ON restaurant_employee.ID = restaurant_employee_time_in_out.Employee_ID WHERE Date BETWEEN @start AND @end ORDER BY restaurant_employee_time_in_out.Date, restaurant_employee.Firstname LIMIT " + prev + ", " + pageSize;
+                    query = "SELECT restaurant_employee.Firstname, restaurant_employee.Lastname, restaurant_employee_time_in_out.Timein, restaurant_employee_time_in_out.Timeout, restaurant_employee_time_in_out.Date FROM restaurant_employee INNER JOIN restaurant_employee_time_in_out ON restaurant_employee.ID = restaurant_employee_time_in_out.Employee_ID ORDER BY restaurant_employee_time_in_out.Date, restaurant_employee.Firstname LIMIT " + prev + ", " + pageSize;
                 }
             }
             else
             {
-                query = "SELECT restaurant_employee.Firstname, restaurant_employee.Lastname, restaurant_employee_time_in_out.Timein, restaurant_employee_time_in_out.Timeout, restaurant_employee_time_in_out.Date FROM restaurant_employee INNER JOIN restaurant_employee_time_in_out ON restaurant_employee.ID = restaurant_employee_time_in_out.Employee_ID WHERE Date BETWEEN @start AND @end ORDER BY restaurant_employee_time_in_out.Date, restaurant_employee.Firstname";
+                query = "SELECT restaurant_employee.Firstname, restaurant_employee.Lastname, restaurant_employee_time_in_out.Timein, restaurant_employee_time_in_out.Timeout, restaurant_employee_time_in_out.Date FROM restaurant_employee INNER JOIN restaurant_employee_time_in_out ON restaurant_employee.ID = restaurant_employee_time_in_out.Employee_ID ORDER BY restaurant_employee_time_in_out.Date, restaurant_employee.Firstname";
             }
 
             Connect();
             cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@start", Convert.ToDateTime(startDate));
-            cmd.Parameters.AddWithValue("@end", Convert.ToDateTime(endDate));
+            //cmd.Parameters.AddWithValue("@start", Convert.ToDateTime(startDate));
+            //cmd.Parameters.AddWithValue("@end", Convert.ToDateTime(endDate));
             dr = cmd.ExecuteReader();
 
             while (dr.Read())

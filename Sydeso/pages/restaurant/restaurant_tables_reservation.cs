@@ -73,5 +73,27 @@ namespace Sydeso
             move = false;
         }
         #endregion
+
+        String id = "", tid="";
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+                id = row.Cells[0].Value.ToString();
+                tid = row.Cells[1].Value.ToString();
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if (rh.res_table_cancel_reservation(id, tid))
+            {
+                id = "";
+                tid = "";
+                dataGridView1.DataSource = rh.res_table_get_reservation("");
+            }
+        }
     }
 }

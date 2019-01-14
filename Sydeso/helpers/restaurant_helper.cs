@@ -1046,6 +1046,46 @@ namespace Sydeso
             return _res_table_get_reservation;
         }
 
+        public Boolean res_table_cancel_reservation(String id, String tid)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                alert("Error: ", "Please specify the table you want to modify.\nSelect first a table then try again.", "danger");
+                return false;
+            }
+
+            Connect();
+            cmd = new MySqlCommand("DELETE FROM restaurant_table_booking WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+
+            int count = 0;
+            Connect();
+            cmd = new MySqlCommand("SELECT COUNT(*) as row FROM restaurant_table_booking WHERE Table_ID = @tid", con);
+            cmd.Parameters.AddWithValue("@tid", tid);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                count = Convert.ToInt32(dr["row"]);
+            }
+            Disconnect();
+
+            if (count == 0)
+            {
+                Connect();
+                cmd = new MySqlCommand("UPDATE restaurant_table SET Status = @status WHERE ID = @tid", con);
+                cmd.Parameters.AddWithValue("@status", "VACANT");
+                cmd.Parameters.AddWithValue("@tid", tid);
+                cmd.ExecuteNonQuery();
+                Disconnect();
+            }
+
+            alert("Notification: ", "Cancellation of Reservatin successfully.", "information");
+            return true;
+        }
+
         #endregion
         #endregion
 
