@@ -104,3 +104,4 @@ C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_tables_new.resource
 C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_tables_update.resources
 C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_tables_reserve.resources
 C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_tables_view_details.resources
+C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_tables_reservation.resources

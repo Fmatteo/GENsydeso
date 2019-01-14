@@ -55,6 +55,7 @@
             this.customPanel2 = new Sydeso.CustomPanel();
             this.customPanel3 = new Sydeso.CustomPanel();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnViewReservation = new Bunifu.Framework.UI.BunifuFlatButton();
             this.customPanel5.SuspendLayout();
             this.customPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnNext)).BeginInit();
@@ -357,6 +358,7 @@
             // 
             this.customPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.customPanel1.BackColor = System.Drawing.Color.White;
+            this.customPanel1.Controls.Add(this.btnViewReservation);
             this.customPanel1.Controls.Add(this.borderedPanel2);
             this.customPanel1.Controls.Add(this.borderedPanel1);
             this.customPanel1.Controls.Add(this.customPanel2);
@@ -476,6 +478,33 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "LIST OF TABLES";
             // 
+            // btnViewReservation
+            // 
+            this.btnViewReservation.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnViewReservation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnViewReservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnViewReservation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnViewReservation.BorderRadius = 0;
+            this.btnViewReservation.ButtonText = "VIEW RESERVATION";
+            this.btnViewReservation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnViewReservation.Iconcolor = System.Drawing.Color.Transparent;
+            this.btnViewReservation.Iconimage = ((System.Drawing.Image)(resources.GetObject("btnViewReservation.Iconimage")));
+            this.btnViewReservation.Iconimage_right = null;
+            this.btnViewReservation.Iconimage_right_Selected = null;
+            this.btnViewReservation.Iconimage_Selected = null;
+            this.btnViewReservation.IconZoom = 70D;
+            this.btnViewReservation.IsTab = false;
+            this.btnViewReservation.Location = new System.Drawing.Point(243, 15);
+            this.btnViewReservation.Name = "btnViewReservation";
+            this.btnViewReservation.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnViewReservation.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(163)))), ((int)(((byte)(148)))));
+            this.btnViewReservation.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnViewReservation.selected = false;
+            this.btnViewReservation.Size = new System.Drawing.Size(184, 44);
+            this.btnViewReservation.TabIndex = 7;
+            this.btnViewReservation.Textcolor = System.Drawing.Color.White;
+            this.btnViewReservation.TextFont = new System.Drawing.Font("Calibri", 11F);
+            // 
             // restaurant_tables
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -532,5 +561,6 @@
         private System.Windows.Forms.Label label1;
         private Bunifu.Framework.UI.BunifuFlatButton btnView;
         private Bunifu.Framework.UI.BunifuFlatButton btnReserve;
+        private Bunifu.Framework.UI.BunifuFlatButton btnViewReservation;
     }
 }

@@ -46,6 +46,7 @@ namespace Sydeso
             pageSize = Convert.ToInt32(cbEntries.SelectedItem.ToString());
 
             dataGridView1.Focus();
+
             LoadTable(DateTime.Now.ToString("dd-MM-yyyy"), DateTime.Now.ToString("dd-MM-yyyy"), currentPage, pageSize);
             txtStart.Text = DateTime.Now.ToString("dd-MM-yyyy");
             txtEnd.Text = DateTime.Now.ToString("dd-MM-yyyy");
@@ -114,13 +115,17 @@ namespace Sydeso
         /// <param name="pageSize"></param>
         private void LoadTable(String start, String end, int page, int pageSize)
         {
-            dt.Clear();
-            dataGridView1.DataSource = db.dtr_view(dt, start, end, page, pageSize);
+            try
+            {
+                dt.Clear();
+                dataGridView1.DataSource = db.dtr_view(dt, start, end, page, pageSize);
 
-            dataGridView1.CurrentCell = null;
+                dataGridView1.CurrentCell = null;
 
-            // Calls the method to calculate the pages..
-            CalculatePages();
+                // Calls the method to calculate the pages..
+                CalculatePages();
+            }
+            catch (Exception) { }
         }
         #endregion
 

@@ -1013,6 +1013,38 @@ namespace Sydeso
             return cust;
         }
 
+        private DataTable _res_table_get_reservation;
+        public DataTable res_table_get_reservation(String search)
+        {
+            _res_table_get_reservation = new DataTable();
+            _res_table_get_reservation.Columns.Add("ID");
+            _res_table_get_reservation.Columns.Add("Table ID");
+            _res_table_get_reservation.Columns.Add("Customer ID");
+            _res_table_get_reservation.Columns.Add("Customer Name");
+            _res_table_get_reservation.Columns.Add("Date of Reservation");
+
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM restaurant_table_booking WHERE Customer_Name LIKE @search OR MONTHNAME(Date) LIKE @search ORDER BY Date", con);
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                String id = "";
+
+                if (dr[1].ToString() == "0")
+                    id = "N/A";
+                else
+                    id = dr[1].ToString();
+
+                _res_table_get_reservation.Rows.Add(new Object[] {
+                    dr[0], id, dr[2], dr[3], Convert.ToDateTime(dr[4]).ToString("MMMM dd, yyyy")
+                });
+            }
+            dr.Close();
+            Disconnect();
+            return _res_table_get_reservation;
+        }
+
         #endregion
         #endregion
 
