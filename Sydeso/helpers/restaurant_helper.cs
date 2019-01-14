@@ -633,21 +633,22 @@ namespace Sydeso
             return false;
         }
 
-        public void res_cust_create(String name, String bday, String num, String email)
+        public Boolean res_cust_create(String name, String bday, String num, String email)
         {
             if (res_cust_email_exist("0", email))
-                return;
+                return false;
 
             Connect();
             cmd = new MySqlCommand("INSERT INTO restaurant_customers(Name, Birthdate, Phone_Number, Email_Address)values(@name, @bday, @num, @email)", con);
             cmd.Parameters.AddWithValue("@name", name);
-            cmd.Parameters.AddWithValue("@bday", bday);
+            cmd.Parameters.AddWithValue("@bday", Convert.ToDateTime(bday));
             cmd.Parameters.AddWithValue("@num", num);
             cmd.Parameters.AddWithValue("@email", email);
             cmd.ExecuteNonQuery();
             Disconnect();
 
             alert("Notification: ", "Creating record of a customer successfully.", "information");
+            return true;
         }
 
         public DataTable res_cust_read(DataTable data, String search, int page, int pageSize)
@@ -686,29 +687,53 @@ namespace Sydeso
             return data;
         }
 
-        public void res_cust_update(String id, String name, String bday, String num, String email)
+        private List<String> _res_cust_read_id;
+        public List<String> res_cust_read_id(String id)
+        {
+            _res_cust_read_id = new List<String>();
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM restaurant_customers WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                _res_cust_read_id.Add(dr[0].ToString());
+                _res_cust_read_id.Add(dr[1].ToString());
+                _res_cust_read_id.Add(dr[2].ToString());
+                _res_cust_read_id.Add(dr[3].ToString());
+                _res_cust_read_id.Add(dr[4].ToString());
+            }
+            dr.Close();
+            Disconnect();
+            return _res_cust_read_id;
+        }
+
+        public Boolean res_cust_update(String id, String name, String bday, String num, String email)
         {
             if (res_cust_email_exist(id, email))
-                return;
+                return false;
 
             Connect();
             cmd = new MySqlCommand("UPDATE restaurant_customers SET Name = @name, Birthdate = @bday, Phone_Number = @num, Email_Address = @email WHERE ID = @id", con);
             cmd.Parameters.AddWithValue("@name", name);
-            cmd.Parameters.AddWithValue("@bday", bday);
+            cmd.Parameters.AddWithValue("@bday", Convert.ToDateTime(bday));
             cmd.Parameters.AddWithValue("@num", num);
             cmd.Parameters.AddWithValue("@email", email);
+            cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
             Disconnect();
 
             alert("Notification: ", "Updating an existing customer record successfully.", "information");
+            return true;
         }
 
-        public void res_cust_delete(String id)
+        public Boolean res_cust_delete(String id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
                 alert("Error: ", "Please specify the product you want to modify.\nSelect first a product then try again.", "danger");
-                return;
+                return false;
             }
 
             Connect();
@@ -718,6 +743,203 @@ namespace Sydeso
             Disconnect();
 
             alert("Notification: ", "Deleting a customer record successfully.", "information");
+            return true;
+        }
+        #endregion
+
+        #region restaurant_tables
+        private Boolean res_table_name_exists(String id, String name)
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM restaurant_table WHERE Name = @name AND ID != @id", con);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                alert("Error: ", "Table name is already existing.\nPlease pick another one.", "danger");
+                return true;
+            }
+            dr.Close();
+            Disconnect();
+            return false;
+        }
+
+        public Boolean res_table_create(String name, String desc)
+        {
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(desc))
+            {
+                alert("Error: ", "Please fill up all required fields to proceed.", "danger");
+                return false;
+            }
+            if (res_table_name_exists("0", name))
+                return false;
+
+            Connect();
+            cmd = new MySqlCommand("INSERT INTO restaurant_table(Name, Description, Status)VALUES(@name, @desc, @status)", con);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@desc", desc);
+            cmd.Parameters.AddWithValue("@status", "VACANT");
+            cmd.ExecuteNonQuery();
+            Disconnect();
+
+            alert("Notification: ", "Creating table record successfully.", "information");
+            return true;
+        }
+
+        public DataTable res_table_read(DataTable data, String search, int page, int pageSize)
+        {
+            String query = "";
+
+            if (page != -1)
+            {
+                if (page == 1)
+                {
+                    query = "SELECT * FROM restaurant_table WHERE ID LIKE @search OR Description LIKE @search OR Status LIKE @search ORDER BY ID LIMIT " + pageSize;
+                }
+                else
+                {
+                    int prev = (page - 1) * pageSize;
+                    query = "SELECT * FROM restaurant_table WHERE ID LIKE @search OR Description LIKE @search OR Status LIKE @search ORDER BY ID LIMIT " + prev + ", " + pageSize;
+
+                }
+            }
+            else
+            {
+                query = "SELECT * FROM restaurant_table WHERE ID LIKE @search OR Description LIKE @search OR Status LIKE @search ORDER BY ID";
+            }
+
+            Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@search", search + "%");
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                data.Rows.Add(new Object[] {
+                    dr[0], dr[1], dr[2], dr[3]
+                });
+            }
+            dr.Close();
+            Disconnect();
+
+            return data;
+        }
+
+        private List<String> _res_table_read_id;
+        public List<String> res_table_read_id(String id)
+        {
+            _res_table_read_id = new List<String>();
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM restaurant_table WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                _res_table_read_id.Add(dr[0].ToString());
+                _res_table_read_id.Add(dr[1].ToString());
+                _res_table_read_id.Add(dr[2].ToString());
+                _res_table_read_id.Add(dr[3].ToString());
+            }
+            dr.Close();
+            Disconnect();
+            return _res_table_read_id;
+        }
+
+        public Boolean res_table_update(String id, String name, String desc)
+        {
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(desc))
+            {
+                alert("Error: ", "Please fill up all required fields to proceed.", "danger");
+                return false;
+            }
+
+            if (res_table_name_exists(id, name))
+                return false;
+
+            Connect();
+            cmd = new MySqlCommand("UPDATE restaurant_table SET Name = @name, Description = @desc WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@desc", desc);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+
+            alert("Notification: ", "Updating table record successfully.", "information");
+            return true;
+        }
+
+        public Boolean res_table_delete(String id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                alert("Error: ", "Please specify the product you want to modify.\nSelect first a product then try again.", "danger");
+                return false;
+            }
+
+            Connect();
+            cmd = new MySqlCommand("DELETE FROM restaurant_table WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+
+            alert("Notification: ", "Deleting table record successfully.", "information");
+            return true;
+        }
+
+        private DataTable _res_table_read_details_occupied;
+        public DataTable res_table_read_details_occupied(String id)
+        {
+            _res_table_read_details_occupied = new DataTable();
+            _res_table_read_details_occupied.Columns.Add("Order ID");
+            _res_table_read_details_occupied.Columns.Add("Order Customer Name");
+            _res_table_read_details_occupied.Columns.Add("Order Qty");
+            _res_table_read_details_occupied.Columns.Add("Order Price");
+            _res_table_read_details_occupied.Columns.Add("Order Total");
+
+            Connect();
+            cmd = new MySqlCommand("SELECT restaurant_order.ID, restaurant_order.Customer_Name, restaurant_order_details.Product_Name, restaurant_order_details.Qty, restaurant_order_details.Price, restaurant_order_details.Qty * restaurant_order_details.Price as Total FROM restaurant_order INNER JOIN restaurant_order_details ON restaurant_order.ID = restaurant_order_details.Order_ID WHERE restaurant_order.Table_ID = @id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                _res_table_read_details_occupied.Rows.Add(new Object[] {
+                    dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString()
+                }); 
+            }
+            dr.Close();
+            Disconnect();
+            return _res_table_read_details_occupied;
+        }
+
+        private DataTable _res_table_read_details_reserved;
+        public DataTable res_table_read_details_reserved(String id)
+        {
+            _res_table_read_details_reserved = new DataTable();
+            _res_table_read_details_reserved.Columns.Add("Table ID");
+            _res_table_read_details_reserved.Columns.Add("Table Name");
+            _res_table_read_details_reserved.Columns.Add("Table Description");
+            _res_table_read_details_reserved.Columns.Add("Customer Name");
+            _res_table_read_details_reserved.Columns.Add("Date");
+
+            Connect();
+            cmd = new MySqlCommand("SELECT restaurant_table.ID, restaurant_table.Name, restaurant_table.Description, restaurant_table_booking.Customer_Name, restaurant_table_booking.Date FROM restaurant_table INNER JOIN restaurant_table_booking ON restaurant_table.ID = restaurant_table_booking.Table_ID WHERE restaurant_table.ID = @id", con);
+            cmd.Parameters.AddWithValue("@id", con);
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                _res_table_read_details_reserved.Rows.Add(new Object[] {
+                    dr[0], dr[1], dr[2], dr[3], dr[4]
+                });
+            }
+            dr.Close();
+            Disconnect();
+
+            return _res_table_read_details_reserved;
         }
         #endregion
     }

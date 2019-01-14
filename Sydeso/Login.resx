@@ -120,17 +120,17 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnDTR.Iconimage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAAvcAAAL3AS0UjTgAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
-        AAAB3klEQVRoQ+2YS0oDURBFg5DgVBQiLkPxN9OhDpyILkBIJq5AXIBDx25Bgm7CoSIOFCeCLsAfKAgO
-        2nur6rWJ0dCx0/0SqAMH0vXeu9WVj4ZUHMdxHOc/JElyBANHVs4Mz+hRoe/zuWFT7S34AFYuDjSpwn14
-        Bu/gKwzwMWv9+Nt5Zu/BqrUdHAg9hWXRsraDAYGLmlsq89Y+Pwjb0UyBL/VWQTI7sGPt84OwpmYK51Ye
-        OMzWFkLTyvlhmGYKIz/AA+R1ETI7UNgAZeEDpDBMM4V3yPdqETI74B/iFIZpppBrAJwfs4ddMFs6KEMx
-        QM0UcHYJ3sMFK3XAbBgYigHGzXDzL5KQJM9wkfV2UIs7ANYm4a5dpqA2Cx9h4BNu2nIKavEGQH0G3sqO
-        JDm0MuvLsP2r8wdcs+UOUI86wLEupxzAOfgkVwqf+W070gXWog5Qh9ey4xs+24GeN0+wHv0zMMF12dUJ
-        B1m3bX+CPXEHIFj/OUSmmyfYF38Agj1T8ApmvnnCbBiINwDBvmm4YZeZYDYbGHEH+A/M1haCD5DCMM0U
-        RnKAhmYKN5D/oIqQ2YGGtc8PwlY1s1RWrH1+EFaDlxJbDhdwsD8vIpB/Fk/gGywKZrdg3do6juM4Tg8q
-        lS/s4ZIDm7Pa2wAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAC
+        9wAAAvcBLRSNOAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAHeSURBVGhD7ZhL
+        SgNREEWDkOBUFCIuQ/E306EOnIguQEgmrkBcgEPHbkGCbsKhIg4UJ4IuwB8oCA7ae6vqtYnR0LHT/RKo
+        AwfS9d671ZWPhlQcx3Ec5z8kSXIEA0dWzgzP6FGh7/O5YVPtLfgAVi4ONKnCfXgG7+ArDPAxa/3423lm
+        78GqtR0cCD2FZdGytoMBgYuaWyrz1j4/CNvRTIEv9VZBMjuwY+3zg7CmZgrnVh44zNYWQtPK+WGYZgoj
+        P8AD5HURMjtQ2ABl4QOkMEwzhXfI92oRMjvgH+IUhmmmkGsAnB+zh10wWzooQzFAzRRwdgnewwUrdcBs
+        GBiKAcbNcPMvkpAkz3CR9XZQizsA1ibhrl2moDYLH2HgE27acgpq8QZAfQbeyo4kObQy68uw/avzB1yz
+        5Q5QjzrAsS6nHMA5+CRXCp/5bTvSBdaiDlCH17LjGz7bgZ43T7Ae/TMwwXXZ1QkHWbdtf4I9cQcgWP85
+        RKabJ9gXfwCCPVPwCma+ecJsGIg3AMG+abhhl5lgNhsYcQf4D8zWFoIPkMIwzRRGcoCGZgo3kP+gipDZ
+        gYa1zw/CVjWzVFasfX4QVoOXElsOF3CwPy8ikH8WT+AbLApmt2Dd2jqO4zhODyqVL+zhkgObs9rbAAAA
+        AElFTkSuQmCC
 </value>
   </data>
   <data name="btnLogin.Iconimage_right" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

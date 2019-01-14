@@ -142,6 +142,12 @@
     <Compile Include="pages\restaurant\restaurant_customers_new.Designer.cs">
       <DependentUpon>restaurant_customers_new.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\restaurant\restaurant_customers_update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_customers_update.Designer.cs">
+      <DependentUpon>restaurant_customers_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\restaurant\restaurant_dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,6 +238,24 @@
     <Compile Include="pages\restaurant\restaurant_tables.Designer.cs">
       <DependentUpon>restaurant_tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\restaurant\restaurant_tables_new.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_tables_new.Designer.cs">
+      <DependentUpon>restaurant_tables_new.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_tables_reserve.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_tables_reserve.Designer.cs">
+      <DependentUpon>restaurant_tables_reserve.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_tables_update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_tables_update.Designer.cs">
+      <DependentUpon>restaurant_tables_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wizard.cs">
@@ -272,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_customers_new.resx">
       <DependentUpon>restaurant_customers_new.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_customers_update.resx">
+      <DependentUpon>restaurant_customers_update.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_dashboard.resx">
       <DependentUpon>restaurant_dashboard.cs</DependentUpon>
@@ -318,6 +345,15 @@
     <EmbeddedResource Include="pages\restaurant\restaurant_tables.resx">
       <DependentUpon>restaurant_tables.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_tables_new.resx">
+      <DependentUpon>restaurant_tables_new.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_tables_reserve.resx">
+      <DependentUpon>restaurant_tables_reserve.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_tables_update.resx">
+      <DependentUpon>restaurant_tables_update.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -356,6 +392,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\icon_phone.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_reserve.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\icon_view.png">

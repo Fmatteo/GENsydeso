@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.customPanel3 = new Sydeso.CustomPanel();
+            this.btnDTR = new Bunifu.Framework.UI.BunifuFlatButton();
             this.btnLogin = new Bunifu.Framework.UI.BunifuFlatButton();
             this.borderedPanel2 = new Sydeso.BorderedPanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -44,7 +45,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnl_toolbar = new Sydeso.CustomPanel();
             this.btnExit = new System.Windows.Forms.PictureBox();
-            this.btnDTR = new Bunifu.Framework.UI.BunifuFlatButton();
             this.customPanel3.SuspendLayout();
             this.borderedPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -71,6 +71,34 @@
             this.customPanel3.Size = new System.Drawing.Size(446, 393);
             this.customPanel3.TabIndex = 3;
             // 
+            // btnDTR
+            // 
+            this.btnDTR.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnDTR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnDTR.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDTR.BorderRadius = 2;
+            this.btnDTR.ButtonText = "Check In/Out";
+            this.btnDTR.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDTR.Iconcolor = System.Drawing.Color.Transparent;
+            this.btnDTR.Iconimage = ((System.Drawing.Image)(resources.GetObject("btnDTR.Iconimage")));
+            this.btnDTR.Iconimage_right = null;
+            this.btnDTR.Iconimage_right_Selected = null;
+            this.btnDTR.Iconimage_Selected = null;
+            this.btnDTR.IconZoom = 70D;
+            this.btnDTR.IsTab = false;
+            this.btnDTR.Location = new System.Drawing.Point(45, 302);
+            this.btnDTR.Name = "btnDTR";
+            this.btnDTR.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnDTR.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(193)))), ((int)(((byte)(178)))));
+            this.btnDTR.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnDTR.selected = false;
+            this.btnDTR.Size = new System.Drawing.Size(150, 41);
+            this.btnDTR.TabIndex = 10;
+            this.btnDTR.TabStop = false;
+            this.btnDTR.Textcolor = System.Drawing.Color.White;
+            this.btnDTR.TextFont = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDTR.Click += new System.EventHandler(this.btnDTR_Click);
+            // 
             // btnLogin
             // 
             this.btnLogin.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
@@ -94,6 +122,7 @@
             this.btnLogin.selected = false;
             this.btnLogin.Size = new System.Drawing.Size(150, 41);
             this.btnLogin.TabIndex = 9;
+            this.btnLogin.TabStop = false;
             this.btnLogin.Textcolor = System.Drawing.Color.White;
             this.btnLogin.TextFont = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -244,33 +273,6 @@
             this.btnExit.TabIndex = 1;
             this.btnExit.TabStop = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnDTR
-            // 
-            this.btnDTR.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
-            this.btnDTR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
-            this.btnDTR.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnDTR.BorderRadius = 2;
-            this.btnDTR.ButtonText = "Check In/Out";
-            this.btnDTR.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDTR.Iconcolor = System.Drawing.Color.Transparent;
-            this.btnDTR.Iconimage = ((System.Drawing.Image)(resources.GetObject("btnDTR.Iconimage")));
-            this.btnDTR.Iconimage_right = null;
-            this.btnDTR.Iconimage_right_Selected = null;
-            this.btnDTR.Iconimage_Selected = null;
-            this.btnDTR.IconZoom = 70D;
-            this.btnDTR.IsTab = false;
-            this.btnDTR.Location = new System.Drawing.Point(45, 302);
-            this.btnDTR.Name = "btnDTR";
-            this.btnDTR.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
-            this.btnDTR.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(193)))), ((int)(((byte)(178)))));
-            this.btnDTR.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnDTR.selected = false;
-            this.btnDTR.Size = new System.Drawing.Size(150, 41);
-            this.btnDTR.TabIndex = 10;
-            this.btnDTR.Textcolor = System.Drawing.Color.White;
-            this.btnDTR.TextFont = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDTR.Click += new System.EventHandler(this.btnDTR_Click);
             // 
             // Login
             // 

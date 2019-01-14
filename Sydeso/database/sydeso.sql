@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2019 at 01:22 PM
+-- Generation Time: Jan 14, 2019 at 10:14 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -133,11 +133,11 @@ CREATE TABLE `restaurant_logs` (
 
 CREATE TABLE `restaurant_order` (
   `ID` int(11) NOT NULL,
-  `Table_Number` int(11) NOT NULL,
+  `Table_ID` int(11) NOT NULL,
   `Customer_ID` int(11) NOT NULL,
-  `Employee_ID` int(11) NOT NULL,
-  `Status_ID` int(11) NOT NULL,
-  `Order_Type_ID` int(11) NOT NULL,
+  `Customer_Name` text NOT NULL,
+  `Account_ID` int(11) NOT NULL,
+  `Total` double NOT NULL,
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -148,21 +148,11 @@ CREATE TABLE `restaurant_order` (
 --
 
 CREATE TABLE `restaurant_order_details` (
-  `Sub_Order_ID` int(11) NOT NULL,
-  `Order_ID` int(11) NOT NULL,
-  `Food_ID` int(11) NOT NULL,
-  `Special` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `restaurant_order_type`
---
-
-CREATE TABLE `restaurant_order_type` (
   `ID` int(11) NOT NULL,
-  `Name` int(11) NOT NULL
+  `Order_ID` int(11) NOT NULL,
+  `Product_Name` text NOT NULL,
+  `Qty` int(11) NOT NULL,
+  `Price` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -184,18 +174,6 @@ CREATE TABLE `restaurant_products` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `restaurant_products_damage`
---
-
-CREATE TABLE `restaurant_products_damage` (
-  `ID` int(11) NOT NULL,
-  `Prod_ID` int(11) NOT NULL,
-  `Qty` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `restaurant_sales`
 --
 
@@ -208,7 +186,6 @@ CREATE TABLE `restaurant_sales` (
   `Amount` double NOT NULL,
   `Cash_Change` double NOT NULL,
   `Payment_Mode` text NOT NULL,
-  `OR_Number` text NOT NULL,
   `Date` date NOT NULL,
   `Time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -225,17 +202,6 @@ CREATE TABLE `restaurant_sales_details` (
   `Prod_ID` int(11) NOT NULL,
   `Qty` int(11) NOT NULL,
   `Price` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `restaurant_status`
---
-
-CREATE TABLE `restaurant_status` (
-  `ID` int(11) NOT NULL,
-  `Status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -261,7 +227,9 @@ CREATE TABLE `restaurant_stock_out` (
 
 CREATE TABLE `restaurant_table` (
   `ID` int(11) NOT NULL,
-  `Name` text NOT NULL
+  `Name` text NOT NULL,
+  `Description` text NOT NULL,
+  `Status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -274,7 +242,7 @@ CREATE TABLE `restaurant_table_booking` (
   `ID` int(11) NOT NULL,
   `Table_ID` int(11) NOT NULL,
   `Customer_ID` int(11) NOT NULL,
-  `Status_ID` int(11) NOT NULL,
+  `Customer_Name` text NOT NULL,
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -363,24 +331,12 @@ ALTER TABLE `restaurant_order`
 -- Indexes for table `restaurant_order_details`
 --
 ALTER TABLE `restaurant_order_details`
-  ADD PRIMARY KEY (`Sub_Order_ID`);
-
---
--- Indexes for table `restaurant_order_type`
---
-ALTER TABLE `restaurant_order_type`
   ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `restaurant_products`
 --
 ALTER TABLE `restaurant_products`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `restaurant_products_damage`
---
-ALTER TABLE `restaurant_products_damage`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -393,12 +349,6 @@ ALTER TABLE `restaurant_sales`
 -- Indexes for table `restaurant_sales_details`
 --
 ALTER TABLE `restaurant_sales_details`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `restaurant_status`
---
-ALTER TABLE `restaurant_status`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -487,24 +437,12 @@ ALTER TABLE `restaurant_order`
 -- AUTO_INCREMENT for table `restaurant_order_details`
 --
 ALTER TABLE `restaurant_order_details`
-  MODIFY `Sub_Order_ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `restaurant_order_type`
---
-ALTER TABLE `restaurant_order_type`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `restaurant_products`
 --
 ALTER TABLE `restaurant_products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `restaurant_products_damage`
---
-ALTER TABLE `restaurant_products_damage`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -517,12 +455,6 @@ ALTER TABLE `restaurant_sales`
 -- AUTO_INCREMENT for table `restaurant_sales_details`
 --
 ALTER TABLE `restaurant_sales_details`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `restaurant_status`
---
-ALTER TABLE `restaurant_status`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --

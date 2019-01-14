@@ -12,6 +12,16 @@ namespace Sydeso
 {
     public partial class restaurant_customers : Form
     {
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle = cp.ExStyle | 0x2000000;
+                return cp;
+            }
+        }
+
         #region Variables
         private DataTable dt = new DataTable();
         private int pageSize;
@@ -225,6 +235,12 @@ namespace Sydeso
             {
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
                 id = row.Cells[0].Value.ToString();
+
+                if (restaurant_customers_update._Show(id) == DialogResult.Yes)
+                {
+                    LoadTable("", currentPage, pageSize);
+                    id = "";
+                }
             }
         }
 
@@ -235,14 +251,16 @@ namespace Sydeso
             switch (c.Name)
             {
                 case "btnNew":
-                    if (restaurant_accounts_new._Show() == DialogResult.Yes)
+                    if (restaurant_customers_new._Show() == DialogResult.Yes)
                         LoadTable("", currentPage, pageSize);
                     break;
 
                 case "btnDelete":
-                    rh.res_cust_delete(id);
-                    id = "";
-                    LoadTable("", currentPage, pageSize);
+                    if (rh.res_cust_delete(id))
+                    {
+                        id = "";
+                        LoadTable("", currentPage, pageSize);
+                    }
                     break;
 
                 default:

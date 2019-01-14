@@ -466,7 +466,7 @@ namespace Sydeso
             alert("Notification: ", "Checking out successfully, see you tomorrow.", "success");
         }
 
-        public DataTable dtr_view(DataTable data, String search, int page, int pageSize)
+        public DataTable dtr_view(DataTable data, String startDate, String endDate, int page, int pageSize)
         {
             String query = "";
 
@@ -474,22 +474,23 @@ namespace Sydeso
             {
                 if (page == 1)
                 {
-                    query = "SELECT restaurant_employee.Firstname, restaurant_employee.Lastname, restaurant_employee_time_in_out.Timein, restaurant_employee_time_in_out.Timeout, restaurant_employee_time_in_out.Date FROM restaurant_employee INNER JOIN restaurant_employee_time_in_out ON restaurant_employee.ID = restaurant_employee_time_in_out.Employee_ID WHERE (restaurant_employee.Firstname LIKE @search OR restaurant_employee.Lastname LIKE @search OR restaurant_employee_time_in_out.Timein LIKE @search OR restaurant_employee_time_in_out.Timeout LIKE @search OR MONTHNAME(restaurant_employee_time_in_out.Date) LIKE @search) ORDER BY restaurant_employee_time_in_out.Date, restaurant_employee.Firstname LIMIT " + pageSize;
+                    query = "SELECT restaurant_employee.Firstname, restaurant_employee.Lastname, restaurant_employee_time_in_out.Timein, restaurant_employee_time_in_out.Timeout, restaurant_employee_time_in_out.Date FROM restaurant_employee INNER JOIN restaurant_employee_time_in_out ON restaurant_employee.ID = restaurant_employee_time_in_out.Employee_ID WHERE Date BETWEEN @start AND @end ORDER BY restaurant_employee_time_in_out.Date, restaurant_employee.Firstname LIMIT " + pageSize;
                 }
                 else
                 {
                     int prev = (page - 1) * pageSize;
-                    query = "SELECT restaurant_employee.Firstname, restaurant_employee.Lastname, restaurant_employee_time_in_out.Timein, restaurant_employee_time_in_out.Timeout, restaurant_employee_time_in_out.Date FROM restaurant_employee INNER JOIN restaurant_employee_time_in_out ON restaurant_employee.ID = restaurant_employee_time_in_out.Employee_ID WHERE (restaurant_employee.Firstname LIKE @search OR restaurant_employee.Lastname LIKE @search OR restaurant_employee_time_in_out.Timein LIKE @search OR restaurant_employee_time_in_out.Timeout LIKE @search OR MONTHNAME(restaurant_employee_time_in_out.Date) LIKE @search) ORDER BY restaurant_employee_time_in_out.Date, restaurant_employee.Firstname LIMIT " + prev + ", " + pageSize;
+                    query = "SELECT restaurant_employee.Firstname, restaurant_employee.Lastname, restaurant_employee_time_in_out.Timein, restaurant_employee_time_in_out.Timeout, restaurant_employee_time_in_out.Date FROM restaurant_employee INNER JOIN restaurant_employee_time_in_out ON restaurant_employee.ID = restaurant_employee_time_in_out.Employee_ID WHERE Date BETWEEN @start AND @end ORDER BY restaurant_employee_time_in_out.Date, restaurant_employee.Firstname LIMIT " + prev + ", " + pageSize;
                 }
             }
             else
             {
-                query = "SELECT restaurant_employee.Firstname, restaurant_employee.Lastname, restaurant_employee_time_in_out.Timein, restaurant_employee_time_in_out.Timeout, restaurant_employee_time_in_out.Date FROM restaurant_employee INNER JOIN restaurant_employee_time_in_out ON restaurant_employee.ID = restaurant_employee_time_in_out.Employee_ID WHERE (restaurant_employee.Firstname LIKE @search OR restaurant_employee.Lastname LIKE @search OR restaurant_employee_time_in_out.Timein LIKE @search OR restaurant_employee_time_in_out.Timeout LIKE @search OR MONTHNAME(restaurant_employee_time_in_out.Date) LIKE @search) ORDER BY restaurant_employee_time_in_out.Date, restaurant_employee.Firstname";
+                query = "SELECT restaurant_employee.Firstname, restaurant_employee.Lastname, restaurant_employee_time_in_out.Timein, restaurant_employee_time_in_out.Timeout, restaurant_employee_time_in_out.Date FROM restaurant_employee INNER JOIN restaurant_employee_time_in_out ON restaurant_employee.ID = restaurant_employee_time_in_out.Employee_ID WHERE Date BETWEEN @start AND @end ORDER BY restaurant_employee_time_in_out.Date, restaurant_employee.Firstname";
             }
 
             Connect();
             cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@search", search + "%");
+            cmd.Parameters.AddWithValue("@start", Convert.ToDateTime(startDate));
+            cmd.Parameters.AddWithValue("@end", Convert.ToDateTime(endDate));
             dr = cmd.ExecuteReader();
 
             while (dr.Read())

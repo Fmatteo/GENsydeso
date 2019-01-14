@@ -13,6 +13,16 @@ namespace Sydeso
 {
     public partial class restaurant_products : Form
     {
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle = cp.ExStyle | 0x2000000;
+                return cp;
+            }
+        }
+
         #region Variables
         private DataTable dt = new DataTable();
         private int pageSize;
@@ -229,8 +239,21 @@ namespace Sydeso
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            int i = 0;
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
+                i++;
+                row.DefaultCellStyle.BackColor = Color.FromArgb(220, 220, 219);
+                row.DefaultCellStyle.ForeColor = Color.FromArgb(205, 49, 49);
+                row.DefaultCellStyle.SelectionBackColor = Color.SteelBlue;
+                row.DefaultCellStyle.SelectionForeColor = Color.AliceBlue;
+
+                if (i == 2)
+                {
+                    i = 0;
+                    row.DefaultCellStyle.BackColor = Color.FromArgb(237, 242, 246);
+                }
+
                 if (row.Cells["Price"].Value.ToString() == "Grand Total: ")
                 {
                     row.DefaultCellStyle.BackColor = Color.FromArgb(205, 49, 49);

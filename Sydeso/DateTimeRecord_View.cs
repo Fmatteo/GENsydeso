@@ -45,7 +45,10 @@ namespace Sydeso
             cbEntries.SelectedIndex = 0;
             pageSize = Convert.ToInt32(cbEntries.SelectedItem.ToString());
 
-            LoadTable("", currentPage, pageSize);
+            dataGridView1.Focus();
+            LoadTable(DateTime.Now.ToString("dd-MM-yyyy"), DateTime.Now.ToString("dd-MM-yyyy"), currentPage, pageSize);
+            txtStart.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            txtEnd.Text = DateTime.Now.ToString("dd-MM-yyyy");
         }
 
         #region Draggable
@@ -109,37 +112,15 @@ namespace Sydeso
         /// <param name="search"></param>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
-        private void LoadTable(String search, int page, int pageSize)
+        private void LoadTable(String start, String end, int page, int pageSize)
         {
             dt.Clear();
-            dataGridView1.DataSource = db.dtr_view(dt, search, page, pageSize);
+            dataGridView1.DataSource = db.dtr_view(dt, start, end, page, pageSize);
 
             dataGridView1.CurrentCell = null;
 
             // Calls the method to calculate the pages..
             CalculatePages();
-        }
-        #endregion
-
-        #region Placeholder Logics
-        private void placeholder_keydown(object sender, KeyEventArgs e)
-        {
-            TextBox c = sender as TextBox;
-            if (c.Text == "  SEARCH")
-                c.Text = "";
-        }
-
-        private void placeholder_keyup(object sender, KeyEventArgs e)
-        {
-            TextBox c = sender as TextBox;
-            if (string.IsNullOrWhiteSpace(c.Text))
-                c.Text = "  SEARCH";
-
-            if (c.Text != "  SEARCH")
-                LoadTable(c.Text, currentPage, pageSize);
-            else
-                LoadTable("", currentPage, pageSize);
-            c.SelectionStart = c.Text.Length;
         }
         #endregion
 
@@ -178,7 +159,7 @@ namespace Sydeso
 
             }
 
-            LoadTable("", currentPage, pageSize);
+            LoadTable(dateStart.Value.ToString("dd-MM-yyyy"), dateEnd.Value.ToString("dd-MM-yyyy"), currentPage, pageSize);
             txtPage.Text = currentPage.ToString();
         }
 
@@ -199,7 +180,7 @@ namespace Sydeso
             {
                 if (c.Text != string.Empty)
                     currentPage = Convert.ToInt32(c.Text);
-                LoadTable("", currentPage, pageSize);
+                LoadTable(dateStart.Value.ToString("dd-MM-yyyy"), dateEnd.Value.ToString("dd-MM-yyyy"), currentPage, pageSize);
             }
 
             c.SelectionStart = c.Text.Length;
@@ -231,7 +212,7 @@ namespace Sydeso
                 pageSize = Convert.ToInt32(c.SelectedItem.ToString());
 
             currentPage = 1;
-            LoadTable("", currentPage, pageSize);
+            LoadTable(dateStart.Value.ToString("dd-MM-yyyy"), dateEnd.Value.ToString("dd-MM-yyyy"), currentPage, pageSize);
             txtPage.Text = currentPage.ToString();
         }
         #endregion
@@ -247,9 +228,9 @@ namespace Sydeso
             {
                 DGVPrinter printer = new DGVPrinter();
                 printer.PageSettings.Landscape = true;
-                printer.Title = "Date Time Record Report as of Today: ";
+                printer.Title = "Date Time Record from " + dateStart.Value.ToString("MMMM dd, yyyy") + " to " + dateEnd.Value.ToString("MMMM dd, yyyy");
                 printer.TitleAlignment = StringAlignment.Near;
-                printer.SubTitle = DateTime.Now.ToString("MMMM dd, yyyy");
+                printer.SubTitle = "Date Generated: " + DateTime.Now.ToString("MMMM dd, yyyy");
                 printer.SubTitleAlignment = StringAlignment.Near;
                 printer.SubTitleSpacing = 20;
 
@@ -259,5 +240,63 @@ namespace Sydeso
                 printer.PrintPreviewDataGridView(dataGridView1);
             }
         }
+
+        #region Date Logics
+        private void date_valuechanged(Object sender, EventArgs e)
+        {
+            Control c = sender as Control;
+
+            switch (c.Name)
+            {
+                case "dateStart":
+                    txtStart.Text = dateStart.Value.ToString("dd-MM-yyyy");
+                    break;
+                default:
+                    txtEnd.Text = dateEnd.Value.ToString("dd-MM-yyyy");
+                    break;
+            }
+
+            LoadTable(dateStart.Value.ToString("dd-MM-yyyy"), dateEnd.Value.ToString("dd-MM-yyyy"), currentPage, pageSize);
+        }
+
+        private void text_keypress(Object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void text_enter(Object sender, EventArgs e)
+        {
+            Control c = sender as Control;
+
+            switch (c.Name)
+            {
+                case "txtStart":
+                    dateStart.Select();
+                    SendKeys.Send("%{DOWN}");
+                    break;
+                default:
+                    dateEnd.Select();
+                    SendKeys.Send("%{DOWN}");
+                    break;
+            }
+        }
+
+        private void text_leave(Object sender, EventArgs e)
+        {
+            Control c = sender as Control;
+
+            switch (c.Name)
+            {
+                case "txtStart":
+                    dateStart.Select();
+                    SendKeys.Send("%{DOWN}");
+                    break;
+                default:
+                    dateEnd.Select();
+                    SendKeys.Send("%{DOWN}");
+                    break;
+            }
+        } 
+        #endregion
     }
 }

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Sydeso
 {
-    public partial class restaurant_customers_new : Form
+    public partial class restaurant_customers_update : Form
     {
         protected override CreateParams CreateParams
         {
@@ -22,22 +22,30 @@ namespace Sydeso
             }
         }
 
-        public restaurant_customers_new()
+        public restaurant_customers_update()
         {
             InitializeComponent();
         }
 
-        static restaurant_customers_new add; static DialogResult result = DialogResult.No;
-        restaurant_helper rh = new restaurant_helper();
+        static restaurant_customers_update update; static DialogResult result = DialogResult.No;
+        static restaurant_helper rh = new restaurant_helper(); static List<String> cust_detail;
 
-        public static DialogResult _Show()
+        public static DialogResult _Show(String id)
         {
-            add = new restaurant_customers_new();
-            add.ShowDialog();
+            update = new restaurant_customers_update();
+            cust_detail = rh.res_cust_read_id(id);
+            string[] name = cust_detail[1].Split(' ');
+            update.txtFname.Text = cust_detail[1].Replace(name[name.Length - 1], "").Trim();
+            update.txtLname.Text = name[name.Length - 1];
+            update.txtBday.Text = Convert.ToDateTime(cust_detail[2]).ToString("dd-MM-yyyy");
+            update.datePicker.Value = Convert.ToDateTime(cust_detail[2]);
+            update.txtPhone.Text = cust_detail[3];
+            update.txtEmail.Text = cust_detail[4];
+            update.ShowDialog();
             return result;
         }
 
-        private void restaurant_customer_create_Load(object sender, EventArgs e)
+        private void restaurant_customers_update_Load(object sender, EventArgs e)
         {
             foreach (Control c in pnl_container.Controls)
             {
@@ -47,7 +55,6 @@ namespace Sydeso
                             d.ContextMenu = new ContextMenu();
             }
         }
-
 
         #region Draggable
         private bool move;
@@ -86,7 +93,7 @@ namespace Sydeso
                 default:
                     if (!string.IsNullOrWhiteSpace(txtFname.Text) && !string.IsNullOrWhiteSpace(txtLname.Text) && !string.IsNullOrWhiteSpace(txtPhone.Text) && !string.IsNullOrWhiteSpace(txtBday.Text) && !string.IsNullOrWhiteSpace(txtEmail.Text))
                     {
-                        if (rh.res_cust_create(txtFname.Text + " " + txtLname.Text, datePicker.Value.ToString(), txtPhone.Text, txtEmail.Text))
+                        if (rh.res_cust_update(cust_detail[0], txtFname.Text + " " + txtLname.Text, datePicker.Value.ToString(), txtPhone.Text, txtEmail.Text))
                         {
                             result = DialogResult.Yes; this.Close();
                         }

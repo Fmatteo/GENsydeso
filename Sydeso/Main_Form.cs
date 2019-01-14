@@ -327,6 +327,7 @@ namespace Sydeso
                         res_tables = new restaurant_tables();
                         res_tables.TopLevel = false;
                         res_tables.Parent = this.pnl_content;
+                        res_tables.Width = this.pnl_content.Width;
                         res_tables.FormClosed += Res_tables_FormClosed;
                         res_tables.Show();
                         res_nav.btnTables_Res.Normalcolor = Color.FromArgb(233, 233, 233);
@@ -385,6 +386,7 @@ namespace Sydeso
                         res_cust.TopLevel = false;
                         res_cust.Parent = this.pnl_content;
                         res_cust.FormClosed += Res_cust_FormClosed;
+                        res_cust.Width = this.pnl_content.Width;
                         res_cust.Show();
                         res_nav.btnCustomers_Res.Normalcolor = Color.FromArgb(233, 233, 233);
                     }
@@ -520,9 +522,19 @@ namespace Sydeso
                 res_prod.Width = this.pnl_content.Width;
             }
 
+            if (res_tables != null)
+            {
+                res_tables.Width = this.pnl_content.Width;
+            }
+
             if (res_emp != null)
             {
                 res_emp.Width = this.pnl_content.Width;
+            }
+
+            if (res_cust != null)
+            {
+                res_cust.Width = this.pnl_content.Width;
             }
 
             if (res_acc != null)
@@ -557,5 +569,10 @@ namespace Sydeso
             }
         }
         #endregion
+
+        private void btnCheckIn_Click(object sender, EventArgs e)
+        {
+            new DateTimeRecord().ShowDialog();
+        }
     }
 }

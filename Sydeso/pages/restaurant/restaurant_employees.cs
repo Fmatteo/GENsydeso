@@ -41,19 +41,23 @@ namespace Sydeso
         /// </summary>
         private void CalculatePages()
         {
-            int rowCount = rh.res_emp_count();
-            totalPage = rowCount / pageSize;
+            try
+            {
+                int rowCount = rh.res_emp_count();
+                totalPage = rowCount / pageSize;
 
-            if (rowCount % pageSize > 0)
-                totalPage += 1;
+                if (rowCount % pageSize > 0)
+                    totalPage += 1;
 
-            if (pageSize == 1 || totalPage == 0)
-                lblTotalPage.Text = "/1";
-            else
-                lblTotalPage.Text = "/" + totalPage;
+                if (pageSize == 1 || totalPage == 0)
+                    lblTotalPage.Text = "/1";
+                else
+                    lblTotalPage.Text = "/" + totalPage;
 
-            lblTotalPage.Left = customPanel6.Width;
-            txtPage.Left = lblTotalPage.Location.X - txtPage.Width - 2;
+                lblTotalPage.Left = customPanel6.Width;
+                txtPage.Left = lblTotalPage.Location.X - txtPage.Width - 2;
+            }
+            catch (Exception) { }
         }
 
         /// <summary>

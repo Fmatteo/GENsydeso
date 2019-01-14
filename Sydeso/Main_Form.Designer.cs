@@ -37,12 +37,14 @@
             this.btnSettings = new System.Windows.Forms.PictureBox();
             this.btnShutdown = new System.Windows.Forms.PictureBox();
             this.btnExit = new System.Windows.Forms.PictureBox();
+            this.btnCheckIn = new System.Windows.Forms.PictureBox();
             this.pnl_toolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnToggleVoiceCommand)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnShutdown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnExit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCheckIn)).BeginInit();
             this.SuspendLayout();
             // 
             // pnl_content
@@ -57,6 +59,7 @@
             // pnl_toolbar
             // 
             this.pnl_toolbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
+            this.pnl_toolbar.Controls.Add(this.btnCheckIn);
             this.pnl_toolbar.Controls.Add(this.label1);
             this.pnl_toolbar.Controls.Add(this.pbIcon);
             this.pnl_toolbar.Controls.Add(this.btnToggleVoiceCommand);
@@ -96,12 +99,13 @@
             // 
             this.btnToggleVoiceCommand.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnToggleVoiceCommand.Image = ((System.Drawing.Image)(resources.GetObject("btnToggleVoiceCommand.Image")));
-            this.btnToggleVoiceCommand.Location = new System.Drawing.Point(952, 29);
+            this.btnToggleVoiceCommand.Location = new System.Drawing.Point(921, 29);
             this.btnToggleVoiceCommand.Name = "btnToggleVoiceCommand";
             this.btnToggleVoiceCommand.Size = new System.Drawing.Size(25, 25);
             this.btnToggleVoiceCommand.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnToggleVoiceCommand.TabIndex = 3;
             this.btnToggleVoiceCommand.TabStop = false;
+            this.btnToggleVoiceCommand.Visible = false;
             this.btnToggleVoiceCommand.Click += new System.EventHandler(this.btnToggleVoiceCommand_Click);
             // 
             // btnSettings
@@ -140,6 +144,18 @@
             this.btnExit.Visible = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // btnCheckIn
+            // 
+            this.btnCheckIn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCheckIn.Image = ((System.Drawing.Image)(resources.GetObject("btnCheckIn.Image")));
+            this.btnCheckIn.Location = new System.Drawing.Point(952, 29);
+            this.btnCheckIn.Name = "btnCheckIn";
+            this.btnCheckIn.Size = new System.Drawing.Size(25, 25);
+            this.btnCheckIn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnCheckIn.TabIndex = 6;
+            this.btnCheckIn.TabStop = false;
+            this.btnCheckIn.Click += new System.EventHandler(this.btnCheckIn_Click);
+            // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,6 +176,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnSettings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnShutdown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnExit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCheckIn)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -173,6 +190,7 @@
         private System.Windows.Forms.PictureBox btnShutdown;
         private System.Windows.Forms.PictureBox pbIcon;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox btnCheckIn;
     }
 }
 
