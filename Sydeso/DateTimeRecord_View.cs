@@ -47,9 +47,9 @@ namespace Sydeso
 
             dataGridView1.Focus();
 
-            LoadTable(DateTime.Now.ToString("dd-MM-yyyy"), DateTime.Now.ToString("dd-MM-yyyy"), currentPage, pageSize);
-            txtStart.Text = DateTime.Now.ToString("dd-MM-yyyy");
-            txtEnd.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            LoadTable(DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.ToString("yyyy-MM-dd"), currentPage, pageSize);
+            txtStart.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            txtEnd.Text = DateTime.Now.ToString("yyyy-MM-dd");
         }
 
         #region Draggable
@@ -162,7 +162,7 @@ namespace Sydeso
 
             }
 
-            LoadTable(dateStart.Value.ToString("dd-MM-yyyy"), dateEnd.Value.ToString("dd-MM-yyyy"), currentPage, pageSize);
+            LoadTable(dateStart.Value.ToString("yyyy-MM-dd"), dateEnd.Value.ToString("yyyy-MM-dd"), currentPage, pageSize);
             txtPage.Text = currentPage.ToString();
         }
 
@@ -183,7 +183,7 @@ namespace Sydeso
             {
                 if (c.Text != string.Empty)
                     currentPage = Convert.ToInt32(c.Text);
-                LoadTable(dateStart.Value.ToString("dd-MM-yyyy"), dateEnd.Value.ToString("dd-MM-yyyy"), currentPage, pageSize);
+                LoadTable(dateStart.Value.ToString("yyyy-MM-dd"), dateEnd.Value.ToString("yyyy-MM-dd"), currentPage, pageSize);
             }
 
             c.SelectionStart = c.Text.Length;
@@ -215,7 +215,7 @@ namespace Sydeso
                 pageSize = Convert.ToInt32(c.SelectedItem.ToString());
 
             currentPage = 1;
-            LoadTable(dateStart.Value.ToString("dd-MM-yyyy"), dateEnd.Value.ToString("dd-MM-yyyy"), currentPage, pageSize);
+            LoadTable(dateStart.Value.ToString("yyyy-MM-dd"), dateEnd.Value.ToString("yyyy-MM-dd"), currentPage, pageSize);
             txtPage.Text = currentPage.ToString();
         }
         #endregion
@@ -252,14 +252,14 @@ namespace Sydeso
             switch (c.Name)
             {
                 case "dateStart":
-                    txtStart.Text = dateStart.Value.ToString("dd-MM-yyyy");
+                    txtStart.Text = dateStart.Value.ToString("yyyy-MM-dd");
                     break;
                 default:
-                    txtEnd.Text = dateEnd.Value.ToString("dd-MM-yyyy");
+                    txtEnd.Text = dateEnd.Value.ToString("yyyy-MM-dd");
                     break;
             }
 
-            LoadTable(dateStart.Value.ToString("dd-MM-yyyy"), dateEnd.Value.ToString("dd-MM-yyyy"), currentPage, pageSize);
+            LoadTable(dateStart.Value.ToString("yyyy-MM-dd"), dateEnd.Value.ToString("yyyy-MM-dd"), currentPage, pageSize);
         }
 
         private void text_keypress(Object sender, KeyPressEventArgs e)
