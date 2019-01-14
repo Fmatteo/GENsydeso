@@ -115,17 +115,15 @@ namespace Sydeso
         /// <param name="pageSize"></param>
         private void LoadTable(String start, String end, int page, int pageSize)
         {
-            try
-            {
-                dt.Clear();
-                dataGridView1.DataSource = db.dtr_view(dt, start, end, page, pageSize);
 
-                dataGridView1.CurrentCell = null;
+            dt.Clear();
+            dataGridView1.DataSource = db.dtr_view(dt, start, end, page, pageSize);
 
-                // Calls the method to calculate the pages..
-                CalculatePages();
-            }
-            catch (Exception) { }
+            dataGridView1.CurrentCell = null;
+
+            // Calls the method to calculate the pages..
+            CalculatePages();
+
         }
         #endregion
 

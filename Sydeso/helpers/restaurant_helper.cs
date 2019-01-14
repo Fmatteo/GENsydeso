@@ -1025,6 +1025,7 @@ namespace Sydeso
 
             Connect();
             cmd = new MySqlCommand("SELECT * FROM restaurant_table_booking WHERE Customer_Name LIKE @search OR MONTHNAME(Date) LIKE @search ORDER BY Date", con);
+            cmd.Parameters.AddWithValue("@search", search + "%");
             dr = cmd.ExecuteReader();
 
             while (dr.Read())

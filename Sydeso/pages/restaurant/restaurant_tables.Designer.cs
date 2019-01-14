@@ -46,6 +46,7 @@
             this.btnLast = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.customPanel1 = new Sydeso.CustomPanel();
+            this.btnViewReservation = new Bunifu.Framework.UI.BunifuFlatButton();
             this.borderedPanel2 = new Sydeso.BorderedPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.cbEntries = new System.Windows.Forms.ComboBox();
@@ -55,7 +56,6 @@
             this.customPanel2 = new Sydeso.CustomPanel();
             this.customPanel3 = new Sydeso.CustomPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnViewReservation = new Bunifu.Framework.UI.BunifuFlatButton();
             this.customPanel5.SuspendLayout();
             this.customPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnNext)).BeginInit();
@@ -367,6 +367,34 @@
             this.customPanel1.Size = new System.Drawing.Size(791, 74);
             this.customPanel1.TabIndex = 3;
             // 
+            // btnViewReservation
+            // 
+            this.btnViewReservation.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnViewReservation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnViewReservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnViewReservation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnViewReservation.BorderRadius = 0;
+            this.btnViewReservation.ButtonText = "VIEW RESERVATION";
+            this.btnViewReservation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnViewReservation.Iconcolor = System.Drawing.Color.Transparent;
+            this.btnViewReservation.Iconimage = ((System.Drawing.Image)(resources.GetObject("btnViewReservation.Iconimage")));
+            this.btnViewReservation.Iconimage_right = null;
+            this.btnViewReservation.Iconimage_right_Selected = null;
+            this.btnViewReservation.Iconimage_Selected = null;
+            this.btnViewReservation.IconZoom = 70D;
+            this.btnViewReservation.IsTab = false;
+            this.btnViewReservation.Location = new System.Drawing.Point(243, 15);
+            this.btnViewReservation.Name = "btnViewReservation";
+            this.btnViewReservation.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnViewReservation.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(163)))), ((int)(((byte)(148)))));
+            this.btnViewReservation.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnViewReservation.selected = false;
+            this.btnViewReservation.Size = new System.Drawing.Size(184, 44);
+            this.btnViewReservation.TabIndex = 7;
+            this.btnViewReservation.Textcolor = System.Drawing.Color.White;
+            this.btnViewReservation.TextFont = new System.Drawing.Font("Calibri", 11F);
+            this.btnViewReservation.Click += new System.EventHandler(this.crud_button_click);
+            // 
             // borderedPanel2
             // 
             this.borderedPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -477,33 +505,6 @@
             this.label1.Size = new System.Drawing.Size(123, 21);
             this.label1.TabIndex = 0;
             this.label1.Text = "LIST OF TABLES";
-            // 
-            // btnViewReservation
-            // 
-            this.btnViewReservation.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
-            this.btnViewReservation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnViewReservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
-            this.btnViewReservation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnViewReservation.BorderRadius = 0;
-            this.btnViewReservation.ButtonText = "VIEW RESERVATION";
-            this.btnViewReservation.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnViewReservation.Iconcolor = System.Drawing.Color.Transparent;
-            this.btnViewReservation.Iconimage = ((System.Drawing.Image)(resources.GetObject("btnViewReservation.Iconimage")));
-            this.btnViewReservation.Iconimage_right = null;
-            this.btnViewReservation.Iconimage_right_Selected = null;
-            this.btnViewReservation.Iconimage_Selected = null;
-            this.btnViewReservation.IconZoom = 70D;
-            this.btnViewReservation.IsTab = false;
-            this.btnViewReservation.Location = new System.Drawing.Point(243, 15);
-            this.btnViewReservation.Name = "btnViewReservation";
-            this.btnViewReservation.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
-            this.btnViewReservation.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(163)))), ((int)(((byte)(148)))));
-            this.btnViewReservation.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnViewReservation.selected = false;
-            this.btnViewReservation.Size = new System.Drawing.Size(184, 44);
-            this.btnViewReservation.TabIndex = 7;
-            this.btnViewReservation.Textcolor = System.Drawing.Color.White;
-            this.btnViewReservation.TextFont = new System.Drawing.Font("Calibri", 11F);
             // 
             // restaurant_tables
             // 

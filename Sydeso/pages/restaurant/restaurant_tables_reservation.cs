@@ -45,5 +45,33 @@ namespace Sydeso
             c.SelectionStart = c.Text.Length;
         }
         #endregion
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        #region Draggable
+        private bool move;
+        private Point lastPoint;
+        private void pnl_toolbar_MouseDown(object sender, MouseEventArgs e)
+        {
+            move = true;
+            lastPoint = e.Location;
+        }
+
+        private void pnl_toolbar_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (move)
+            {
+                this.Location = new Point((this.Location.X - lastPoint.X) + e.X, (this.Location.Y - lastPoint.Y) + e.Y);
+            }
+        }
+
+        private void pnl_toolbar_MouseUp(object sender, MouseEventArgs e)
+        {
+            move = false;
+        }
+        #endregion
     }
 }

@@ -309,6 +309,11 @@ namespace Sydeso
                     }
                     break;
 
+                case "btnViewReservation":
+                    new restaurant_tables_reservation().ShowDialog();
+                    LoadTable("", currentPage, pageSize);
+                    break;
+
                 default:
                     if (string.IsNullOrWhiteSpace(id))
                     {

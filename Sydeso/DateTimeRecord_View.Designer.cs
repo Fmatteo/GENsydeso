@@ -47,10 +47,10 @@
             this.btnExit = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.borderedPanel1 = new Sydeso.BorderedPanel();
+            this.label3 = new System.Windows.Forms.Label();
             this.dateEnd = new System.Windows.Forms.DateTimePicker();
             this.txtEnd = new System.Windows.Forms.TextBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.borderedPanel3 = new Sydeso.BorderedPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.dateStart = new System.Windows.Forms.DateTimePicker();
@@ -340,11 +340,23 @@
             this.borderedPanel1.Size = new System.Drawing.Size(148, 44);
             this.borderedPanel1.TabIndex = 1;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 7F);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
+            this.label3.Location = new System.Drawing.Point(5, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(66, 12);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "ENDING DATE";
+            // 
             // dateEnd
             // 
             this.dateEnd.CalendarFont = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateEnd.CustomFormat = "";
             this.dateEnd.Font = new System.Drawing.Font("Segoe UI", 7F);
+            this.dateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateEnd.Location = new System.Drawing.Point(31, 16);
             this.dateEnd.Name = "dateEnd";
             this.dateEnd.Size = new System.Drawing.Size(18, 20);
@@ -376,17 +388,6 @@
             this.pictureBox3.TabIndex = 3;
             this.pictureBox3.TabStop = false;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 7F);
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.label3.Location = new System.Drawing.Point(5, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 12);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "ENDING DATE";
-            // 
             // borderedPanel3
             // 
             this.borderedPanel3.BackColor = System.Drawing.Color.Transparent;
@@ -417,6 +418,7 @@
             this.dateStart.CalendarFont = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateStart.CustomFormat = "";
             this.dateStart.Font = new System.Drawing.Font("Segoe UI", 7F);
+            this.dateStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateStart.Location = new System.Drawing.Point(31, 16);
             this.dateStart.Name = "dateStart";
             this.dateStart.Size = new System.Drawing.Size(18, 20);
