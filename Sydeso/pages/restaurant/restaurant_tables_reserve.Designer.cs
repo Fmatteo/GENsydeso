@@ -282,6 +282,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.restaurant_tables_reserve_Load);
             this.pnl_container.ResumeLayout(false);
             this.pnl_container.PerformLayout();
             this.borderedPanel2.ResumeLayout(false);

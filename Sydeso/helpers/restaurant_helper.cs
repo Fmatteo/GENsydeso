@@ -875,7 +875,7 @@ namespace Sydeso
         {
             if (string.IsNullOrWhiteSpace(id))
             {
-                alert("Error: ", "Please specify the product you want to modify.\nSelect first a product then try again.", "danger");
+                alert("Error: ", "Please specify the table you want to modify.\nSelect first a table then try again.", "danger");
                 return false;
             }
 
@@ -923,17 +923,17 @@ namespace Sydeso
             _res_table_read_details_reserved.Columns.Add("Table Name");
             _res_table_read_details_reserved.Columns.Add("Table Description");
             _res_table_read_details_reserved.Columns.Add("Customer Name");
-            _res_table_read_details_reserved.Columns.Add("Date");
+            _res_table_read_details_reserved.Columns.Add("Date of Reservation");
 
             Connect();
-            cmd = new MySqlCommand("SELECT restaurant_table.ID, restaurant_table.Name, restaurant_table.Description, restaurant_table_booking.Customer_Name, restaurant_table_booking.Date FROM restaurant_table INNER JOIN restaurant_table_booking ON restaurant_table.ID = restaurant_table_booking.Table_ID WHERE restaurant_table.ID = @id", con);
-            cmd.Parameters.AddWithValue("@id", con);
+            cmd = new MySqlCommand("SELECT restaurant_table.ID, restaurant_table.Name, restaurant_table.Description, restaurant_table_booking.Customer_Name, restaurant_table_booking.Date FROM restaurant_table INNER JOIN restaurant_table_booking ON restaurant_table.ID = restaurant_table_booking.Table_ID WHERE restaurant_table.ID = @id ORDER BY Date", con);
+            cmd.Parameters.AddWithValue("@id", id);
             dr = cmd.ExecuteReader();
 
             while (dr.Read())
             {
                 _res_table_read_details_reserved.Rows.Add(new Object[] {
-                    dr[0], dr[1], dr[2], dr[3], dr[4]
+                    dr[0], dr[1], dr[2], dr[3], Convert.ToDateTime(dr[4]).ToString("MMMM dd, yyyy")
                 });
             }
             dr.Close();
@@ -941,6 +941,81 @@ namespace Sydeso
 
             return _res_table_read_details_reserved;
         }
+
+        #region Reservation
+
+        private Boolean res_table_reserve_exists(String id, String date)
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM restaurant_table_booking WHERE Table_ID = @id AND Date = @date", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@date", Convert.ToDateTime(date));
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                alert("Notification: ", "This table is already reserved for this day.", "information");
+                return true;
+            }
+            dr.Close();
+            Disconnect();
+            return false;
+        }
+
+        public Boolean res_table_reserve(String id, String name, String date)
+        {
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(date))
+            {
+                alert("Error: ", "Please fill up all the required fields to proceed.", "danger");
+                return false;
+            }
+
+            if (res_table_reserve_exists(id, date))
+            {
+                return false;
+            }
+            string[] cust_detail = name.Split(':');
+
+            Connect();
+            cmd = new MySqlCommand("INSERT INTO restaurant_table_booking(Table_ID, Customer_ID, Customer_Name, Date)VALUES(@tid, @cid, @cname, @date)", con);
+            cmd.Parameters.AddWithValue("@tid", id);
+            cmd.Parameters.AddWithValue("@cid", cust_detail[0].Trim());
+            cmd.Parameters.AddWithValue("@cname", name.Replace(cust_detail[0] + ": ", "").Trim());
+            cmd.Parameters.AddWithValue("@date", Convert.ToDateTime(date));
+            cmd.ExecuteNonQuery();
+            Disconnect();
+
+            Connect();
+            cmd = new MySqlCommand("UPDATE restaurant_table SET Status = @status WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@status", "RESERVED");
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+
+            alert("Notification: ", "Reserving a table successfully.", "information");
+            return true;
+        }
+
+        private List<String> cust;
+        public List<String> res_table_get_customer()
+        {
+            cust = new List<String>();
+            Connect();
+            cmd = new MySqlCommand("SELECT ID, Name FROM restaurant_customers", con);
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                cust.Add(dr[0].ToString() + ": " + dr[1].ToString());
+            }
+            dr.Close();
+            Disconnect();
+            return cust;
+        }
+
         #endregion
+        #endregion
+
+
     }
 }

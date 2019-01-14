@@ -18,10 +18,13 @@ namespace Sydeso
         }
 
         static restaurant_tables_reserve reserve; static DialogResult result = DialogResult.No;
+        static String _id = "";
+        restaurant_helper rh = new restaurant_helper();
 
         public static DialogResult _Show(String id)
         {
             reserve = new restaurant_tables_reserve();
+            _id = id;
             reserve.ShowDialog();
             return result;
         }
@@ -69,12 +72,18 @@ namespace Sydeso
 
         private void datePicker_ValueChanged(object sender, EventArgs e)
         {
-            txtDate.Text = datePicker.Value.ToString("MMMM dd, yyyy");
+            if (datePicker.Value >= DateTime.Now)
+                txtDate.Text = datePicker.Value.ToString("MMMM dd, yyyy");
+            else
+            {
+                datePicker.Value = DateTime.Now;
+                txtDate.Text = DateTime.Now.ToString("MMMM dd, yyyy");
+            }
         }
 
         private void cbNames_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtName.Text = cbNames.SelectedItem.ToString();
+            txtName.Text = cbNames.SelectedItem.ToString().Remove(0, 3);
         }
 
         private void button_click(object sender, EventArgs e)
@@ -88,10 +97,33 @@ namespace Sydeso
                     result = DialogResult.No; this.Close();
                     break;
                 default:
-                    result = DialogResult.Yes; this.Close();
+                    String name = "";
+                    if (cbNames.SelectedIndex >= 0)
+                    {
+                        name = cbNames.SelectedItem.ToString();
+                    }
+                    else
+                    {
+                        name = txtName.Text;
+                    }
+
+                        if (rh.res_table_reserve(_id, name, datePicker.Value.ToString("dd-MM-yyyy")))
+                        {
+                            result = DialogResult.Yes; this.Close();
+                        }
                     break;
             }
-        } 
+        }
         #endregion
+
+        private void restaurant_tables_reserve_Load(object sender, EventArgs e)
+        {
+            List<String> names = rh.res_table_get_customer();
+
+            foreach (var name in names)
+            {
+                cbNames.Items.Add(name);
+            }
+        }
     }
 }

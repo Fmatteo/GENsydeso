@@ -141,9 +141,9 @@
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
             this.label6.Location = new System.Drawing.Point(212, 36);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(112, 15);
+            this.label6.Size = new System.Drawing.Size(98, 15);
             this.label6.TabIndex = 7;
-            this.label6.Text = "Product Description";
+            this.label6.Text = "Table Description";
             // 
             // label3
             // 
@@ -152,9 +152,9 @@
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
             this.label3.Location = new System.Drawing.Point(37, 37);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 15);
+            this.label3.Size = new System.Drawing.Size(70, 15);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Product Name";
+            this.label3.Text = "Table Name";
             // 
             // btnYes
             // 

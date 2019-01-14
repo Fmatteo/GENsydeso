@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Sydeso
 {
-    public partial class restaurant_tables_new : Form
+    public partial class restaurant_tables_view_details : Form
     {
         protected override CreateParams CreateParams
         {
@@ -22,18 +22,29 @@ namespace Sydeso
             }
         }
 
-        public restaurant_tables_new()
+        public restaurant_tables_view_details()
         {
             InitializeComponent();
         }
 
-        static restaurant_tables_new add; static DialogResult result = DialogResult.No;
-        restaurant_helper rh = new restaurant_helper();
+        static restaurant_tables_view_details view; static DialogResult result = DialogResult.No;
+        static restaurant_helper rh = new restaurant_helper();
 
-        public static DialogResult _Show()
+        public static DialogResult _Show(String id, String status)
         {
-            add = new restaurant_tables_new();
-            add.ShowDialog();
+            view = new restaurant_tables_view_details();
+
+            switch (status)
+            {
+                case "RESERVED":
+                    view.dataGridView1.DataSource = rh.res_table_read_details_reserved(id);
+                    break;
+                default:
+                    view.dataGridView1.DataSource = rh.res_table_read_details_occupied(id);
+                    break;
+            }
+
+            view.ShowDialog();
             return result;
         }
 
@@ -60,24 +71,9 @@ namespace Sydeso
         }
         #endregion
 
-        #region Button Logics
-        private void button_click(Object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
-            Control c = sender as Control;
-
-            switch (c.Name)
-            {
-                case "btnExit":
-                case "btnNo":
-                    result = DialogResult.No; this.Close();
-                    break;
-
-                default:
-                    if (rh.res_table_create(txtName.Text, txtDesc.Text))
-                        result = DialogResult.Yes; this.Close();
-                    break;
-            }
-        } 
-        #endregion
+            this.Close();
+        }
     }
 }

@@ -298,15 +298,32 @@ namespace Sydeso
                 case "btnReserve":
                     if (string.IsNullOrWhiteSpace(id))
                     {
-                        rh.alert("Error: ", "Please specify the product you want to modify.\nSelect first a product then try again.", "danger");
+                        rh.alert("Error: ", "Please specify the table you want to modify.\nSelect first a table then try again.", "danger");
                         return;
                     }
 
                     if (restaurant_tables_reserve._Show(id) == DialogResult.Yes)
+                    {
                         LoadTable("", currentPage, pageSize);
+                        id = "";
+                    }
                     break;
 
                 default:
+                    if (string.IsNullOrWhiteSpace(id))
+                    {
+                        rh.alert("Error: ", "Please specify the table you want to modify.\nSelect first a table then try again.", "danger");
+                        return;
+                    }
+
+                    if (status != "VACANT")
+                    {
+                        restaurant_tables_view_details._Show(id, status);
+                        id = "";
+                        status = "";
+                    }
+                    else
+                        rh.alert("Notification: ", "This table is vacant, no information to view.", "information");
                     break;
             }
         }
