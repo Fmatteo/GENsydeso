@@ -469,6 +469,22 @@ namespace Sydeso
             Disconnect();
             return 0;
         }
+
+        public String res_sales_today()
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT SUM(Amount) FROM restaurant_sales WHERE Date = @date", con);
+            cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd"));
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return dr[0].ToString();
+            }
+            dr.Close();
+            Disconnect();
+            return "";
+        }
         #endregion
 
         #region restaurant_employees
@@ -1177,6 +1193,92 @@ namespace Sydeso
             Disconnect();
 
             return _prod;
+        }
+
+        public void sales_create(String cname, String aid, String cash, String disc, String amount, String change)
+        {
+            string[] cust_detail = cname.Split(':');
+
+            Connect();
+            cmd = new MySqlCommand("INSERT INTO restaurant_sales(Customer_ID, Customer_Name, Account_ID, Cash_Tendered, Discount, Amount, Cash_Change, Date, Time)VALUES(@cid, @cname, @aid, @cash, @disc, @amount, @change, @date, @time)", con);
+            cmd.Parameters.AddWithValue("@cid", cust_detail[0].Trim());
+            cmd.Parameters.AddWithValue("@cname", cname.Replace(cust_detail[0] + ": ", "").Trim());
+            cmd.Parameters.AddWithValue("@aid", aid);
+            cmd.Parameters.AddWithValue("@cash", cash);
+            cmd.Parameters.AddWithValue("@disc", disc);
+            cmd.Parameters.AddWithValue("@amount", amount);
+            cmd.Parameters.AddWithValue("@change", change);
+            cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd"));
+            cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString("hh:mm:ss tt"));
+            cmd.ExecuteNonQuery();
+            Disconnect();
+        }
+
+        public int sales_number_get()
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT MAX(ID) as MAX FROM restaurant_sales", con);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return Convert.ToInt32(dr["MAX"]);
+            }
+            dr.Close();
+            Disconnect();
+            return 0;
+        }
+
+        public String sales_or_number()
+        {
+            String id = sales_number_get().ToString();
+            String or = "";
+
+            for (int i = id.Length; i < 8; i++)
+            {
+                or += "0";
+            }
+
+            or += id;
+
+            return or;
+        }
+
+        public void sales_details_create(String sid, String pid, String qty, String price)
+        {
+            Connect();
+            cmd = new MySqlCommand("INSERT INTO restaurant_sales_details(Sales_ID, Prod_ID, Qty, Price)VALUES(@sid, @pid, @qty, @price)", con);
+            cmd.Parameters.AddWithValue("@sid", sid);
+            cmd.Parameters.AddWithValue("@pid", pid);
+            cmd.Parameters.AddWithValue("@qty", qty);
+            cmd.Parameters.AddWithValue("@price", price);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+
+            sales_update_inventory(pid, Convert.ToInt32(qty));
+        }
+
+        public void sales_update_inventory(String pid, int qty)
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM restaurant_products WHERE ID = @pid", con);
+            cmd.Parameters.AddWithValue("@pid", pid);
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                if (!string.IsNullOrWhiteSpace(dr["Qty"].ToString()))
+                {
+                    Connect();
+                    cmd = new MySqlCommand("UPDATE restaurant_products SET Qty = Qty-@qty WHERE ID = @id", con);
+                    cmd.Parameters.AddWithValue("@qty", qty);
+                    cmd.Parameters.AddWithValue("@id", pid);
+                    cmd.ExecuteNonQuery();
+                    Disconnect();
+                }
+            }
+            dr.Close(); 
+            Disconnect();
         }
 
         #endregion

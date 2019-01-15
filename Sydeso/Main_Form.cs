@@ -268,7 +268,7 @@ namespace Sydeso
 
                     if (res_order == null)
                     {
-                        res_order = new restaurant_order_pos(); ;
+                        res_order = new restaurant_order_pos(_user); ;
                         res_order.TopLevel = false;
                         res_order.Parent = this.pnl_content;
                         res_order.Width = this.pnl_content.Width;

@@ -22,6 +22,12 @@ namespace Sydeso
             lblReorder.Text = rh.FormatLabel(rh.res_stock_reorder());
             lblNoStock.Text = rh.FormatLabel(rh.res_stock_empty());
 
+            String sales = rh.res_sales_today();
+            if (string.IsNullOrWhiteSpace(sales))
+                lblSales.Text = rh.hookDecimal("0");
+            else
+                lblSales.Text = rh.hookDecimal(sales);
+
             RefreshLabel();
         }
 
