@@ -519,6 +519,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "restaurant_tables";
             this.Load += new System.EventHandler(this.restaurant_tables_Load);
+            this.SizeChanged += new System.EventHandler(this.restaurant_tables_SizeChanged);
             this.customPanel5.ResumeLayout(false);
             this.customPanel4.ResumeLayout(false);
             this.customPanel4.PerformLayout();

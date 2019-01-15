@@ -17,6 +17,8 @@ namespace Sydeso
         {
             InitializeComponent();
 
+            lblTableAvailable.Text = rh.FormatLabel(rh.res_table_available()) + "/" + rh.FormatLabel(rh.res_table_count());
+            lblTableReserved.Text = rh.FormatLabel(rh.res_table_reserved()) + "/" + rh.FormatLabel(rh.res_table_count());
             lblReorder.Text = rh.FormatLabel(rh.res_stock_reorder());
             lblNoStock.Text = rh.FormatLabel(rh.res_stock_empty());
 

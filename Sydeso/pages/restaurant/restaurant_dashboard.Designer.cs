@@ -53,13 +53,13 @@
             this.customPanel8 = new Sydeso.CustomPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.customPanel2 = new Sydeso.CustomPanel();
-            this.label16 = new System.Windows.Forms.Label();
+            this.lblTableReserved = new System.Windows.Forms.Label();
             this.customPanel10 = new Sydeso.CustomPanel();
             this.label9 = new System.Windows.Forms.Label();
             this.customPanel6 = new Sydeso.CustomPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.customPanel1 = new Sydeso.CustomPanel();
-            this.label17 = new System.Windows.Forms.Label();
+            this.lblTableAvailable = new System.Windows.Forms.Label();
             this.customPanel9 = new Sydeso.CustomPanel();
             this.label10 = new System.Windows.Forms.Label();
             this.customPanel5 = new Sydeso.CustomPanel();
@@ -210,9 +210,9 @@
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(21, 20);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(158, 21);
+            this.label6.Size = new System.Drawing.Size(128, 21);
             this.label6.TabIndex = 1;
-            this.label6.Text = "No. of Unpaid Orders";
+            this.label6.Text = "Pending Order(s)";
             // 
             // customPanel3
             // 
@@ -347,7 +347,7 @@
             // customPanel2
             // 
             this.customPanel2.BackColor = System.Drawing.Color.White;
-            this.customPanel2.Controls.Add(this.label16);
+            this.customPanel2.Controls.Add(this.lblTableReserved);
             this.customPanel2.Controls.Add(this.customPanel10);
             this.customPanel2.Controls.Add(this.customPanel6);
             this.customPanel2.Location = new System.Drawing.Point(445, 41);
@@ -355,17 +355,17 @@
             this.customPanel2.Size = new System.Drawing.Size(356, 180);
             this.customPanel2.TabIndex = 1;
             // 
-            // label16
+            // lblTableReserved
             // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 32F);
-            this.label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.label16.Location = new System.Drawing.Point(305, 71);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(48, 59);
-            this.label16.TabIndex = 5;
-            this.label16.Text = "0";
+            this.lblTableReserved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTableReserved.AutoSize = true;
+            this.lblTableReserved.Font = new System.Drawing.Font("Segoe UI", 32F);
+            this.lblTableReserved.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
+            this.lblTableReserved.Location = new System.Drawing.Point(305, 71);
+            this.lblTableReserved.Name = "lblTableReserved";
+            this.lblTableReserved.Size = new System.Drawing.Size(48, 59);
+            this.lblTableReserved.TabIndex = 5;
+            this.lblTableReserved.Text = "0";
             // 
             // customPanel10
             // 
@@ -405,14 +405,14 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(21, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 21);
+            this.label2.Size = new System.Drawing.Size(130, 21);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Pending Order(s)";
+            this.label2.Text = "Table(s) Reserved";
             // 
             // customPanel1
             // 
             this.customPanel1.BackColor = System.Drawing.Color.White;
-            this.customPanel1.Controls.Add(this.label17);
+            this.customPanel1.Controls.Add(this.lblTableAvailable);
             this.customPanel1.Controls.Add(this.customPanel9);
             this.customPanel1.Controls.Add(this.customPanel5);
             this.customPanel1.Location = new System.Drawing.Point(49, 41);
@@ -420,17 +420,17 @@
             this.customPanel1.Size = new System.Drawing.Size(356, 180);
             this.customPanel1.TabIndex = 0;
             // 
-            // label17
+            // lblTableAvailable
             // 
-            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Segoe UI", 32F);
-            this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.label17.Location = new System.Drawing.Point(305, 71);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(48, 59);
-            this.label17.TabIndex = 5;
-            this.label17.Text = "0";
+            this.lblTableAvailable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTableAvailable.AutoSize = true;
+            this.lblTableAvailable.Font = new System.Drawing.Font("Segoe UI", 32F);
+            this.lblTableAvailable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
+            this.lblTableAvailable.Location = new System.Drawing.Point(305, 71);
+            this.lblTableAvailable.Name = "lblTableAvailable";
+            this.lblTableAvailable.Size = new System.Drawing.Size(48, 59);
+            this.lblTableAvailable.TabIndex = 5;
+            this.lblTableAvailable.Text = "0";
             // 
             // customPanel9
             // 
@@ -549,10 +549,10 @@
         private CustomPanel customPanel16;
         private CustomPanel customPanel17;
         private CustomPanel customPanel18;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lblTableAvailable;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lblTableReserved;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblNoStock;

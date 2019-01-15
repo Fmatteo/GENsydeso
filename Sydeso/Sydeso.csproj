@@ -226,6 +226,12 @@
     <Compile Include="pages\restaurant\restaurant_products_update.Designer.cs">
       <DependentUpon>restaurant_products_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\restaurant\restaurant_prod_detail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_prod_detail.Designer.cs">
+      <DependentUpon>restaurant_prod_detail.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\restaurant\restaurant_sales_expenses.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -351,6 +357,9 @@
     <EmbeddedResource Include="pages\restaurant\restaurant_products_update.resx">
       <DependentUpon>restaurant_products_update.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_prod_detail.resx">
+      <DependentUpon>restaurant_prod_detail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_sales_expenses.resx">
       <DependentUpon>restaurant_sales_expenses.cs</DependentUpon>
     </EmbeddedResource>
@@ -413,6 +422,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\icon_reserve.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\icon_unknown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\icon_view.png">

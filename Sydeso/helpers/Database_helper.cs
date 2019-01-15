@@ -318,6 +318,12 @@ namespace Sydeso
             return temp;
         }
 
+        public String FormatLabel1(double num)
+        {
+            String temp = String.Format("{0:n0}", num);
+            return temp;
+        }
+
         public static Bitmap ResizeImage(Image image, int width, int height)
         {
             var destRect = new Rectangle(0, 0, width, height);

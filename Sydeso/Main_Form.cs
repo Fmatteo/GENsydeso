@@ -271,6 +271,7 @@ namespace Sydeso
                         res_order = new restaurant_order_pos(); ;
                         res_order.TopLevel = false;
                         res_order.Parent = this.pnl_content;
+                        res_order.Width = this.pnl_content.Width;
                         res_order.FormClosed += Res_order_FormClosed;
                         res_order.Show();
                         res_nav.btnOrder_Res.Normalcolor = Color.FromArgb(233, 233, 233);
@@ -520,6 +521,11 @@ namespace Sydeso
             if (res_prod != null)
             {
                 res_prod.Width = this.pnl_content.Width;
+            }
+
+            if (res_order != null)
+            {
+                res_order.Width = this.pnl_content.Width;
             }
 
             if (res_tables != null)

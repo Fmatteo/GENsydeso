@@ -55,19 +55,24 @@ namespace Sydeso
         /// </summary>
         private void CalculatePages()
         {
-            int rowCount = dt.Rows.Count;
-            totalPage = rowCount / pageSize;
+            try
+            {
+                int rowCount = dt.Rows.Count;
+                totalPage = rowCount / pageSize;
 
-            if (rowCount % pageSize > 0)
-                totalPage += 1;
+                if (rowCount % pageSize > 0)
+                    totalPage += 1;
 
-            if (pageSize == 1 || totalPage == 0)
-                lblTotalPage.Text = "/1";
-            else
-                lblTotalPage.Text = "/" + totalPage;
+                if (pageSize == 1 || totalPage == 0)
+                    lblTotalPage.Text = "/1";
+                else
+                    lblTotalPage.Text = "/" + totalPage;
 
-            lblTotalPage.Left = dataGridView1.Width;
-            txtPage.Left = lblTotalPage.Location.X - txtPage.Width - 2;
+                lblTotalPage.Left = dataGridView1.Width;
+                txtPage.Left = lblTotalPage.Location.X - txtPage.Width - 2;
+            }
+
+            catch (Exception) { }
         }
 
         /// <summary>
@@ -78,6 +83,7 @@ namespace Sydeso
         /// <param name="pageSize"></param>
         private void LoadTable(String search, int page, int pageSize)
         {
+            this.SuspendLayout();
             dt.Clear();
             dataGridView1.DataSource = rh.res_table_read(dt, search, page, pageSize);
 
@@ -85,6 +91,7 @@ namespace Sydeso
 
             // Calls the method to calculate the pages..
             CalculatePages();
+            this.ResumeLayout();
         }
         #endregion
 
@@ -231,6 +238,7 @@ namespace Sydeso
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            this.SuspendLayout();
             int i = 0;
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -262,6 +270,7 @@ namespace Sydeso
                     row.DefaultCellStyle.SelectionForeColor = Color.White;
                 }
             }
+            this.ResumeLayout();
         }
 
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -277,6 +286,11 @@ namespace Sydeso
                     id = "";
                 }
             }
+        }
+
+        private void restaurant_tables_SizeChanged(object sender, EventArgs e)
+        {
+            LoadTable("", currentPage, pageSize);
         }
 
         private void crud_button_click(object sender, EventArgs e)

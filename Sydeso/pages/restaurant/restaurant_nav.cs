@@ -21,15 +21,15 @@ namespace Sydeso
         {
             if (this.Width == this.MaximumSize.Width)
             {
-                this.Visible = false;
+                //this.Visible = false;
                 this.Width = this.MinimumSize.Width;
-                pnlAnimator.ShowSync(this);
+                //pnlAnimator.ShowSync(this);
             }
             else
             {
-                this.Visible = false;
+                //this.Visible = false;
                 this.Width = this.MaximumSize.Width;
-                pnlAnimator.ShowSync(this);
+                //pnlAnimator.ShowSync(this);
             }
         }
     }

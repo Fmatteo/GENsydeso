@@ -86,7 +86,6 @@ namespace Sydeso
         {
             dt.Clear();
             dataGridView1.DataSource = rh.res_product_view(dt, search, page, pageSize);
-
             dataGridView1.CurrentCell = null;
 
             // Calls the method to calculate the pages..
@@ -247,7 +246,7 @@ namespace Sydeso
                 row.DefaultCellStyle.ForeColor = Color.FromArgb(205, 49, 49);
                 row.DefaultCellStyle.SelectionBackColor = Color.SteelBlue;
                 row.DefaultCellStyle.SelectionForeColor = Color.AliceBlue;
-
+                
                 if (i == 2)
                 {
                     i = 0;

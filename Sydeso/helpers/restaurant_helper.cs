@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Sydeso
 {
@@ -168,14 +169,14 @@ namespace Sydeso
                 else
                     qty = 0;
                 data.Rows.Add(new Object[] {
-                    dr[0], dr[1], dr[2], dr[3], dr[5], hookDecimal(dr[4].ToString()), hookDecimal((Convert.ToDouble(qty) * Convert.ToDouble(dr[4])).ToString())
+                    dr[0], dr[1], dr[2], dr[3], dr[5], hookDecimal(dr[4].ToString()), hookDecimal(FormatLabel1((Convert.ToDouble(qty) * Convert.ToDouble(dr[4]))))
                 });
 
                 total += Convert.ToDouble(qty) * Convert.ToDouble(dr[4]);
             }
 
             if (total != 0)
-                data.Rows.Add("", "", "", "", "", "Grand Total: ", hookDecimal(total.ToString()));
+                data.Rows.Add("", "", "", "", "", "Grand Total: ", hookDecimal(FormatLabel1(Convert.ToDouble(total))));
             return data;
         }
 
@@ -259,7 +260,7 @@ namespace Sydeso
             cmd.Parameters.AddWithValue("@cat", cat);
 
             if (!string.IsNullOrWhiteSpace(path))
-                cmd.Parameters.AddWithValue("@image", File.ReadAllBytes(path));
+                cmd.Parameters.AddWithValue("@image", imageToByteArray(ResizeImage(Image.FromFile(path), 252, 300)));
 
             cmd.ExecuteNonQuery();
             Disconnect();
@@ -421,6 +422,50 @@ namespace Sydeso
                 return Convert.ToInt32(dr["empty"]);
             }
             dr.Close();
+            Disconnect();
+            return 0;
+        }
+
+        public int res_table_available()
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT COUNT(*) as available FROM restaurant_table WHERE Status = @status", con);
+            cmd.Parameters.AddWithValue("@status", "VACANT");
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return Convert.ToInt32(dr["available"]);
+            }
+            Disconnect();
+            return 0;
+        }
+
+        public int res_table_reserved()
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT COUNT(*) as reserved FROM restaurant_table WHERE Status = @status", con);
+            cmd.Parameters.AddWithValue("@status", "RESERVED");
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return Convert.ToInt32(dr["reserved"]);
+            }
+            Disconnect();
+            return 0;
+        }
+
+        public int res_table_count()
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT COUNT(*) as table_count FROM restaurant_table", con);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return Convert.ToInt32(dr["table_count"]);
+            }
             Disconnect();
             return 0;
         }
@@ -1089,6 +1134,51 @@ namespace Sydeso
         #endregion
         #endregion
 
+        #region restaurant_pos
 
+        private List<restaurant_prod_detail> _prod;
+        public List<restaurant_prod_detail> res_pos_get_prod(String search, String cat)
+        {
+            _prod = new List<restaurant_prod_detail>();
+            String query = "SELECT * FROM restaurant_products WHERE Name LIKE @search";
+
+            if (cat != "ALL")
+                query += " AND Category = @cat";
+
+            query += " ORDER BY Name";
+
+            Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@search", search + "%");
+
+            if (cat != "ALL")
+                cmd.Parameters.AddWithValue("@cat", cat);
+
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                restaurant_prod_detail list = new restaurant_prod_detail();
+                list.Product_ID = Convert.ToInt32(dr[0]);
+                list.Product_Name = dr[1].ToString();
+                list.Product_Price = hookDecimal(dr[4].ToString());
+
+                try
+                {
+                    list.Product_Image = byteArrayToImage((byte[])dr[6]);
+                }
+                catch (Exception)
+                {
+                    list.Product_Image = Image.FromFile(Application.StartupPath + "/icons/icon_unknown.png");
+                }
+                _prod.Add(list);
+            }
+            dr.Close();
+            Disconnect();
+
+            return _prod;
+        }
+
+        #endregion
     }
 }
