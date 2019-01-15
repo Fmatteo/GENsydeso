@@ -107,10 +107,10 @@ namespace Sydeso
                         name = txtName.Text;
                     }
 
-                        if (rh.res_table_reserve(_id, name, datePicker.Value.ToString("yyyy-MM-dd")))
-                        {
-                            result = DialogResult.Yes; this.Close();
-                        }
+                    if (rh.res_table_reserve(_id, name, datePicker.Value.ToString("yyyy-MM-dd")))
+                    {
+                        result = DialogResult.Yes; this.Close();
+                    }
                     break;
             }
         }

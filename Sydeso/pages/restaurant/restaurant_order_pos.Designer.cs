@@ -39,6 +39,10 @@
             this.pnl_header = new Sydeso.CustomPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.pnl_total = new Sydeso.CustomPanel();
+            this.lblOrderType = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnView = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.btnFinish = new Bunifu.Framework.UI.BunifuFlatButton();
             this.customPanel8 = new Sydeso.CustomPanel();
             this.customPanel7 = new Sydeso.CustomPanel();
             this.lblAmountDue = new System.Windows.Forms.Label();
@@ -172,6 +176,10 @@
             // 
             this.pnl_total.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pnl_total.BackColor = System.Drawing.Color.White;
+            this.pnl_total.Controls.Add(this.lblOrderType);
+            this.pnl_total.Controls.Add(this.label4);
+            this.pnl_total.Controls.Add(this.btnView);
+            this.pnl_total.Controls.Add(this.btnFinish);
             this.pnl_total.Controls.Add(this.customPanel8);
             this.pnl_total.Controls.Add(this.customPanel7);
             this.pnl_total.Controls.Add(this.lblAmountDue);
@@ -189,11 +197,90 @@
             this.pnl_total.Size = new System.Drawing.Size(393, 209);
             this.pnl_total.TabIndex = 4;
             // 
+            // lblOrderType
+            // 
+            this.lblOrderType.AutoSize = true;
+            this.lblOrderType.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.lblOrderType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
+            this.lblOrderType.Location = new System.Drawing.Point(320, 12);
+            this.lblOrderType.Name = "lblOrderType";
+            this.lblOrderType.Size = new System.Drawing.Size(61, 21);
+            this.lblOrderType.TabIndex = 16;
+            this.lblOrderType.Text = "Dine In";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
+            this.label4.Location = new System.Drawing.Point(10, 12);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(96, 21);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Order Type:";
+            // 
+            // btnView
+            // 
+            this.btnView.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnView.BorderRadius = 0;
+            this.btnView.ButtonText = "VIEW PENDING";
+            this.btnView.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnView.Iconcolor = System.Drawing.Color.Transparent;
+            this.btnView.Iconimage = ((System.Drawing.Image)(resources.GetObject("btnView.Iconimage")));
+            this.btnView.Iconimage_right = null;
+            this.btnView.Iconimage_right_Selected = null;
+            this.btnView.Iconimage_Selected = null;
+            this.btnView.IconZoom = 70D;
+            this.btnView.IsTab = false;
+            this.btnView.Location = new System.Drawing.Point(205, 156);
+            this.btnView.Name = "btnView";
+            this.btnView.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnView.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(163)))), ((int)(((byte)(148)))));
+            this.btnView.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnView.selected = false;
+            this.btnView.Size = new System.Drawing.Size(178, 40);
+            this.btnView.TabIndex = 14;
+            this.btnView.TabStop = false;
+            this.btnView.Textcolor = System.Drawing.Color.White;
+            this.btnView.TextFont = new System.Drawing.Font("Calibri", 11F);
+            // 
+            // btnFinish
+            // 
+            this.btnFinish.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnFinish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFinish.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnFinish.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnFinish.BorderRadius = 0;
+            this.btnFinish.ButtonText = "[F5] FINISH ORDER";
+            this.btnFinish.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFinish.Iconcolor = System.Drawing.Color.Transparent;
+            this.btnFinish.Iconimage = ((System.Drawing.Image)(resources.GetObject("btnFinish.Iconimage")));
+            this.btnFinish.Iconimage_right = null;
+            this.btnFinish.Iconimage_right_Selected = null;
+            this.btnFinish.Iconimage_Selected = null;
+            this.btnFinish.IconZoom = 60D;
+            this.btnFinish.IsTab = false;
+            this.btnFinish.Location = new System.Drawing.Point(21, 156);
+            this.btnFinish.Name = "btnFinish";
+            this.btnFinish.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnFinish.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(163)))), ((int)(((byte)(148)))));
+            this.btnFinish.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnFinish.selected = false;
+            this.btnFinish.Size = new System.Drawing.Size(178, 40);
+            this.btnFinish.TabIndex = 13;
+            this.btnFinish.TabStop = false;
+            this.btnFinish.Textcolor = System.Drawing.Color.White;
+            this.btnFinish.TextFont = new System.Drawing.Font("Calibri", 11F);
+            this.btnFinish.Click += new System.EventHandler(this.btnFinish_Click);
+            // 
             // customPanel8
             // 
             this.customPanel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.customPanel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.customPanel8.Location = new System.Drawing.Point(14, 131);
+            this.customPanel8.Location = new System.Drawing.Point(14, 148);
             this.customPanel8.Name = "customPanel8";
             this.customPanel8.Size = new System.Drawing.Size(369, 2);
             this.customPanel8.TabIndex = 12;
@@ -202,7 +289,7 @@
             // 
             this.customPanel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.customPanel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.customPanel7.Location = new System.Drawing.Point(14, 102);
+            this.customPanel7.Location = new System.Drawing.Point(14, 119);
             this.customPanel7.Name = "customPanel7";
             this.customPanel7.Size = new System.Drawing.Size(369, 2);
             this.customPanel7.TabIndex = 11;
@@ -213,7 +300,7 @@
             this.lblAmountDue.AutoSize = true;
             this.lblAmountDue.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblAmountDue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblAmountDue.Location = new System.Drawing.Point(364, 107);
+            this.lblAmountDue.Location = new System.Drawing.Point(364, 124);
             this.lblAmountDue.Name = "lblAmountDue";
             this.lblAmountDue.Size = new System.Drawing.Size(19, 21);
             this.lblAmountDue.TabIndex = 10;
@@ -224,7 +311,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.label13.Location = new System.Drawing.Point(10, 107);
+            this.label13.Location = new System.Drawing.Point(10, 124);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(106, 21);
             this.label13.TabIndex = 9;
@@ -236,7 +323,7 @@
             this.lblVat.AutoSize = true;
             this.lblVat.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblVat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblVat.Location = new System.Drawing.Point(364, 79);
+            this.lblVat.Location = new System.Drawing.Point(364, 96);
             this.lblVat.Name = "lblVat";
             this.lblVat.Size = new System.Drawing.Size(17, 19);
             this.lblVat.TabIndex = 8;
@@ -248,7 +335,7 @@
             this.lblDiscount.AutoSize = true;
             this.lblDiscount.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblDiscount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblDiscount.Location = new System.Drawing.Point(364, 37);
+            this.lblDiscount.Location = new System.Drawing.Point(364, 54);
             this.lblDiscount.Name = "lblDiscount";
             this.lblDiscount.Size = new System.Drawing.Size(17, 19);
             this.lblDiscount.TabIndex = 7;
@@ -260,7 +347,7 @@
             this.lblSubTotal.AutoSize = true;
             this.lblSubTotal.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblSubTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblSubTotal.Location = new System.Drawing.Point(364, 58);
+            this.lblSubTotal.Location = new System.Drawing.Point(364, 75);
             this.lblSubTotal.Name = "lblSubTotal";
             this.lblSubTotal.Size = new System.Drawing.Size(19, 21);
             this.lblSubTotal.TabIndex = 6;
@@ -272,7 +359,7 @@
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblTotal.Location = new System.Drawing.Point(364, 16);
+            this.lblTotal.Location = new System.Drawing.Point(364, 33);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(19, 21);
             this.lblTotal.TabIndex = 5;
@@ -283,7 +370,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.label8.Location = new System.Drawing.Point(10, 79);
+            this.label8.Location = new System.Drawing.Point(10, 96);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(35, 19);
             this.label8.TabIndex = 4;
@@ -294,7 +381,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.label7.Location = new System.Drawing.Point(10, 58);
+            this.label7.Location = new System.Drawing.Point(10, 75);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(81, 21);
             this.label7.TabIndex = 3;
@@ -305,7 +392,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.label6.Location = new System.Drawing.Point(10, 37);
+            this.label6.Location = new System.Drawing.Point(10, 54);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(66, 19);
             this.label6.TabIndex = 2;
@@ -316,7 +403,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.label5.Location = new System.Drawing.Point(10, 16);
+            this.label5.Location = new System.Drawing.Point(10, 33);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(49, 21);
             this.label5.TabIndex = 1;
@@ -364,7 +451,7 @@
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(3);
@@ -720,5 +807,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        private Bunifu.Framework.UI.BunifuFlatButton btnView;
+        private Bunifu.Framework.UI.BunifuFlatButton btnFinish;
+        private System.Windows.Forms.Label lblOrderType;
+        private System.Windows.Forms.Label label4;
     }
 }

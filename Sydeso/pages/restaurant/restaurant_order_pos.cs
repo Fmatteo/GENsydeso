@@ -22,9 +22,14 @@ namespace Sydeso
             }
         }
 
+        String customer = "", cash_tendered = "";
+
         public restaurant_order_pos()
         {
             InitializeComponent();
+
+            lblOrderType.Text = restaurant_order_pos_modal._Show();
+            customer = restaurant_order_pos_modal_name._Show();
 
             LoadTable("", "ALL");
             InitializeCategory();
@@ -36,6 +41,8 @@ namespace Sydeso
 
         private void restaurant_order_pos_Load(object sender, EventArgs e)
         {
+            lblOrderType.Left = pnl_total.Width - lblOrderType.Width - 10;
+
             cbCat.SelectedIndex = 0;
             vatPerc = Convert.ToDouble(txtVat.Text);
         }
@@ -54,6 +61,11 @@ namespace Sydeso
                 return true;
             }
 
+            if (keyData == Keys.F5)
+            {
+                openCash();
+                return true;
+            }
             // Call the base class
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -292,6 +304,24 @@ namespace Sydeso
             Control c = sender as Control;
             if ((!char.IsDigit(e.KeyChar)) && (e.KeyChar != 8) && (e.KeyChar != '.' || c.Text.Contains(".")))
                 e.Handled = true;
+        }
+
+        private void btnFinish_Click(object sender, EventArgs e)
+        {
+            openCash();
+        }
+
+        private void openCash()
+        {
+            if (dataGridView1.Rows.Count > 0)
+            {
+                cash_tendered = restaurant_order_pos_modal_choice._Show(lblAmountDue.Text);
+
+                if (!string.IsNullOrWhiteSpace(cash_tendered))
+                {
+                    MessageBox.Show("Total: " + lblAmountDue.Text + "\nCash Tendered: " + cash_tendered + "\nCash Change: " + rh.hookDecimal((Convert.ToDouble(cash_tendered) - Convert.ToDouble(lblAmountDue.Text)).ToString()));
+                }
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
