@@ -54,13 +54,18 @@
             this.pnl_items = new Sydeso.CustomPanel();
             this.pnl_receipt = new Sydeso.CustomPanel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prod_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customPanel1 = new Sydeso.CustomPanel();
             this.borderedPanel4 = new Sydeso.BorderedPanel();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtDiscount = new System.Windows.Forms.TextBox();
             this.borderedPanel3 = new Sydeso.BorderedPanel();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
+            this.txtVat = new System.Windows.Forms.TextBox();
             this.borderedPanel2 = new Sydeso.BorderedPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.cbCat = new System.Windows.Forms.ComboBox();
@@ -70,11 +75,6 @@
             this.customPanel2 = new Sydeso.CustomPanel();
             this.customPanel3 = new Sydeso.CustomPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Prod_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnl_header.SuspendLayout();
             this.pnl_total.SuspendLayout();
             this.pnl_receipt.SuspendLayout();
@@ -104,7 +104,7 @@
             this.btnQuantity.Iconimage_Selected = null;
             this.btnQuantity.IconZoom = 70D;
             this.btnQuantity.IsTab = false;
-            this.btnQuantity.Location = new System.Drawing.Point(437, 603);
+            this.btnQuantity.Location = new System.Drawing.Point(429, 603);
             this.btnQuantity.Name = "btnQuantity";
             this.btnQuantity.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
             this.btnQuantity.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(163)))), ((int)(((byte)(148)))));
@@ -115,10 +115,12 @@
             this.btnQuantity.TabStop = false;
             this.btnQuantity.Textcolor = System.Drawing.Color.White;
             this.btnQuantity.TextFont = new System.Drawing.Font("Calibri", 11F);
+            this.btnQuantity.Click += new System.EventHandler(this.btnQuantity_Click);
             // 
             // btnDelete
             // 
             this.btnDelete.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
             this.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnDelete.BorderRadius = 0;
@@ -142,6 +144,7 @@
             this.btnDelete.TabStop = false;
             this.btnDelete.Textcolor = System.Drawing.Color.White;
             this.btnDelete.TextFont = new System.Drawing.Font("Calibri", 11F);
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // pnl_header
             // 
@@ -190,7 +193,7 @@
             // 
             this.customPanel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.customPanel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.customPanel8.Location = new System.Drawing.Point(18, 131);
+            this.customPanel8.Location = new System.Drawing.Point(14, 131);
             this.customPanel8.Name = "customPanel8";
             this.customPanel8.Size = new System.Drawing.Size(369, 2);
             this.customPanel8.TabIndex = 12;
@@ -199,7 +202,7 @@
             // 
             this.customPanel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.customPanel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.customPanel7.Location = new System.Drawing.Point(18, 102);
+            this.customPanel7.Location = new System.Drawing.Point(14, 102);
             this.customPanel7.Name = "customPanel7";
             this.customPanel7.Size = new System.Drawing.Size(369, 2);
             this.customPanel7.TabIndex = 11;
@@ -210,18 +213,18 @@
             this.lblAmountDue.AutoSize = true;
             this.lblAmountDue.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblAmountDue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblAmountDue.Location = new System.Drawing.Point(314, 107);
+            this.lblAmountDue.Location = new System.Drawing.Point(364, 107);
             this.lblAmountDue.Name = "lblAmountDue";
-            this.lblAmountDue.Size = new System.Drawing.Size(73, 21);
+            this.lblAmountDue.Size = new System.Drawing.Size(19, 21);
             this.lblAmountDue.TabIndex = 10;
-            this.lblAmountDue.Text = "1, 200.00";
+            this.lblAmountDue.Text = "0";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.label13.Location = new System.Drawing.Point(14, 107);
+            this.label13.Location = new System.Drawing.Point(10, 107);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(106, 21);
             this.label13.TabIndex = 9;
@@ -233,11 +236,11 @@
             this.lblVat.AutoSize = true;
             this.lblVat.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblVat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblVat.Location = new System.Drawing.Point(343, 79);
+            this.lblVat.Location = new System.Drawing.Point(364, 79);
             this.lblVat.Name = "lblVat";
-            this.lblVat.Size = new System.Drawing.Size(44, 19);
+            this.lblVat.Size = new System.Drawing.Size(17, 19);
             this.lblVat.TabIndex = 8;
-            this.lblVat.Text = "12.00";
+            this.lblVat.Text = "0";
             // 
             // lblDiscount
             // 
@@ -245,11 +248,11 @@
             this.lblDiscount.AutoSize = true;
             this.lblDiscount.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblDiscount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblDiscount.Location = new System.Drawing.Point(343, 37);
+            this.lblDiscount.Location = new System.Drawing.Point(364, 37);
             this.lblDiscount.Name = "lblDiscount";
-            this.lblDiscount.Size = new System.Drawing.Size(44, 19);
+            this.lblDiscount.Size = new System.Drawing.Size(17, 19);
             this.lblDiscount.TabIndex = 7;
-            this.lblDiscount.Text = "12.00";
+            this.lblDiscount.Text = "0";
             // 
             // lblSubTotal
             // 
@@ -257,11 +260,11 @@
             this.lblSubTotal.AutoSize = true;
             this.lblSubTotal.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblSubTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblSubTotal.Location = new System.Drawing.Point(323, 58);
+            this.lblSubTotal.Location = new System.Drawing.Point(364, 58);
             this.lblSubTotal.Name = "lblSubTotal";
-            this.lblSubTotal.Size = new System.Drawing.Size(64, 21);
+            this.lblSubTotal.Size = new System.Drawing.Size(19, 21);
             this.lblSubTotal.TabIndex = 6;
-            this.lblSubTotal.Text = "1, 111.00";
+            this.lblSubTotal.Text = "0";
             // 
             // lblTotal
             // 
@@ -269,18 +272,18 @@
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblTotal.Location = new System.Drawing.Point(317, 16);
+            this.lblTotal.Location = new System.Drawing.Point(364, 16);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(70, 21);
+            this.lblTotal.Size = new System.Drawing.Size(19, 21);
             this.lblTotal.TabIndex = 5;
-            this.lblTotal.Text = "1, 123.00";
+            this.lblTotal.Text = "0";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.label8.Location = new System.Drawing.Point(14, 79);
+            this.label8.Location = new System.Drawing.Point(10, 79);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(35, 19);
             this.label8.TabIndex = 4;
@@ -291,7 +294,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.label7.Location = new System.Drawing.Point(14, 58);
+            this.label7.Location = new System.Drawing.Point(10, 58);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(81, 21);
             this.label7.TabIndex = 3;
@@ -302,7 +305,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.label6.Location = new System.Drawing.Point(14, 37);
+            this.label6.Location = new System.Drawing.Point(10, 37);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(66, 19);
             this.label6.TabIndex = 2;
@@ -313,7 +316,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.label5.Location = new System.Drawing.Point(14, 16);
+            this.label5.Location = new System.Drawing.Point(10, 16);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(49, 21);
             this.label5.TabIndex = 1;
@@ -354,12 +357,9 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.AliceBlue;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -380,8 +380,9 @@
             this.Price,
             this.Qty,
             this.Total});
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 17);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -396,8 +397,48 @@
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(381, 258);
+            this.dataGridView1.Size = new System.Drawing.Size(393, 292);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // ID
+            // 
+            this.ID.FillWeight = 51.59628F;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // Prod_Name
+            // 
+            this.Prod_Name.FillWeight = 140F;
+            this.Prod_Name.HeaderText = "Product Name";
+            this.Prod_Name.Name = "Prod_Name";
+            this.Prod_Name.ReadOnly = true;
+            // 
+            // Price
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Price.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Price.FillWeight = 91.32541F;
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            // 
+            // Qty
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Qty.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Qty.FillWeight = 91.32541F;
+            this.Qty.HeaderText = "Qty.";
+            this.Qty.Name = "Qty";
+            this.Qty.ReadOnly = true;
+            // 
+            // Total
+            // 
+            this.Total.FillWeight = 91.32541F;
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
             // 
             // customPanel1
             // 
@@ -419,7 +460,7 @@
             this.borderedPanel4.BackColor = System.Drawing.Color.Transparent;
             this.borderedPanel4.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
             this.borderedPanel4.Controls.Add(this.label10);
-            this.borderedPanel4.Controls.Add(this.textBox1);
+            this.borderedPanel4.Controls.Add(this.txtDiscount);
             this.borderedPanel4.Location = new System.Drawing.Point(231, 15);
             this.borderedPanel4.Name = "borderedPanel4";
             this.borderedPanel4.Padding = new System.Windows.Forms.Padding(2);
@@ -437,18 +478,19 @@
             this.label10.TabIndex = 3;
             this.label10.Text = "DISCOUNT %";
             // 
-            // textBox1
+            // txtDiscount
             // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
-            this.textBox1.Location = new System.Drawing.Point(20, 18);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(51, 20);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "0";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtDiscount.BackColor = System.Drawing.Color.White;
+            this.txtDiscount.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDiscount.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtDiscount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
+            this.txtDiscount.Location = new System.Drawing.Point(20, 18);
+            this.txtDiscount.Name = "txtDiscount";
+            this.txtDiscount.Size = new System.Drawing.Size(51, 20);
+            this.txtDiscount.TabIndex = 0;
+            this.txtDiscount.Text = "0";
+            this.txtDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtDiscount.TextChanged += new System.EventHandler(this.txtDiscount_TextChanged);
             // 
             // borderedPanel3
             // 
@@ -456,7 +498,7 @@
             this.borderedPanel3.BackColor = System.Drawing.Color.Transparent;
             this.borderedPanel3.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
             this.borderedPanel3.Controls.Add(this.label9);
-            this.borderedPanel3.Controls.Add(this.txtName);
+            this.borderedPanel3.Controls.Add(this.txtVat);
             this.borderedPanel3.Location = new System.Drawing.Point(313, 15);
             this.borderedPanel3.Name = "borderedPanel3";
             this.borderedPanel3.Padding = new System.Windows.Forms.Padding(2);
@@ -474,18 +516,20 @@
             this.label9.TabIndex = 3;
             this.label9.Text = "VALUE ADDED TAX %";
             // 
-            // txtName
+            // txtVat
             // 
-            this.txtName.BackColor = System.Drawing.Color.White;
-            this.txtName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtName.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.txtName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
-            this.txtName.Location = new System.Drawing.Point(15, 18);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(89, 20);
-            this.txtName.TabIndex = 0;
-            this.txtName.Text = "12";
-            this.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtVat.BackColor = System.Drawing.Color.White;
+            this.txtVat.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtVat.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtVat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
+            this.txtVat.Location = new System.Drawing.Point(15, 18);
+            this.txtVat.Name = "txtVat";
+            this.txtVat.Size = new System.Drawing.Size(89, 20);
+            this.txtVat.TabIndex = 0;
+            this.txtVat.Text = "12";
+            this.txtVat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtVat.TextChanged += new System.EventHandler(this.txtVat_TextChanged);
+            this.txtVat.Leave += new System.EventHandler(this.txtVat_Leave);
             // 
             // borderedPanel2
             // 
@@ -594,45 +638,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "POINT OF SALES";
             // 
-            // ID
-            // 
-            this.ID.FillWeight = 51.59628F;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // Prod_Name
-            // 
-            this.Prod_Name.FillWeight = 140F;
-            this.Prod_Name.HeaderText = "Product Name";
-            this.Prod_Name.Name = "Prod_Name";
-            this.Prod_Name.ReadOnly = true;
-            // 
-            // Price
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Price.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Price.FillWeight = 91.32541F;
-            this.Price.HeaderText = "Price";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            // 
-            // Qty
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Qty.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Qty.FillWeight = 91.32541F;
-            this.Qty.HeaderText = "Qty.";
-            this.Qty.Name = "Qty";
-            this.Qty.ReadOnly = true;
-            // 
-            // Total
-            // 
-            this.Total.FillWeight = 91.32541F;
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
-            // 
             // restaurant_order_pos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -702,10 +707,10 @@
         private System.Windows.Forms.Label label5;
         private BorderedPanel borderedPanel4;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtDiscount;
         private BorderedPanel borderedPanel3;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.TextBox txtVat;
         private CustomPanel pnl_header;
         private System.Windows.Forms.Label label3;
         private Bunifu.Framework.UI.BunifuFlatButton btnQuantity;

@@ -36,6 +36,19 @@ namespace Sydeso
 
         public void Connect()
         {
+           /* try
+            {
+                //con = new MySqlConnection("server=198.91.81.6; user=ilscodes_user123; password=password1234; database=ilscodes_test");
+                String conString = "SERVER=sql12.freesqldatabase.com; PORT=3306; DATABASE=sql12274214; UID=sql12274214; PASSWORD=FgzNGXisLd;";
+                con = new MySqlConnection();
+                con.ConnectionString = conString;
+                con.Open();
+            }
+            catch (Exception)
+            {
+                alert("Error: ", "Please check your internet connection.\nCannot connect to the database.", "danger");
+            }*/
+
             con = new MySqlConnection("server=localhost; user=root; database=sydeso");
             con.Open();
         }
@@ -212,6 +225,30 @@ namespace Sydeso
             }
             Disconnect();
             return false;
+        }
+
+        public void updateVat(String vat)
+        {
+            Connect();
+            cmd = new MySqlCommand("UPDATE system_config SET Vat = @vat WHERE ID = 1", con);
+            cmd.Parameters.AddWithValue("@vat", vat);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+        }
+
+        public String getVat()
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT Vat FROM system_config WHERE ID = 1", con);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return dr[0].ToString();
+            }
+            dr.Close();
+            Disconnect();
+            return "";
         }
 
         /// <summary>

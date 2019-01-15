@@ -107,3 +107,4 @@ C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.pdb
 C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.csprojResolveAssemblyReference.cache
 C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_prod_detail.resources
 C:\Xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_unknown.png
+C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_order_pos_quantity.resources

@@ -196,6 +196,12 @@
     <Compile Include="pages\restaurant\restaurant_order_pos.Designer.cs">
       <DependentUpon>restaurant_order_pos.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\restaurant\restaurant_order_pos_quantity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_order_pos_quantity.Designer.cs">
+      <DependentUpon>restaurant_order_pos_quantity.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\restaurant\restaurant_products.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -341,6 +347,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_order_pos.resx">
       <DependentUpon>restaurant_order_pos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_order_pos_quantity.resx">
+      <DependentUpon>restaurant_order_pos_quantity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_products.resx">
       <DependentUpon>restaurant_products.cs</DependentUpon>
