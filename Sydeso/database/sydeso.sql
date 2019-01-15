@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2019 at 02:25 PM
+-- Generation Time: Jan 15, 2019 at 07:36 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -212,11 +212,11 @@ CREATE TABLE `restaurant_products` (
 --
 
 INSERT INTO `restaurant_products` (`ID`, `Name`, `Qty`, `Reorder`, `Price`, `Category`, `Image`) VALUES
-(1, 'Coke', 200, 20, 35, 'Beverages', ''),
-(2, 'Sprite', 200, 20, 35, 'Beverages', ''),
-(3, 'Royal', 200, 20, 35, 'Beverages', ''),
-(4, '7-UP', 200, 20, 35, 'Beverages', ''),
-(5, 'Emperador Light', 200, 20, 150, 'Beverages', ''),
+(1, 'Coke', 195, 20, 35, 'Beverages', ''),
+(2, 'Sprite', 197, 20, 35, 'Beverages', ''),
+(3, 'Royal', 197, 20, 35, 'Beverages', ''),
+(4, '7-UP', 194, 20, 35, 'Beverages', ''),
+(5, 'Emperador Light', 195, 20, 150, 'Beverages', ''),
 (6, 'Sarsyadong Tilapia', NULL, NULL, 45, 'Dish', ''),
 (7, 'Kaning Bahaw', NULL, NULL, 10, 'Dish', ''),
 (8, 'Menudo', NULL, NULL, 40, 'Dish', '');
@@ -230,6 +230,7 @@ INSERT INTO `restaurant_products` (`ID`, `Name`, `Qty`, `Reorder`, `Price`, `Cat
 CREATE TABLE `restaurant_sales` (
   `ID` int(11) NOT NULL,
   `Customer_ID` int(11) NOT NULL,
+  `Customer_Name` text NOT NULL,
   `Account_ID` int(11) NOT NULL,
   `Cash_Tendered` double NOT NULL,
   `Discount` double NOT NULL,
@@ -237,8 +238,22 @@ CREATE TABLE `restaurant_sales` (
   `Cash_Change` double NOT NULL,
   `Payment_Mode` text NOT NULL,
   `Date` date NOT NULL,
-  `Time` time NOT NULL
+  `Time` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `restaurant_sales`
+--
+
+INSERT INTO `restaurant_sales` (`ID`, `Customer_ID`, `Customer_Name`, `Account_ID`, `Cash_Tendered`, `Discount`, `Amount`, `Cash_Change`, `Payment_Mode`, `Date`, `Time`) VALUES
+(1, 0, 'WALK-IN', 1, 100, 0, 72.8, 27.2, '', '2019-01-15', '11:50:16 PM'),
+(2, 0, 'WALK-IN', 1, 150, 0, 112, 38, '', '2019-01-15', '11:58:18 PM'),
+(3, 0, 'WALK-IN', 1, 150, 0, 112, 38, '', '2019-01-15', '11:59:38 PM'),
+(4, 0, 'WALK-IN', 1, 500, 0, 414.4, 85.6, '', '2019-01-15', '11:59:57 PM'),
+(5, 0, 'WALK-IN', 1, 100, 0, 72.8, 27.2, '', '2019-01-16', '12:12:39 AM'),
+(6, 1, 'John Armon Manaloto', 1, 500, 0, 431.2, 68.8, '', '2019-01-16', '02:17:06 AM'),
+(7, 0, 'WALK-IN', 1, 500, 0, 431.2, 68.8, '', '2019-01-16', '02:20:53 AM'),
+(8, 0, 'WALK-IN', 1, 1000, 0, 431.2, 568.8, '', '2019-01-16', '02:24:00 AM');
 
 -- --------------------------------------------------------
 
@@ -253,6 +268,45 @@ CREATE TABLE `restaurant_sales_details` (
   `Qty` int(11) NOT NULL,
   `Price` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `restaurant_sales_details`
+--
+
+INSERT INTO `restaurant_sales_details` (`ID`, `Sales_ID`, `Prod_ID`, `Qty`, `Price`) VALUES
+(1, 1, 4, 1, 35),
+(2, 1, 7, 3, 10),
+(3, 2, 4, 2, 35),
+(4, 3, 4, 2, 35),
+(5, 3, 7, 3, 10),
+(6, 4, 1, 2, 35),
+(7, 4, 5, 2, 150),
+(8, 5, 4, 1, 35),
+(9, 5, 7, 3, 10),
+(10, 6, 4, 1, 35),
+(11, 6, 7, 1, 10),
+(12, 6, 1, 1, 35),
+(13, 6, 8, 1, 40),
+(14, 6, 5, 1, 150),
+(15, 6, 3, 1, 35),
+(16, 6, 6, 1, 45),
+(17, 6, 2, 1, 35),
+(18, 7, 4, 1, 35),
+(19, 7, 7, 1, 10),
+(20, 7, 1, 1, 35),
+(21, 7, 8, 1, 40),
+(22, 7, 5, 1, 150),
+(23, 7, 3, 1, 35),
+(24, 7, 6, 1, 45),
+(25, 7, 2, 1, 35),
+(26, 8, 4, 1, 35),
+(27, 8, 7, 1, 10),
+(28, 8, 1, 1, 35),
+(29, 8, 8, 1, 40),
+(30, 8, 5, 1, 150),
+(31, 8, 3, 1, 35),
+(32, 8, 6, 1, 45),
+(33, 8, 2, 1, 35);
 
 -- --------------------------------------------------------
 
@@ -529,13 +583,13 @@ ALTER TABLE `restaurant_products`
 -- AUTO_INCREMENT for table `restaurant_sales`
 --
 ALTER TABLE `restaurant_sales`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `restaurant_sales_details`
 --
 ALTER TABLE `restaurant_sales_details`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `restaurant_stock_out`
