@@ -32,9 +32,6 @@ namespace Sydeso
 
             InitializeComponent();
 
-            lblOrderType.Text = restaurant_order_pos_modal._Show();
-            customer = restaurant_order_pos_modal_name._Show();
-
             LoadTable("", "ALL");
             InitializeCategory();
             
@@ -148,53 +145,60 @@ namespace Sydeso
 
         private void product_click(object sender, EventArgs e)
         {
-            Control c = sender as Control;
-            Control d = c.Parent;
-
-            try
+            if (!btnTransaction.Visible)
             {
-                restaurant_prod_detail a = d.Parent as restaurant_prod_detail;
+                Control c = sender as Control;
+                Control d = c.Parent;
 
-                _id = a.Product_ID.ToString();
-                _name = a.Product_Name;
-                _price = a.Product_Price;
-                _qty = "1";
-                _total = a.Product_Price;
-            }
-            catch (Exception)
-            {
-                restaurant_prod_detail a = c.Parent as restaurant_prod_detail;
-
-                _id = a.Product_ID.ToString();
-                _name = a.Product_Name;
-                _price = a.Product_Price;
-                _qty = "1";
-                _total = a.Product_Price;
-            }
-
-            bool found = false;
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (row.Cells["ID"].Value.ToString() == _id)
+                try
                 {
-                    found = true;
-                    row.Cells["Qty"].Value = Convert.ToInt32(row.Cells["Qty"].Value) + 1;
-                    row.Cells["Total"].Value = rh.hookDecimal(rh.FormatLabel1(Convert.ToDouble(row.Cells["Qty"].Value) * Convert.ToDouble(row.Cells["Price"].Value)));
-                }
-            }
+                    restaurant_prod_detail a = d.Parent as restaurant_prod_detail;
 
-            if (!found)
-            {
-                dataGridView1.Rows.Add(new Object[] {
+                    _id = a.Product_ID.ToString();
+                    _name = a.Product_Name;
+                    _price = a.Product_Price;
+                    _qty = "1";
+                    _total = a.Product_Price;
+                }
+                catch (Exception)
+                {
+                    restaurant_prod_detail a = c.Parent as restaurant_prod_detail;
+
+                    _id = a.Product_ID.ToString();
+                    _name = a.Product_Name;
+                    _price = a.Product_Price;
+                    _qty = "1";
+                    _total = a.Product_Price;
+                }
+
+                bool found = false;
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (row.Cells["ID"].Value.ToString() == _id)
+                    {
+                        found = true;
+                        row.Cells["Qty"].Value = Convert.ToInt32(row.Cells["Qty"].Value) + 1;
+                        row.Cells["Total"].Value = rh.hookDecimal(rh.FormatLabel1(Convert.ToDouble(row.Cells["Qty"].Value) * Convert.ToDouble(row.Cells["Price"].Value)));
+                    }
+                }
+
+                if (!found)
+                {
+                    dataGridView1.Rows.Add(new Object[] {
                     _id, _name, rh.hookDecimal(rh.FormatLabel1(Convert.ToDouble(_price))), _qty, rh.hookDecimal(rh.FormatLabel1(Convert.ToDouble(_total)))
                 });
+                }
+
+                dataGridView1.Rows[dataGridView1.Rows.Count - 1].Selected = true;
+                index = dataGridView1.Rows.Count - 1;
+
+                dataGridView1.Focus();
+                CalculateTotal();
             }
-
-            dataGridView1.Rows[dataGridView1.Rows.Count - 1].Selected = true;
-            index = dataGridView1.Rows.Count - 1;
-
-            dataGridView1.Focus();
-            CalculateTotal();
+            else
+            {
+                rh.alert("Notification: ", "Click start transaction before proceeding.", "information");
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -329,6 +333,7 @@ namespace Sydeso
                     PrintDialog print = new PrintDialog();
                     PrintDocument doc = new PrintDocument();
                     //PrintPreviewDialog preview = new PrintPreviewDialog();
+                    //doc.PrinterSettings.PrinterName = "Send To OneNote 2013";
                     print.Document = doc;
                     //preview.Document = doc;
                     doc.PrintPage += new PrintPageEventHandler(Doc_PrintPage);
@@ -351,7 +356,7 @@ namespace Sydeso
                                     String qty = dataGridView1[3, i].Value.ToString();
                                     String price = dataGridView1[2, i].Value.ToString();
 
-                                    rh.sales_details_create(oid, pid, qty, price);
+                                    rh.order_details_create(oid, pid, qty, price);
                                 }
                             }
                             break;
@@ -365,6 +370,7 @@ namespace Sydeso
                                 change = rh.hookDecimal((Convert.ToDouble(cash_tendered) - Convert.ToDouble(lblAmountDue.Text)).ToString());
                                 rh.sales_create(customer, acc_detail[0], cash_tendered, lblDiscount.Text, txtDiscount.Text, lblAmountDue.Text, change, lblVat.Text, txtVat.Text, lblTotal.Text, lblOrderType.Text);
                                 String sid = rh.sales_number_get().ToString();
+                                rh.sales_customer_details_create(customer, sid, lblAmountDue.Text);
 
                                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                                 {
@@ -379,6 +385,8 @@ namespace Sydeso
                     }
 
 
+                    new restaurant_order_pos_modal_table(cash_tendered, customer).ShowDialog();
+
                     dataGridView1.Rows.Clear();
                     CalculateTotal();
                     mode = 0;
@@ -386,8 +394,16 @@ namespace Sydeso
                     // Pick Tables...
                 }
 
-                MessageBox.Show("Transaction Done");
+                rh.alert("Notification: ", "Transaction done. System is ready for the next transaction.", "success");
+                btnTransaction.Visible = true;
             }
+        }
+
+        private void btnTransaction_Click(object sender, EventArgs e)
+        {
+            btnTransaction.Visible = false;
+            lblOrderType.Text = restaurant_order_pos_modal._Show();
+            customer = restaurant_order_pos_modal_name._Show();
         }
 
         private void Doc_PrintPage(object sender, PrintPageEventArgs e)

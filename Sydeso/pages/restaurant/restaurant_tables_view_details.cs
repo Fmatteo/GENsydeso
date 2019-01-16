@@ -38,9 +38,13 @@ namespace Sydeso
             {
                 case "RESERVED":
                     view.dataGridView1.DataSource = rh.res_table_read_details_reserved(id);
+                    view.dataGridView2.Visible = false;
+                    view.label2.Visible = false;
+                    view.dataGridView1.Height = 323;
                     break;
                 default:
                     view.dataGridView1.DataSource = rh.res_table_read_details_occupied(id);
+                    view.dataGridView2.DataSource = rh.res_table_read_details_occupied_item(view.dataGridView1[0, 0].Value.ToString());
                     break;
             }
 

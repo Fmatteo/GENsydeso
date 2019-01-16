@@ -970,25 +970,48 @@ namespace Sydeso
         {
             _res_table_read_details_occupied = new DataTable();
             _res_table_read_details_occupied.Columns.Add("Order ID");
-            _res_table_read_details_occupied.Columns.Add("Order Customer Name");
-            _res_table_read_details_occupied.Columns.Add("Order Qty");
-            _res_table_read_details_occupied.Columns.Add("Order Price");
-            _res_table_read_details_occupied.Columns.Add("Order Total");
+            _res_table_read_details_occupied.Columns.Add("Customer Name");
+            _res_table_read_details_occupied.Columns.Add("Total Amount");
 
             Connect();
-            cmd = new MySqlCommand("SELECT restaurant_order.ID, restaurant_order.Customer_Name, restaurant_order_details.Product_Name, restaurant_order_details.Qty, restaurant_order_details.Price, restaurant_order_details.Qty * restaurant_order_details.Price as Total FROM restaurant_order INNER JOIN restaurant_order_details ON restaurant_order.ID = restaurant_order_details.Order_ID WHERE restaurant_order.Table_ID = @id", con);
+            cmd = new MySqlCommand("SELECT ID, Customer_Name, Amount FROM restaurant_order WHERE Table_ID = @id", con);
             cmd.Parameters.AddWithValue("@id", id);
             dr = cmd.ExecuteReader();
 
             if (dr.Read())
             {
                 _res_table_read_details_occupied.Rows.Add(new Object[] {
-                    dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString()
+                    dr[0].ToString(), dr[1].ToString(), hookDecimal(dr[2].ToString())
                 }); 
             }
             dr.Close();
             Disconnect();
             return _res_table_read_details_occupied;
+        }
+
+        private DataTable _res_table_read_details_occupied_items;
+        public DataTable res_table_read_details_occupied_item(String id)
+        {
+            _res_table_read_details_occupied_items = new DataTable();
+            _res_table_read_details_occupied_items.Columns.Add("Product Name");
+            _res_table_read_details_occupied_items.Columns.Add("Price");
+            _res_table_read_details_occupied_items.Columns.Add("Qty.");
+            _res_table_read_details_occupied_items.Columns.Add("Total Amount");
+
+            Connect();
+            cmd = new MySqlCommand("SELECT restaurant_products.Name, restaurant_products.Price, restaurant_order_details.Qty, restaurant_products.Price * restaurant_order_details.Qty FROM restaurant_products INNER JOIN restaurant_order_details ON restaurant_products.ID = restaurant_order_details.Prod_ID WHERE restaurant_order_details.Order_ID = @id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                _res_table_read_details_occupied_items.Rows.Add(new Object[] {
+                    dr[0], hookDecimal(dr[1].ToString()), dr[2], hookDecimal(dr[3].ToString())
+                });
+            }
+            dr.Close();
+            Disconnect();
+            return _res_table_read_details_occupied_items;
         }
 
         private DataTable _res_table_read_details_reserved;
@@ -1016,6 +1039,94 @@ namespace Sydeso
             Disconnect();
 
             return _res_table_read_details_reserved;
+        }
+
+        private List<restaurant_table_detail> _res_table_detail;
+        public List<restaurant_table_detail> res_table_detail(String search)
+        {
+            _res_table_detail = new List<restaurant_table_detail>();
+            Connect();
+            cmd = new MySqlCommand("SELECT * FROM restaurant_table WHERE ID Like @search OR Name Like @search OR Status Like @search", con);
+            cmd.Parameters.AddWithValue("@search", search + "%");
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                restaurant_table_detail list = new restaurant_table_detail();
+                list.Table_ID = Convert.ToInt32(dr[0]);
+                list.Table_Name = dr[1].ToString();
+                list.Table_Desc = dr[2].ToString();
+                list.Table_Status = dr[3].ToString();
+                _res_table_detail.Add(list);
+            }
+            dr.Close();
+            Disconnect();
+            return _res_table_detail;
+        }
+
+        public void res_table_choose(String mode, String cname, String status, String id)
+        {
+            string[] cust_detail = cname.Split(':');
+            if (status == "RESERVED")
+            {
+                Connect();
+                cmd = new MySqlCommand("DELETE FROM restaurant_table_booking WHERE Customer_ID = @cid AND Customer_Name = @cname AND Table_ID = @tid AND Date = @date", con);
+                cmd.Parameters.AddWithValue("@cid", cust_detail[0].Trim());
+                cmd.Parameters.AddWithValue("@cname", cname.Replace(cust_detail[0] + ": ", "").Trim());
+                cmd.Parameters.AddWithValue("@tid", id);
+                cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd"));
+                cmd.ExecuteNonQuery();
+                Disconnect();
+
+                // Change Status of Table to Occupied if possible
+                if (res_table_count_reserved(id) == 0)
+                {
+                    res_table_update_status(id, "OCCUPIED");
+                }
+            }
+            else
+            {
+                res_table_update_status(id, "OCCUPIED");
+            }
+
+            if (mode == "PENDING SALE")
+                res_table_order_update(id, order_number_get().ToString());
+        }
+
+        private int res_table_count_reserved(String id)
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT COUNT(ID) FROM restaurant_table_booking WHERE Table_ID = @id", con);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return Convert.ToInt32(dr[0]);
+            }
+            dr.Close();
+            Disconnect();
+            return 0;
+        }
+
+        private void res_table_update_status(String id, String status)
+        {
+            Connect();
+            cmd = new MySqlCommand("UPDATE restaurant_table SET Status = @status WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@status", status);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+        }
+
+        private void res_table_order_update(String tid, String id)
+        {
+            Connect();
+            cmd = new MySqlCommand("UPDATE restaurant_order SET Table_ID = @tid WHERE ID = @id", con);
+            cmd.Parameters.AddWithValue("@tid", tid);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            Disconnect();
         }
 
         #region Reservation
@@ -1275,6 +1386,24 @@ namespace Sydeso
             Disconnect();
 
             sales_update_inventory(pid, Convert.ToInt32(qty));
+        }
+
+        public void sales_customer_details_create(String cname, String sid, String amount)
+        {
+            string[] cust_detail = cname.Split(':');
+            int cid;
+            int.TryParse(cust_detail[0].Trim(), out cid);
+
+            if (cid != 0)
+            {
+                Connect();
+                cmd = new MySqlCommand("INSERT INTO restaurant_customers_record(Customer_ID, Sales_ID, Amount)VALUES(@cid, @sid, @amount)", con);
+                cmd.Parameters.AddWithValue("@cid", cid);
+                cmd.Parameters.AddWithValue("@sid", sid);
+                cmd.Parameters.AddWithValue("@amount", amount);
+                cmd.ExecuteNonQuery();
+                Disconnect();
+            }
         }
 
         public void sales_update_inventory(String pid, int qty)

@@ -114,3 +114,12 @@ C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_order_pos_modal.res
 C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_order_pos_modal_name.resources
 C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_order_pos_modal_cash.resources
 C:\Xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_order_pos_modal_choice.resources
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\Bunifu_UI_v1.4.dll
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\MySql.Data.dll
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\Google.Protobuf.dll
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\MySql.Data.xml
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_order_pos_modal_table.resources
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_table_1.png
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_table_black.png
+C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_table_white.png
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_table_detail.resources
