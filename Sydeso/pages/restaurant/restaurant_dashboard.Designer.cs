@@ -35,7 +35,7 @@
             this.customPanel15 = new Sydeso.CustomPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.customPanel16 = new Sydeso.CustomPanel();
-            this.label13 = new System.Windows.Forms.Label();
+            this.lblPending = new System.Windows.Forms.Label();
             this.customPanel17 = new Sydeso.CustomPanel();
             this.label12 = new System.Windows.Forms.Label();
             this.customPanel18 = new Sydeso.CustomPanel();
@@ -152,7 +152,7 @@
             // customPanel16
             // 
             this.customPanel16.BackColor = System.Drawing.Color.White;
-            this.customPanel16.Controls.Add(this.label13);
+            this.customPanel16.Controls.Add(this.lblPending);
             this.customPanel16.Controls.Add(this.customPanel17);
             this.customPanel16.Controls.Add(this.customPanel18);
             this.customPanel16.Location = new System.Drawing.Point(49, 439);
@@ -160,17 +160,17 @@
             this.customPanel16.Size = new System.Drawing.Size(356, 180);
             this.customPanel16.TabIndex = 4;
             // 
-            // label13
+            // lblPending
             // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 32F);
-            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.label13.Location = new System.Drawing.Point(305, 71);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(48, 59);
-            this.label13.TabIndex = 4;
-            this.label13.Text = "0";
+            this.lblPending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPending.AutoSize = true;
+            this.lblPending.Font = new System.Drawing.Font("Segoe UI", 32F);
+            this.lblPending.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
+            this.lblPending.Location = new System.Drawing.Point(305, 71);
+            this.lblPending.Name = "lblPending";
+            this.lblPending.Size = new System.Drawing.Size(48, 59);
+            this.lblPending.TabIndex = 4;
+            this.lblPending.Text = "0";
             // 
             // customPanel17
             // 
@@ -564,7 +564,7 @@
         private System.Windows.Forms.Label lblSales;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lblPending;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label6;
     }

@@ -69,7 +69,9 @@ namespace Sydeso
                 case "btnComplete":
                     value = restaurant_order_pos_modal_cash._Show(_total);
                     break;
-                default: break;
+                default:
+                    value = c.Text;
+                    break;
             }
 
             this.Close();

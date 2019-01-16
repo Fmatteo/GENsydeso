@@ -470,6 +470,21 @@ namespace Sydeso
             return 0;
         }
 
+        public int res_pending_order()
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT COUNT(ID) FROM restaurant_order", con);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return Convert.ToInt32(dr[0]);
+            }
+            dr.Close();
+            Disconnect();
+            return 0;
+        }
+
         public String res_sales_today()
         {
             Connect();
@@ -1195,19 +1210,24 @@ namespace Sydeso
             return _prod;
         }
 
-        public void sales_create(String cname, String aid, String cash, String disc, String amount, String change)
+        public void sales_create(String cname, String aid, String cash, String disc, String discPerc, String amount, String change, String vat, String vatPerc, String vatExempt, String orderType)
         {
             string[] cust_detail = cname.Split(':');
 
             Connect();
-            cmd = new MySqlCommand("INSERT INTO restaurant_sales(Customer_ID, Customer_Name, Account_ID, Cash_Tendered, Discount, Amount, Cash_Change, Date, Time)VALUES(@cid, @cname, @aid, @cash, @disc, @amount, @change, @date, @time)", con);
+            cmd = new MySqlCommand("INSERT INTO restaurant_sales(Customer_ID, Customer_Name, Account_ID, Cash_Tendered, Discount, Discount_Perc, Amount, Cash_Change, Vat, Vat_Perc, Vat_Exempt, Order_Type, Date, Time)VALUES(@cid, @cname, @aid, @cash, @disc, @discPerc, @amount, @change, @vat, @vatPerc, @vatExempt, @orderType, @date, @time)", con);
             cmd.Parameters.AddWithValue("@cid", cust_detail[0].Trim());
             cmd.Parameters.AddWithValue("@cname", cname.Replace(cust_detail[0] + ": ", "").Trim());
             cmd.Parameters.AddWithValue("@aid", aid);
             cmd.Parameters.AddWithValue("@cash", cash);
             cmd.Parameters.AddWithValue("@disc", disc);
+            cmd.Parameters.AddWithValue("@discPerc", discPerc);
             cmd.Parameters.AddWithValue("@amount", amount);
             cmd.Parameters.AddWithValue("@change", change);
+            cmd.Parameters.AddWithValue("@vat", vat);
+            cmd.Parameters.AddWithValue("@vatPerc", vatPerc);
+            cmd.Parameters.AddWithValue("@vatExempt", vatExempt);
+            cmd.Parameters.AddWithValue("@orderType", orderType);
             cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd"));
             cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString("hh:mm:ss tt"));
             cmd.ExecuteNonQuery();
@@ -1229,9 +1249,8 @@ namespace Sydeso
             return 0;
         }
 
-        public String sales_or_number()
+        public String sales_or_number(String id)
         {
-            String id = sales_number_get().ToString();
             String or = "";
 
             for (int i = id.Length; i < 8; i++)
@@ -1280,6 +1299,74 @@ namespace Sydeso
             dr.Close(); 
             Disconnect();
         }
+
+
+        #region ORDER
+        public void order_create(String cname, String aid, String disc, String discPerc, String amount, String vat, String vatPerc, String vatExempt, String orderType)
+        {
+            string[] cust_detail = cname.Split(':');
+
+            Connect();
+            cmd = new MySqlCommand("INSERT INTO restaurant_order(Customer_ID, Customer_Name, Account_ID, Discount, Discount_Perc, Amount, Vat, Vat_Perc, Vat_Exempt, Order_Type, Date, Time)values(@cid, @cname, @aid, @disc, @discPerc, @amount, @vat, @vatPerc, @vatExempt, @orderType, @date, @time)", con);
+            cmd.Parameters.AddWithValue("@cid", cust_detail[0].Trim());
+            cmd.Parameters.AddWithValue("@cname", cname.Replace(cust_detail[0] + ": ", "").Trim());
+            cmd.Parameters.AddWithValue("@aid", aid);
+            cmd.Parameters.AddWithValue("@disc", disc);
+            cmd.Parameters.AddWithValue("@discPerc", discPerc);
+            cmd.Parameters.AddWithValue("@amount", amount);
+            cmd.Parameters.AddWithValue("@vat", vat);
+            cmd.Parameters.AddWithValue("@vatPerc", vatPerc);
+            cmd.Parameters.AddWithValue("@vatExempt", vatExempt);
+            cmd.Parameters.AddWithValue("@orderType", orderType);
+            cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd"));
+            cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString("hh:mm:ss tt"));
+            cmd.ExecuteNonQuery();
+            Disconnect();
+        }
+
+        public int order_number_get()
+        {
+            Connect();
+            cmd = new MySqlCommand("SELECT MAX(ID) as MAX FROM restaurant_order", con);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return Convert.ToInt32(dr["MAX"]);
+            }
+            dr.Close();
+            Disconnect();
+            return 0;
+        }
+
+        public String order_number(String id)
+        {
+            String or = "";
+
+            for (int i = id.Length; i < 8; i++)
+            {
+                or += "0";
+            }
+
+            or += id;
+
+            return or;
+        }
+
+        public void order_details_create(String oid, String pid, String qty, String price)
+        {
+            Connect();
+            cmd = new MySqlCommand("INSERT INTO restaurant_order_details(Order_ID, Prod_ID, Qty, Price)VALUES(@oid, @pid, @qty, @price)", con);
+            cmd.Parameters.AddWithValue("@oid", oid);
+            cmd.Parameters.AddWithValue("@pid", pid);
+            cmd.Parameters.AddWithValue("@qty", qty);
+            cmd.Parameters.AddWithValue("@price", price);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+
+            sales_update_inventory(pid, Convert.ToInt32(qty));
+        }
+        #endregion
 
         #endregion
     }

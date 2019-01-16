@@ -8,6 +8,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Sydeso
 {
@@ -279,7 +280,12 @@ namespace Sydeso
             cmd.Parameters.AddWithValue("@type", btype);
 
             if (!string.IsNullOrWhiteSpace(path))
-                cmd.Parameters.AddWithValue("@image", File.ReadAllBytes(path));
+            {
+                Image logo = Image.FromFile(path);
+                Bitmap bmp = toWhiteScale((Bitmap)logo);
+                
+                cmd.Parameters.AddWithValue("@image", imageToByteArray((Image)bmp));
+            }
 
             cmd.ExecuteNonQuery();
             Disconnect();
@@ -312,6 +318,8 @@ namespace Sydeso
                 {
                     _get_setup_config.Add("");
                 }
+
+                _get_setup_config.Add(dr["TIN"]);
             }
             dr.Close();
             Disconnect();
@@ -361,6 +369,61 @@ namespace Sydeso
             return temp;
         }
 
+        public String formatCurrency(String text)
+        {
+            String newText = "", temp = "", dec = "";
+            String[] split;
+
+            if (text.Contains("."))
+            {
+                split = text.Split('.');
+                temp = split[0];
+                dec = split[1];
+            }
+            else
+                temp = text;
+
+            int count = 0;
+            for (int i = temp.Length - 1; i >= 0; i--)
+            {
+                newText += temp[i];
+                count++;
+                if (count == 3)
+                {
+                    count = 0;
+                    if (i != 0)
+                        newText += ",";
+                }
+            }
+
+            temp = "";
+            for (int j = newText.Length - 1; j >= 0; j--)
+            {
+                temp += newText[j];
+            }
+
+            if (text.Contains("."))
+                temp += "." + dec;
+
+            return temp;
+        }
+
+        private Bitmap toWhiteScale(Bitmap logo)
+        {
+            for (var i = 0; i < logo.Width; i++)
+            {
+                for (var j = 0; j < logo.Height; j++)
+                {
+                    var originalColor = logo.GetPixel(i, j);
+                    var grayScale = (int)((originalColor.R * 0.3) + (originalColor.G * 0.59) + (originalColor.B * 0.11));
+                    var corEmEscalaDeCinza = Color.FromArgb(originalColor.A, 255, 255, 255);
+                    logo.SetPixel(i, j, corEmEscalaDeCinza);
+                }
+            }
+
+            return logo;
+        }
+
         public static Bitmap ResizeImage(Image image, int width, int height)
         {
             var destRect = new Rectangle(0, 0, width, height);
@@ -389,7 +452,7 @@ namespace Sydeso
         public byte[] imageToByteArray(System.Drawing.Image imageIn)
         {
             MemoryStream ms = new MemoryStream();
-            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             return ms.ToArray();
         }
 
@@ -546,6 +609,305 @@ namespace Sydeso
             Disconnect();
             return data;
         }
+        #endregion
+
+        #region Printing
+
+        public void print_receipt(Graphics g, DataGridView dgv, String order_type, String acc_name, String invoice, String amountDue, String cash, String change, String disc, String discPerc, String vatExempt, String vat, String vatPerc, String cust_name)
+        {
+            List<Object> com_details = get_setup_config();
+            String com_name = com_details[1].ToString();
+            String com_add = com_details[2].ToString();
+            String com_phone = com_details[3].ToString();
+            String com_tin = com_details[6].ToString();
+
+            Bitmap com_logo = database_helper.ResizeImage((Image)com_details[5], 100, 100);
+            Bitmap logo = database_helper.ResizeImage(Image.FromFile(Application.StartupPath + "/icons/sydeso.png"), 100, 100);
+
+            int pageWidth = 200;
+
+            SolidBrush brush = new SolidBrush(Color.Black);
+
+            Font font_12 = new Font("Courier New", 12);
+            Font font_12B = new Font("Courier New", 12, FontStyle.Bold);
+
+            int startX = 0;
+            int startY = 10;
+            int offSet = 40;
+
+            g.DrawImage(toGrayScale(com_logo), ((pageWidth * 2 - 100) / 2), startY);
+            startY += 100;
+
+            g.DrawString(com_name, font_12B, brush, ((pageWidth - Measure(g, com_name, font_12B) / 2)), startY);
+            startY += (int)font_12B.GetHeight();
+
+            g.DrawString(com_add, font_12, brush, ((pageWidth - Measure(g, com_add, font_12) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("Phone Number: " + com_phone, font_12, brush, ((pageWidth - Measure(g, "Phone Number: " + com_phone, font_12) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("TIN #: " + com_tin, font_12, brush, ((pageWidth - Measure(g, "TIN No.: " + com_tin, font_12) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            //g.DrawLine(Pens.Black, new Point(0, startY), new Point(pageWidth * 2, startY));
+            g.DrawString(insertLine(g, font_12, pageWidth), font_12, brush, ((pageWidth - Measure(g, insertLine(g, font_12, pageWidth), font_12) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            // - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LINE BREAK <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< - //
+
+            g.DrawString("SALES RECEIPT", font_12B, brush, ((pageWidth - Measure(g, "SALES RECEIPT", font_12B) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("Sales Invoice No.: ", font_12, brush, startX, startY);
+            g.DrawString(invoice, font_12, brush, (pageWidth * 2 - Measure(g, invoice, font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("Time Generated: ", font_12, brush, startX, startY);
+            g.DrawString(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt"), font_12, brush, (pageWidth * 2 - Measure(g, DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt"), font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("Cashier: ", font_12, brush, startX, startY);
+            g.DrawString(acc_name.ToUpper(), font_12, brush, (pageWidth * 2 - Measure(g, acc_name.ToUpper(), font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("Order Type: ", font_12, brush, startX, startY);
+            g.DrawString(order_type, font_12, brush, (pageWidth * 2 - Measure(g, order_type, font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("Payment Method: ", font_12, brush, startX, startY);
+            g.DrawString("CASH", font_12, brush, (pageWidth * 2 - Measure(g, "CASH", font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            // - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LINE BREAK <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< - //
+            g.DrawString(insertLine(g, font_12, pageWidth), font_12, brush, ((pageWidth - Measure(g, insertLine(g, font_12, pageWidth), font_12) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("ITEM NAME", font_12B, brush, startX, startY);
+            g.DrawString("AMOUNT", font_12B, brush, (pageWidth * 2 - Measure(g, "AMOUNT", font_12B)), startY);
+            startY += (int)font_12.GetHeight();
+
+            for (int i = 0; i < dgv.Rows.Count; i++)
+            {
+                String prod_name = dgv[1, i].Value.ToString();
+                String qty = dgv[3, i].Value.ToString();
+                String price = dgv[2, i].Value.ToString();
+                String total = hookDecimal(dgv[4, i].Value.ToString());
+
+                String detail = qty + "PC(s) @ " + hookDecimal(price);
+
+                // Product name
+                g.DrawString(prod_name, font_12, brush, startX, startY);
+
+                startY += (int)font_12.GetHeight();
+                g.DrawString(detail, font_12, brush, startX + offSet, startY);
+                g.DrawString(total, font_12, brush, (pageWidth * 2 - Measure(g, total, font_12)), startY);
+
+                startY += (int)font_12.GetHeight();
+            }
+
+            // - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LINE BREAK <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< - //
+            g.DrawString(insertLine(g, font_12, pageWidth), font_12, brush, ((pageWidth - Measure(g, insertLine(g, font_12, pageWidth), font_12) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("Amount Due: ", font_12, brush, startX, startY);
+            g.DrawString(hookDecimal(amountDue), font_12, brush, (pageWidth * 2 - Measure(g, hookDecimal(amountDue), font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("Cash Tendered: ", font_12, brush, startX, startY);
+            g.DrawString(hookDecimal(cash), font_12, brush, (pageWidth * 2 - Measure(g, hookDecimal(cash), font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("Change Due: ", font_12, brush, startX, startY);
+            g.DrawString(hookDecimal(change), font_12, brush, (pageWidth * 2 - Measure(g, hookDecimal(change), font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("Discount: (" + hookDecimal(discPerc) + "%)", font_12, brush, startX, startY);
+            g.DrawString(hookDecimal(disc), font_12, brush, (pageWidth * 2 - Measure(g, hookDecimal(disc), font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            // - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LINE BREAK <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< - //
+            g.DrawString(insertLine(g, font_12, pageWidth), font_12, brush, ((pageWidth - Measure(g, insertLine(g, font_12, pageWidth), font_12) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("VATable Sales: ", font_12, brush, startX, startY);
+            g.DrawString(hookDecimal(amountDue), font_12, brush, (pageWidth * 2 - Measure(g, hookDecimal(amountDue), font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("VAT Exempt Sales: ", font_12, brush, startX, startY);
+            g.DrawString(hookDecimal(vatExempt), font_12, brush, (pageWidth * 2 - Measure(g, hookDecimal(vatExempt), font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("Zero-Rated Sales: ", font_12, brush, startX, startY);
+            g.DrawString("0.00", font_12, brush, (pageWidth * 2 - Measure(g, "0.00", font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString(hookDecimal(vatPerc) + "% VAT Sales: ", font_12, brush, startX, startY);
+            g.DrawString(hookDecimal(vat), font_12, brush, (pageWidth * 2 - Measure(g, hookDecimal(vat), font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            // - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LINE BREAK <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< - //
+            g.DrawString(insertLine(g, font_12, pageWidth), font_12, brush, ((pageWidth - Measure(g, insertLine(g, font_12, pageWidth), font_12) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("Sold To: ", font_12, brush, startX, startY);
+            g.DrawString(cust_name, font_12, brush, (pageWidth * 2 - Measure(g, cust_name, font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("TIN No.: ", font_12, brush, startX, startY);
+            g.DrawString("______________________", font_12, brush, (pageWidth * 2 - Measure(g, "______________________", font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("Address: ", font_12, brush, startX, startY);
+            g.DrawString("______________________", font_12, brush, (pageWidth * 2 - Measure(g, "______________________", font_12)), startY);
+            startY += (int)font_12.GetHeight() + 10;
+
+            // - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LINE BREAK <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< - //
+            g.DrawString(insertLine(g, font_12, pageWidth), font_12, brush, ((pageWidth - Measure(g, insertLine(g, font_12, pageWidth), font_12) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("Thank you for purchasing!", font_12B, brush, ((pageWidth - Measure(g, "Thank you for purchasing!", font_12B) / 2)), startY);
+            startY += (int)font_12B.GetHeight() + 10;
+
+            g.DrawString("Powered by: ", font_12B, brush, ((pageWidth - Measure(g, "Powered by: ", font_12B) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawImage(toGrayScale(logo), ((pageWidth * 2 - 100) / 2), startY);
+            startY += 100;
+
+            g.DrawString("System Development Solution", font_12, brush, ((pageWidth - Measure(g, "System Development Solution", font_12) / 2)), startY);
+        }
+
+        private int Measure(Graphics g, String text, Font font)
+        {
+            int size = (int)g.MeasureString(text, font).Width;
+            return size;
+        }
+
+        private String insertLine(Graphics g, Font font, int size)
+        {
+            String line = "";
+            while (true)
+            {
+                if ((int)g.MeasureString(line, font).Width < size * 2)
+                {
+                    line += "=";
+
+                    if ((int)g.MeasureString(line, font).Width > size * 2)
+                    {
+                        line.Remove(0);
+                        break;
+                    }
+                }
+            }
+            return line;
+        }
+
+        private Bitmap toGrayScale(Bitmap logo)
+        {
+            for (var i = 0; i < logo.Width; i++)
+            {
+                for (var j = 0; j < logo.Height; j++)
+                {
+                    var originalColor = logo.GetPixel(i, j);
+                    var grayScale = (int)((originalColor.R * 0.3) + (originalColor.G * 0.59) + (originalColor.B * 0.11));
+                    var corEmEscalaDeCinza = Color.FromArgb(originalColor.A, 0, 0, 0);
+                    logo.SetPixel(i, j, corEmEscalaDeCinza);
+                }
+            }
+
+            return logo;
+        }
+
+        public void print_order(Graphics g, DataGridView dgv, String acc_name, String order, String cus_name)
+        {
+            List<Object> com_details = get_setup_config();
+            String com_name = com_details[1].ToString();
+            String com_add = com_details[2].ToString();
+            String com_phone = com_details[3].ToString();
+            String com_tin = com_details[6].ToString();
+
+            Bitmap com_logo = database_helper.ResizeImage((Image)com_details[5], 100, 100);
+            Bitmap logo = database_helper.ResizeImage(Image.FromFile(Application.StartupPath + "/icons/sydeso.png"), 100, 100);
+
+            int pageWidth = 200;
+
+            SolidBrush brush = new SolidBrush(Color.Black);
+
+            Font font_12 = new Font("Courier New", 12);
+            Font font_12B = new Font("Courier New", 12, FontStyle.Bold);
+
+            int startX = 0;
+            int startY = 10;
+
+            g.DrawImage(toGrayScale(com_logo), ((pageWidth * 2 - 100) / 2), startY);
+            startY += 100;
+
+            g.DrawString(com_name, font_12B, brush, ((pageWidth - Measure(g, com_name, font_12B) / 2)), startY);
+            startY += (int)font_12B.GetHeight();
+
+            g.DrawString(com_add, font_12, brush, ((pageWidth - Measure(g, com_add, font_12) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("Phone Number: " + com_phone, font_12, brush, ((pageWidth - Measure(g, "Phone Number: " + com_phone, font_12) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("TIN #: " + com_tin, font_12, brush, ((pageWidth - Measure(g, "TIN No.: " + com_tin, font_12) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            //g.DrawLine(Pens.Black, new Point(0, startY), new Point(pageWidth * 2, startY));
+            g.DrawString(insertLine(g, font_12, pageWidth), font_12, brush, ((pageWidth - Measure(g, insertLine(g, font_12, pageWidth), font_12) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("ORDER STUB", font_12B, brush, ((pageWidth - Measure(g, "ORDER STUB", font_12B) / 2)), startY);
+            startY += (int)font_12B.GetHeight();
+
+            g.DrawString("Time Generated: ", font_12, brush, startX, startY);
+            g.DrawString(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt"), font_12, brush, (pageWidth * 2 - Measure(g, DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt"), font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("STUB NO.: ", font_12, brush, startX, startY);
+            g.DrawString("000001", font_12, brush, (pageWidth * 2 - Measure(g, "000001", font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("ISSUED BY: ", font_12, brush, startX, startY);
+            g.DrawString(acc_name, font_12, brush, (pageWidth * 2 - Measure(g, acc_name, font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("ISSUED TO: ", font_12, brush, startX, startY);
+            g.DrawString(cus_name, font_12, brush, (pageWidth * 2 - Measure(g, cus_name, font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString("ORDER TYPE: ", font_12, brush, startX, startY);
+            g.DrawString(order, font_12, brush, (pageWidth * 2 - Measure(g, order, font_12)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawString(insertLine(g, font_12, pageWidth), font_12, brush, ((pageWidth - Measure(g, insertLine(g, font_12, pageWidth), font_12) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            for (int i = 0; i < dgv.Rows.Count; i++)
+            {
+                String prod_name = dgv[1, i].Value.ToString();
+                String qty = dgv[3, i].Value.ToString();
+
+                // Product name
+                g.DrawString(" - \t" + qty + "\t" + prod_name, font_12, brush, startX, startY);
+
+                startY += (int)font_12.GetHeight();
+            }
+
+            g.DrawString(insertLine(g, font_12, pageWidth), font_12, brush, ((pageWidth - Measure(g, insertLine(g, font_12, pageWidth), font_12) / 2)), startY);
+            startY += (int)font_12.GetHeight() + 10;
+
+            g.DrawString("Powered by: ", font_12B, brush, ((pageWidth - Measure(g, "Powered by: ", font_12B) / 2)), startY);
+            startY += (int)font_12.GetHeight();
+
+            g.DrawImage(toGrayScale(logo), ((pageWidth * 2 - 100) / 2), startY);
+            startY += 100;
+
+            g.DrawString("System Development Solution", font_12, brush, ((pageWidth - Measure(g, "System Development Solution", font_12) / 2)), startY);
+        }
+
         #endregion
     }
 }
