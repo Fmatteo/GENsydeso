@@ -821,6 +821,88 @@ namespace Sydeso
             alert("Notification: ", "Deleting a customer record successfully.", "information");
             return true;
         }
+
+        private DataTable _res_cust_history;
+        public DataTable res_cust_history(String id, String start, String end)
+        {
+            _res_cust_history = new DataTable();
+            _res_cust_history.Columns.Add("ID");
+            _res_cust_history.Columns.Add("Cashier");
+            _res_cust_history.Columns.Add("Amount");
+            _res_cust_history.Columns.Add("Date");
+            _res_cust_history.Columns.Add("Time");
+
+            String query = "SELECT a.ID, b.Firstname, a.Amount, a.Date, a.Time "
+                + "FROM restaurant_sales a "
+                + "LEFT JOIN system_accounts b ON a.Account_ID = b.ID "
+                + "WHERE a.Customer_ID = @id AND a.Date BETWEEN @start AND @end";
+
+            Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@start", Convert.ToDateTime(start).ToString("yyyy-MM-dd"));
+            cmd.Parameters.AddWithValue("@end", Convert.ToDateTime(end).ToString("yyyy-MM-dd"));
+            dr = cmd.ExecuteReader();
+
+            int count = 0; double total = 0;
+            while (dr.Read())
+            {
+                _res_cust_history.Rows.Add(new Object[] {
+                    dr[0], dr[1], hookDecimal(dr[2].ToString()), Convert.ToDateTime(dr[3]).ToString("yyyy-MM-dd"), dr[4]
+                });
+                count++;
+                total += Convert.ToDouble(dr[2]);
+            }
+
+            if (count != 0)
+            {
+                _res_cust_history.Rows.Add(new Object[] {
+                    "", "Total:", hookDecimal(total.ToString()), "No. of Sales", count.ToString()
+                });
+            }
+
+            dr.Close();
+            Disconnect();
+            return _res_cust_history;
+        }
+
+        private DataTable _res_cust_history_details;
+        public DataTable res_cust_history_details(String id)
+        {
+            _res_cust_history_details = new DataTable();
+            _res_cust_history_details.Columns.Add("Product Name");
+            _res_cust_history_details.Columns.Add("Qty.");
+            _res_cust_history_details.Columns.Add("Price");
+            _res_cust_history_details.Columns.Add("Amount");
+
+            String query = "SELECT a.Name, b.Qty, b.Price, b.Qty * b.Price "
+                + "FROM restaurant_sales_details b "
+                + "LEFT JOIN restaurant_products a ON a.ID = b.Prod_ID "
+                + "WHERE b.Sales_ID = @id";
+
+            Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            int qty = 0; double total = 0;
+
+            while (dr.Read())
+            {
+                _res_cust_history_details.Rows.Add(new Object[] {
+                    dr[0], dr[1], hookDecimal(dr[2].ToString()), hookDecimal(dr[3].ToString())
+                });
+                qty += Convert.ToInt32(dr[1]);
+                total += Convert.ToDouble(dr[3]);
+            }
+
+            _res_cust_history_details.Rows.Add(new Object[] {
+                "No. of Items", qty, "Amount Due:", hookDecimal(total.ToString())
+            });
+            dr.Close();
+            Disconnect();
+            return _res_cust_history_details;
+        }
         #endregion
 
         #region restaurant_tables
@@ -872,18 +954,18 @@ namespace Sydeso
             {
                 if (page == 1)
                 {
-                    query = "SELECT * FROM restaurant_table WHERE ID LIKE @search OR Description LIKE @search OR Status LIKE @search ORDER BY ID LIMIT " + pageSize;
+                    query = "SELECT * FROM restaurant_table WHERE ID LIKE @search OR Description LIKE @search OR Status LIKE @search ORDER BY Status DESC LIMIT " + pageSize;
                 }
                 else
                 {
                     int prev = (page - 1) * pageSize;
-                    query = "SELECT * FROM restaurant_table WHERE ID LIKE @search OR Description LIKE @search OR Status LIKE @search ORDER BY ID LIMIT " + prev + ", " + pageSize;
+                    query = "SELECT * FROM restaurant_table WHERE ID LIKE @search OR Description LIKE @search OR Status LIKE @search ORDER BY Status DESC LIMIT " + prev + ", " + pageSize;
 
                 }
             }
             else
             {
-                query = "SELECT * FROM restaurant_table WHERE ID LIKE @search OR Description LIKE @search OR Status LIKE @search ORDER BY ID";
+                query = "SELECT * FROM restaurant_table WHERE ID LIKE @search OR Description LIKE @search OR Status LIKE @search ORDER BY Status DESC";
             }
 
             Connect();
@@ -1046,7 +1128,7 @@ namespace Sydeso
         {
             _res_table_detail = new List<restaurant_table_detail>();
             Connect();
-            cmd = new MySqlCommand("SELECT * FROM restaurant_table WHERE ID Like @search OR Name Like @search OR Status Like @search", con);
+            cmd = new MySqlCommand("SELECT * FROM restaurant_table WHERE ID Like @search OR Name Like @search OR Status Like @search ORDER BY Status DESC", con);
             cmd.Parameters.AddWithValue("@search", search + "%");
             dr = cmd.ExecuteReader();
 
@@ -1494,6 +1576,124 @@ namespace Sydeso
             Disconnect();
 
             sales_update_inventory(pid, Convert.ToInt32(qty));
+        }
+
+        private DataTable _order_pending;
+        public DataTable order_pending(String search)
+        {
+            _order_pending = new DataTable();
+            _order_pending.Columns.Add("Order #");
+            _order_pending.Columns.Add("Table #");
+            _order_pending.Columns.Add("Customer Name");
+            _order_pending.Columns.Add("Cashier");
+            _order_pending.Columns.Add("Amount");
+            _order_pending.Columns.Add("Date");
+            _order_pending.Columns.Add("Time");
+
+            String query = "SELECT a.ID, a.Table_ID, a.Customer_Name, b.Firstname, a.Amount, a.Date, a.Time " 
+                + "FROM restaurant_order a LEFT JOIN system_accounts b ON a.Account_ID = b.ID "
+                + "WHERE a.Customer_Name LIKE @search OR a.ID LIKE @search OR a.Table_ID LIKE @search "
+                + "OR a.Date LIKE @search OR a.Time LIKE @search";
+            Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@search", search + "%");
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                _order_pending.Rows.Add(new Object[] {
+                    dr[0], dr[1], dr[2], dr[3], dr[4], hookDecimal(dr[5].ToString()), dr[6]
+                });
+            }
+            dr.Close();
+            Disconnect();
+            return _order_pending;
+        }
+
+        private DataTable _order_pending_details;
+        public DataTable order_pending_details(String id)
+        {
+            _order_pending_details = new DataTable();
+            _order_pending_details.Columns.Add("ID");
+            _order_pending_details.Columns.Add("Product Name");
+            _order_pending_details.Columns.Add("Price");
+            _order_pending_details.Columns.Add("Qty.");
+            _order_pending_details.Columns.Add("Amount");
+
+            String query = "SELECT a.ID, b.Name, a.Price, a.Qty, a.Qty * a.Price "
+                + "FROM restaurant_order_details a LEFT JOIN restaurant_products b ON a.Prod_ID = b.ID WHERE a.Order_ID = @id";
+            Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                _order_pending_details.Rows.Add(new Object[] {
+                    dr[0], dr[1], hookDecimal(dr[2].ToString()), dr[3], hookDecimal(dr[4].ToString())
+                });
+            }
+            dr.Close();
+            Disconnect();
+            return _order_pending_details;
+        }
+
+        private List<String> _order_pending_missing;
+        public List<String> order_pending_missing(String id)
+        {
+            _order_pending_missing = new List<String>();
+
+            String query = "SELECT Order_Type, Discount, Discount_Perc, Vat_Exempt, Vat, Vat_Perc, Account_ID, Customer_ID FROM restaurant_order WHERE ID = @id";
+            
+            Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                _order_pending_missing.Add(dr[0].ToString());
+                _order_pending_missing.Add(dr[1].ToString());
+                _order_pending_missing.Add(dr[2].ToString());
+                _order_pending_missing.Add(dr[3].ToString());
+                _order_pending_missing.Add(dr[4].ToString());
+                _order_pending_missing.Add(dr[5].ToString());
+                _order_pending_missing.Add(dr[6].ToString());
+                _order_pending_missing.Add(dr[7].ToString());
+            }
+            dr.Close();
+            Disconnect();
+            return _order_pending_missing;
+        }
+
+        private List<List<String>> _orders;
+        public List<List<String>> order(String id)
+        {
+            _orders = new List<List<String>>();
+
+            String query = "SELECT * FROM restaurant_order_details WHERE Order_ID = @id";
+
+            Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                List<String> list = new List<String>();
+                list.Add(dr[2].ToString());
+                list.Add(dr[3].ToString());
+                list.Add(dr[4].ToString());
+                _orders.Add(list);
+            }
+            dr.Close();
+            Disconnect();
+            return _orders;
+        }
+
+        public void order_update_status(String id)
+        {
+            Connect();
         }
         #endregion
 

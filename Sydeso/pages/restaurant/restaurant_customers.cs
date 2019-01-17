@@ -214,7 +214,7 @@ namespace Sydeso
         #endregion
 
         #region CRUD Logics
-
+        private String name;
         /// <summary>
         /// Update Part of CRUD
         /// </summary>
@@ -226,6 +226,7 @@ namespace Sydeso
             {
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
                 id = row.Cells[0].Value.ToString();
+                name = row.Cells[1].Value.ToString();
             }
         }
 
@@ -265,6 +266,10 @@ namespace Sydeso
 
                 default:
                     // btnView
+                    if (!string.IsNullOrWhiteSpace(id))
+                        new restaurant_customers_details(id, name).ShowDialog();
+                    else
+                        rh.alert("Notification: ", "Please select a customer you wish to view details.", "information");
                     break;
             }
         }

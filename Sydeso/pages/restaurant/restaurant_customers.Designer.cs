@@ -51,9 +51,9 @@
             this.customPanel3 = new Sydeso.CustomPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.customPanel5 = new Sydeso.CustomPanel();
+            this.btnView = new Bunifu.Framework.UI.BunifuFlatButton();
             this.btnDelete = new Bunifu.Framework.UI.BunifuFlatButton();
             this.btnNew = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.btnView = new Bunifu.Framework.UI.BunifuFlatButton();
             this.customPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnNext)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBack)).BeginInit();
@@ -365,6 +365,33 @@
             this.customPanel5.Size = new System.Drawing.Size(791, 81);
             this.customPanel5.TabIndex = 4;
             // 
+            // btnView
+            // 
+            this.btnView.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnView.BorderRadius = 0;
+            this.btnView.ButtonText = "VIEW DETAILS";
+            this.btnView.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnView.Iconcolor = System.Drawing.Color.Transparent;
+            this.btnView.Iconimage = ((System.Drawing.Image)(resources.GetObject("btnView.Iconimage")));
+            this.btnView.Iconimage_right = null;
+            this.btnView.Iconimage_right_Selected = null;
+            this.btnView.Iconimage_Selected = null;
+            this.btnView.IconZoom = 70D;
+            this.btnView.IsTab = false;
+            this.btnView.Location = new System.Drawing.Point(361, 18);
+            this.btnView.Name = "btnView";
+            this.btnView.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
+            this.btnView.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(163)))), ((int)(((byte)(148)))));
+            this.btnView.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnView.selected = false;
+            this.btnView.Size = new System.Drawing.Size(161, 44);
+            this.btnView.TabIndex = 5;
+            this.btnView.Textcolor = System.Drawing.Color.White;
+            this.btnView.TextFont = new System.Drawing.Font("Calibri", 11F);
+            this.btnView.Click += new System.EventHandler(this.crud_button_click);
+            // 
             // btnDelete
             // 
             this.btnDelete.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
@@ -418,32 +445,6 @@
             this.btnNew.Textcolor = System.Drawing.Color.White;
             this.btnNew.TextFont = new System.Drawing.Font("Calibri", 11F);
             this.btnNew.Click += new System.EventHandler(this.crud_button_click);
-            // 
-            // btnView
-            // 
-            this.btnView.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
-            this.btnView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
-            this.btnView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnView.BorderRadius = 0;
-            this.btnView.ButtonText = "VIEW DETAILS";
-            this.btnView.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnView.Iconcolor = System.Drawing.Color.Transparent;
-            this.btnView.Iconimage = ((System.Drawing.Image)(resources.GetObject("btnView.Iconimage")));
-            this.btnView.Iconimage_right = null;
-            this.btnView.Iconimage_right_Selected = null;
-            this.btnView.Iconimage_Selected = null;
-            this.btnView.IconZoom = 70D;
-            this.btnView.IsTab = false;
-            this.btnView.Location = new System.Drawing.Point(361, 18);
-            this.btnView.Name = "btnView";
-            this.btnView.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
-            this.btnView.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(163)))), ((int)(((byte)(148)))));
-            this.btnView.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnView.selected = false;
-            this.btnView.Size = new System.Drawing.Size(161, 44);
-            this.btnView.TabIndex = 5;
-            this.btnView.Textcolor = System.Drawing.Color.White;
-            this.btnView.TextFont = new System.Drawing.Font("Calibri", 11F);
             // 
             // restaurant_customers
             // 

@@ -123,3 +123,5 @@ C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_table_1.png
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_table_black.png
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\icons\icon_table_white.png
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_table_detail.resources
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_customers_details.resources
+C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.restaurant_order_pos_pending.resources

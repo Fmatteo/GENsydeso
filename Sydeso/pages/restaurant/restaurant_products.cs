@@ -100,6 +100,8 @@ namespace Sydeso
             pageSize = Convert.ToInt32(cbEntries.SelectedItem.ToString());
 
             LoadTable("", currentPage, pageSize);
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
         #region Placeholder Logics

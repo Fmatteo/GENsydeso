@@ -66,13 +66,19 @@ namespace Sydeso
                     {
                         this.BackColor = Color.Teal;
                         this.pbImage.Image = Image.FromFile(Application.StartupPath + "/icons/icon_table_white.png");
-                        this.borderedPanel1.ForeColor = Color.White;
+
+                        foreach (Control c in borderedPanel1.Controls)
+                            if (c is Label)
+                                c.ForeColor = Color.White;
                     }
                     else
                     {
                         this.BackColor = Color.Yellow;
                         this.pbImage.Image = Image.FromFile(Application.StartupPath + "/icons/icon_table_black.png");
-                        this.borderedPanel1.ForeColor = Color.Black;
+
+                        foreach (Control c in borderedPanel1.Controls)
+                            if (c is Label)
+                                c.ForeColor = Color.Black;
                     }
                 }
                 lblStatus.Left = (this.Width - lblStatus.Width) / 2;

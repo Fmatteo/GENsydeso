@@ -406,6 +406,11 @@ namespace Sydeso
             customer = restaurant_order_pos_modal_name._Show();
         }
 
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            new restaurant_order_pos_pending().ShowDialog();
+        }
+
         private void Doc_PrintPage(object sender, PrintPageEventArgs e)
         {
             if (mode == 1)

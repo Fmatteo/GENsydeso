@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2019 at 07:01 AM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.11
+-- Generation Time: Jan 16, 2019 at 03:41 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -90,6 +90,26 @@ CREATE TABLE `restaurant_customers` (
 
 INSERT INTO `restaurant_customers` (`ID`, `Name`, `Birthdate`, `Phone_Number`, `Email_Address`) VALUES
 (1, 'John Armon Manaloto', '1999-06-27', '09090909', 'johnarmon@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restaurant_customers_record`
+--
+
+CREATE TABLE `restaurant_customers_record` (
+  `ID` int(11) NOT NULL,
+  `Customer_ID` int(11) NOT NULL,
+  `Sales_ID` int(11) NOT NULL,
+  `Amount` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `restaurant_customers_record`
+--
+
+INSERT INTO `restaurant_customers_record` (`ID`, `Customer_ID`, `Sales_ID`, `Amount`) VALUES
+(2, 1, 14, 50.4);
 
 -- --------------------------------------------------------
 
@@ -189,7 +209,9 @@ CREATE TABLE `restaurant_order` (
 --
 
 INSERT INTO `restaurant_order` (`ID`, `Table_ID`, `Customer_ID`, `Customer_Name`, `Account_ID`, `Discount`, `Discount_Perc`, `Amount`, `Vat`, `Vat_Perc`, `Vat_Exempt`, `Order_Type`, `Date`, `Time`) VALUES
-(1, 0, 0, 'WALK-IN', 1, 0, 0, 341.6, 36.6, 12, 305, 'DINE IN', '2019-01-16', '01:15:01 PM');
+(1, 0, 0, 'WALK-IN', 1, 0, 0, 341.6, 36.6, 12, 305, 'DINE IN', '2019-01-16', '01:15:01 PM'),
+(2, 0, 0, 'WALK-IN', 1, 0, 0, 302.4, 32.4, 12, 270, 'DINE IN', '2019-01-16', '09:06:31 AM'),
+(4, 2, 0, 'WALK-IN', 1, 0, 0, 341.6, 36.6, 12, 305, 'DINE IN', '2019-01-16', '11:13:24 AM');
 
 -- --------------------------------------------------------
 
@@ -204,6 +226,18 @@ CREATE TABLE `restaurant_order_details` (
   `Qty` int(11) NOT NULL,
   `Price` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `restaurant_order_details`
+--
+
+INSERT INTO `restaurant_order_details` (`ID`, `Order_ID`, `Prod_ID`, `Qty`, `Price`) VALUES
+(1, 4, 4, 1, 35),
+(2, 4, 7, 1, 10),
+(3, 4, 1, 1, 35),
+(4, 4, 8, 1, 40),
+(5, 4, 5, 1, 150),
+(6, 4, 3, 1, 35);
 
 -- --------------------------------------------------------
 
@@ -226,11 +260,11 @@ CREATE TABLE `restaurant_products` (
 --
 
 INSERT INTO `restaurant_products` (`ID`, `Name`, `Qty`, `Reorder`, `Price`, `Category`, `Image`) VALUES
-(1, 'Coke', 192, 20, 35, 'Beverages', ''),
+(1, 'Coke', 185, 20, 35, 'Beverages', ''),
 (2, 'Sprite', 196, 20, 35, 'Beverages', ''),
-(3, 'Royal', 194, 20, 35, 'Beverages', ''),
-(4, '7-UP', 191, 20, 35, 'Beverages', ''),
-(5, 'Emperador Light', 192, 20, 150, 'Beverages', ''),
+(3, 'Royal', 191, 20, 35, 'Beverages', ''),
+(4, '7-UP', 183, 20, 35, 'Beverages', ''),
+(5, 'Emperador Light', 188, 20, 150, 'Beverages', ''),
 (6, 'Sarsyadong Tilapia', NULL, NULL, 45, 'Dish', ''),
 (7, 'Kaning Bahaw', NULL, NULL, 10, 'Dish', ''),
 (8, 'Menudo', NULL, NULL, 40, 'Dish', '');
@@ -273,7 +307,12 @@ INSERT INTO `restaurant_sales` (`ID`, `Customer_ID`, `Customer_Name`, `Account_I
 (7, 0, 'WALK-IN', 1, 500, 0, 0, 431.2, 68.8, 0, 0, 0, '', '2019-01-16', '02:20:53 AM'),
 (8, 0, 'WALK-IN', 1, 1000, 0, 0, 431.2, 568.8, 0, 0, 0, '', '2019-01-16', '02:24:00 AM'),
 (9, 0, 'WALK-IN', 1, 500, 61, 20, 280.6, 219.4, 36.6, 12, 305, '', '2019-01-16', '11:04:52 AM'),
-(10, 0, 'WALK-IN', 1, 500, 0, 0, 431.2, 68.8, 46.2, 12, 385, '', '2019-01-16', '11:09:23 AM');
+(10, 0, 'WALK-IN', 1, 500, 0, 0, 431.2, 68.8, 46.2, 12, 385, '', '2019-01-16', '11:09:23 AM'),
+(11, 0, 'WALK-IN', 1, 500, 0, 0, 341.6, 158.4, 36.6, 12, 305, 'DINE IN', '2019-01-16', '09:07:25 AM'),
+(12, 0, 'WALK-IN', 1, 200, 0, 0, 134.4, 65.6, 14.4, 12, 120, 'DINE IN', '2019-01-16', '11:27:36 AM'),
+(13, 0, 'WALK-IN', 1, 200, 0, 0, 134.4, 65.6, 14.4, 12, 120, 'DINE IN', '2019-01-16', '11:32:24 AM'),
+(14, 1, 'John Armon Manaloto', 1, 60, 0, 0, 50.4, 9.6, 5.4, 12, 45, 'DINE IN', '2019-01-16', '11:33:29 AM'),
+(15, 0, 'WALK-IN', 1, 200, 0, 0, 134.4, 65.6, 14.4, 12, 120, 'DINE IN', '2019-01-16', '11:39:31 AM');
 
 -- --------------------------------------------------------
 
@@ -346,7 +385,38 @@ INSERT INTO `restaurant_sales_details` (`ID`, `Sales_ID`, `Prod_ID`, `Qty`, `Pri
 (50, 1, 1, 1, 35),
 (51, 1, 8, 1, 40),
 (52, 1, 5, 1, 150),
-(53, 1, 3, 1, 35);
+(53, 1, 3, 1, 35),
+(54, 2, 4, 1, 35),
+(55, 2, 7, 1, 10),
+(56, 2, 1, 1, 35),
+(57, 2, 8, 1, 40),
+(58, 2, 5, 1, 150),
+(59, 11, 4, 1, 35),
+(60, 11, 7, 1, 10),
+(61, 11, 1, 1, 35),
+(62, 11, 8, 1, 40),
+(63, 11, 5, 1, 150),
+(64, 11, 3, 1, 35),
+(65, 3, 4, 1, 35),
+(66, 3, 7, 1, 10),
+(67, 3, 1, 1, 35),
+(68, 3, 8, 1, 40),
+(69, 3, 5, 1, 150),
+(70, 3, 3, 1, 35),
+(71, 12, 4, 1, 35),
+(72, 12, 7, 1, 10),
+(73, 12, 1, 1, 35),
+(74, 12, 8, 1, 40),
+(75, 13, 4, 1, 35),
+(76, 13, 7, 1, 10),
+(77, 13, 1, 1, 35),
+(78, 13, 8, 1, 40),
+(79, 14, 4, 1, 35),
+(80, 14, 7, 1, 10),
+(81, 15, 4, 1, 35),
+(82, 15, 7, 1, 10),
+(83, 15, 1, 1, 35),
+(84, 15, 8, 1, 40);
 
 -- --------------------------------------------------------
 
@@ -382,7 +452,7 @@ CREATE TABLE `restaurant_table` (
 
 INSERT INTO `restaurant_table` (`ID`, `Name`, `Description`, `Status`) VALUES
 (1, 'Table 1', '4 seats', 'RESERVED'),
-(2, 'Table 2', '10 seats', 'VACANT');
+(2, 'Table 2', '10 seats', 'OCCUPIED');
 
 -- --------------------------------------------------------
 
@@ -470,6 +540,12 @@ ALTER TABLE `restaurant_category`
 -- Indexes for table `restaurant_customers`
 --
 ALTER TABLE `restaurant_customers`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `restaurant_customers_record`
+--
+ALTER TABLE `restaurant_customers_record`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -579,6 +655,12 @@ ALTER TABLE `restaurant_customers`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `restaurant_customers_record`
+--
+ALTER TABLE `restaurant_customers_record`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `restaurant_employee`
 --
 ALTER TABLE `restaurant_employee`
@@ -606,13 +688,13 @@ ALTER TABLE `restaurant_logs`
 -- AUTO_INCREMENT for table `restaurant_order`
 --
 ALTER TABLE `restaurant_order`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `restaurant_order_details`
 --
 ALTER TABLE `restaurant_order_details`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `restaurant_products`
@@ -624,13 +706,13 @@ ALTER TABLE `restaurant_products`
 -- AUTO_INCREMENT for table `restaurant_sales`
 --
 ALTER TABLE `restaurant_sales`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `restaurant_sales_details`
 --
 ALTER TABLE `restaurant_sales_details`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `restaurant_stock_out`

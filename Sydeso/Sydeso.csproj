@@ -136,6 +136,12 @@
     <Compile Include="pages\restaurant\restaurant_customers.Designer.cs">
       <DependentUpon>restaurant_customers.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\restaurant\restaurant_customers_details.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_customers_details.Designer.cs">
+      <DependentUpon>restaurant_customers_details.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\restaurant\restaurant_customers_new.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,6 +231,12 @@
     </Compile>
     <Compile Include="pages\restaurant\restaurant_order_pos_modal_table.Designer.cs">
       <DependentUpon>restaurant_order_pos_modal_table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_order_pos_pending.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\restaurant\restaurant_order_pos_pending.Designer.cs">
+      <DependentUpon>restaurant_order_pos_pending.cs</DependentUpon>
     </Compile>
     <Compile Include="pages\restaurant\restaurant_order_pos_quantity.cs">
       <SubType>Form</SubType>
@@ -354,6 +366,9 @@
     <EmbeddedResource Include="pages\restaurant\restaurant_customers.resx">
       <DependentUpon>restaurant_customers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_customers_details.resx">
+      <DependentUpon>restaurant_customers_details.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_customers_new.resx">
       <DependentUpon>restaurant_customers_new.cs</DependentUpon>
     </EmbeddedResource>
@@ -398,6 +413,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_order_pos_modal_table.resx">
       <DependentUpon>restaurant_order_pos_modal_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\restaurant\restaurant_order_pos_pending.resx">
+      <DependentUpon>restaurant_order_pos_pending.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\restaurant\restaurant_order_pos_quantity.resx">
       <DependentUpon>restaurant_order_pos_quantity.cs</DependentUpon>

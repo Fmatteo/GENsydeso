@@ -39,6 +39,7 @@ namespace Sydeso
 
         private void LoadTable(String search)
         {
+            this.SuspendLayout();
             pnl_items.Controls.Clear();
 
             List<restaurant_table_detail> list = rh.res_table_detail(search);
@@ -73,6 +74,7 @@ namespace Sydeso
             pnl_items.HorizontalScroll.Visible = false;
             pnl_items.HorizontalScroll.Maximum = 0;
             pnl_items.AutoScroll = true;
+            this.ResumeLayout();
         }
 
         String _id, _name, _desc, _status;
