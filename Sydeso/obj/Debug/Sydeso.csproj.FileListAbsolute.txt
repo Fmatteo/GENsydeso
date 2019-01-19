@@ -77,7 +77,6 @@ C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\Bunifu_UI_v1.4.dll
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\MySql.Data.dll
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\Google.Protobuf.dll
 C:\xampp\htdocs\gensydeso\Sydeso\bin\Debug\MySql.Data.xml
-C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.csprojResolveAssemblyReference.cache
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.DateTimeRecord.resources
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.DateTimeRecord_View.resources
 C:\xampp\htdocs\gensydeso\Sydeso\obj\Debug\Sydeso.Login.resources

@@ -37,21 +37,23 @@ namespace Sydeso
 
         public void Connect()
         {
-           /* try
+            /* try
+             {
+                 //con = new MySqlConnection("server=198.91.81.6; user=ilscodes_user123; password=password1234; database=ilscodes_test");
+                 String conString = "SERVER=sql12.freesqldatabase.com; PORT=3306; DATABASE=sql12274214; UID=sql12274214; PASSWORD=FgzNGXisLd;";
+                 con = new MySqlConnection();
+                 con.ConnectionString = conString;
+                 con.Open();
+             }
+             catch (Exception)
+             {
+                 alert("Error: ", "Please check your internet connection.\nCannot connect to the database.", "danger");
+             }*/
+
+            using (con = new MySqlConnection("server=localhost; user=root; database=sydeso"))
             {
-                //con = new MySqlConnection("server=198.91.81.6; user=ilscodes_user123; password=password1234; database=ilscodes_test");
-                String conString = "SERVER=sql12.freesqldatabase.com; PORT=3306; DATABASE=sql12274214; UID=sql12274214; PASSWORD=FgzNGXisLd;";
-                con = new MySqlConnection();
-                con.ConnectionString = conString;
                 con.Open();
             }
-            catch (Exception)
-            {
-                alert("Error: ", "Please check your internet connection.\nCannot connect to the database.", "danger");
-            }*/
-
-            con = new MySqlConnection("server=localhost; user=root; database=sydeso");
-            con.Open();
         }
 
         public void Disconnect()
