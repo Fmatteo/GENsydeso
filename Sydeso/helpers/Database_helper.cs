@@ -50,16 +50,22 @@ namespace Sydeso
                  alert("Error: ", "Please check your internet connection.\nCannot connect to the database.", "danger");
              }*/
 
-            using (con = new MySqlConnection("server=localhost; user=root; database=sydeso"))
+            try
             {
+                con = new MySqlConnection("server=localhost; user=root; database=sydeso");
                 con.Open();
             }
+            catch (MySqlException) { }
         }
 
         public void Disconnect()
         {
-            con.Close();
-            con.Dispose();
+            try
+            {
+                con.Close();
+                con.Dispose();
+            }
+            catch (MySqlException) { }
         }
 
         public String hashPass(String pass)

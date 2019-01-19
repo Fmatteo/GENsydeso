@@ -109,7 +109,7 @@
             this.btnQuantity.Iconimage_Selected = null;
             this.btnQuantity.IconZoom = 70D;
             this.btnQuantity.IsTab = false;
-            this.btnQuantity.Location = new System.Drawing.Point(429, 603);
+            this.btnQuantity.Location = new System.Drawing.Point(421, 603);
             this.btnQuantity.Name = "btnQuantity";
             this.btnQuantity.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
             this.btnQuantity.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(163)))), ((int)(((byte)(148)))));
@@ -156,10 +156,10 @@
             this.pnl_header.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnl_header.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
             this.pnl_header.Controls.Add(this.label3);
-            this.pnl_header.Location = new System.Drawing.Point(429, 129);
+            this.pnl_header.Location = new System.Drawing.Point(421, 129);
             this.pnl_header.MaximumSize = new System.Drawing.Size(407, 60);
             this.pnl_header.Name = "pnl_header";
-            this.pnl_header.Size = new System.Drawing.Size(392, 60);
+            this.pnl_header.Size = new System.Drawing.Size(400, 60);
             this.pnl_header.TabIndex = 5;
             // 
             // label3
@@ -195,15 +195,16 @@
             this.pnl_total.Controls.Add(this.label5);
             this.pnl_total.Location = new System.Drawing.Point(30, 427);
             this.pnl_total.Name = "pnl_total";
-            this.pnl_total.Size = new System.Drawing.Size(393, 209);
+            this.pnl_total.Size = new System.Drawing.Size(385, 209);
             this.pnl_total.TabIndex = 4;
             // 
             // lblOrderType
             // 
+            this.lblOrderType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOrderType.AutoSize = true;
             this.lblOrderType.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblOrderType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblOrderType.Location = new System.Drawing.Point(320, 12);
+            this.lblOrderType.Location = new System.Drawing.Point(312, 12);
             this.lblOrderType.Name = "lblOrderType";
             this.lblOrderType.Size = new System.Drawing.Size(61, 21);
             this.lblOrderType.TabIndex = 16;
@@ -236,7 +237,7 @@
             this.btnView.Iconimage_Selected = null;
             this.btnView.IconZoom = 70D;
             this.btnView.IsTab = false;
-            this.btnView.Location = new System.Drawing.Point(205, 156);
+            this.btnView.Location = new System.Drawing.Point(197, 156);
             this.btnView.Name = "btnView";
             this.btnView.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(173)))), ((int)(((byte)(158)))));
             this.btnView.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(163)))), ((int)(((byte)(148)))));
@@ -283,7 +284,7 @@
             this.customPanel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.customPanel8.Location = new System.Drawing.Point(14, 148);
             this.customPanel8.Name = "customPanel8";
-            this.customPanel8.Size = new System.Drawing.Size(369, 2);
+            this.customPanel8.Size = new System.Drawing.Size(361, 2);
             this.customPanel8.TabIndex = 12;
             // 
             // customPanel7
@@ -292,7 +293,7 @@
             this.customPanel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.customPanel7.Location = new System.Drawing.Point(14, 119);
             this.customPanel7.Name = "customPanel7";
-            this.customPanel7.Size = new System.Drawing.Size(369, 2);
+            this.customPanel7.Size = new System.Drawing.Size(361, 2);
             this.customPanel7.TabIndex = 11;
             // 
             // lblAmountDue
@@ -301,7 +302,7 @@
             this.lblAmountDue.AutoSize = true;
             this.lblAmountDue.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblAmountDue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblAmountDue.Location = new System.Drawing.Point(364, 124);
+            this.lblAmountDue.Location = new System.Drawing.Point(356, 124);
             this.lblAmountDue.Name = "lblAmountDue";
             this.lblAmountDue.Size = new System.Drawing.Size(19, 21);
             this.lblAmountDue.TabIndex = 10;
@@ -324,7 +325,7 @@
             this.lblVat.AutoSize = true;
             this.lblVat.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblVat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblVat.Location = new System.Drawing.Point(364, 96);
+            this.lblVat.Location = new System.Drawing.Point(356, 96);
             this.lblVat.Name = "lblVat";
             this.lblVat.Size = new System.Drawing.Size(17, 19);
             this.lblVat.TabIndex = 8;
@@ -336,7 +337,7 @@
             this.lblDiscount.AutoSize = true;
             this.lblDiscount.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblDiscount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblDiscount.Location = new System.Drawing.Point(364, 54);
+            this.lblDiscount.Location = new System.Drawing.Point(356, 54);
             this.lblDiscount.Name = "lblDiscount";
             this.lblDiscount.Size = new System.Drawing.Size(17, 19);
             this.lblDiscount.TabIndex = 7;
@@ -348,7 +349,7 @@
             this.lblSubTotal.AutoSize = true;
             this.lblSubTotal.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblSubTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblSubTotal.Location = new System.Drawing.Point(364, 75);
+            this.lblSubTotal.Location = new System.Drawing.Point(356, 75);
             this.lblSubTotal.Name = "lblSubTotal";
             this.lblSubTotal.Size = new System.Drawing.Size(19, 21);
             this.lblSubTotal.TabIndex = 6;
@@ -360,7 +361,7 @@
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.lblTotal.Location = new System.Drawing.Point(364, 33);
+            this.lblTotal.Location = new System.Drawing.Point(356, 33);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(19, 21);
             this.lblTotal.TabIndex = 5;
@@ -414,10 +415,10 @@
             // 
             this.pnl_items.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnl_items.BackColor = System.Drawing.Color.White;
-            this.pnl_items.Location = new System.Drawing.Point(429, 195);
+            this.pnl_items.Location = new System.Drawing.Point(421, 195);
             this.pnl_items.MaximumSize = new System.Drawing.Size(407, 441);
             this.pnl_items.Name = "pnl_items";
-            this.pnl_items.Size = new System.Drawing.Size(392, 402);
+            this.pnl_items.Size = new System.Drawing.Size(400, 402);
             this.pnl_items.TabIndex = 3;
             // 
             // pnl_receipt
@@ -427,7 +428,7 @@
             this.pnl_receipt.Controls.Add(this.dataGridView1);
             this.pnl_receipt.Location = new System.Drawing.Point(30, 129);
             this.pnl_receipt.Name = "pnl_receipt";
-            this.pnl_receipt.Size = new System.Drawing.Size(393, 292);
+            this.pnl_receipt.Size = new System.Drawing.Size(385, 292);
             this.pnl_receipt.TabIndex = 2;
             // 
             // dataGridView1
@@ -485,7 +486,7 @@
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(393, 292);
+            this.dataGridView1.Size = new System.Drawing.Size(385, 292);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -763,10 +764,10 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.ClientSize = new System.Drawing.Size(850, 660);
             this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.pnl_items);
             this.Controls.Add(this.btnQuantity);
             this.Controls.Add(this.pnl_header);
             this.Controls.Add(this.pnl_total);
-            this.Controls.Add(this.pnl_items);
             this.Controls.Add(this.pnl_receipt);
             this.Controls.Add(this.customPanel1);
             this.DoubleBuffered = true;
