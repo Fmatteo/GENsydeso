@@ -384,6 +384,7 @@ namespace Sydeso
                             break;
                     }
 
+                    // Pick Tables...
 
                     new restaurant_order_pos_modal_table(cash_tendered, customer).ShowDialog();
 
@@ -391,11 +392,9 @@ namespace Sydeso
                     CalculateTotal();
                     mode = 0;
 
-                    // Pick Tables...
+                    rh.alert("Notification: ", "Transaction done. System is ready for the next transaction.", "success");
+                    btnTransaction.Visible = true;
                 }
-
-                rh.alert("Notification: ", "Transaction done. System is ready for the next transaction.", "success");
-                btnTransaction.Visible = true;
             }
         }
 

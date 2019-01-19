@@ -473,7 +473,7 @@ namespace Sydeso
         public int res_pending_order()
         {
             Connect();
-            cmd = new MySqlCommand("SELECT COUNT(ID) FROM restaurant_order", con);
+            cmd = new MySqlCommand("SELECT COUNT(ID) FROM restaurant_order WHERE Status = ''", con);
             dr = cmd.ExecuteReader();
 
             if (dr.Read())
@@ -1056,11 +1056,12 @@ namespace Sydeso
             _res_table_read_details_occupied.Columns.Add("Total Amount");
 
             Connect();
-            cmd = new MySqlCommand("SELECT ID, Customer_Name, Amount FROM restaurant_order WHERE Table_ID = @id", con);
+            cmd = new MySqlCommand("SELECT ID, Customer_Name, Amount FROM restaurant_order WHERE Table_ID = @id AND Status=@status", con);
             cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@status", "");
             dr = cmd.ExecuteReader();
 
-            if (dr.Read())
+            while (dr.Read())
             {
                 _res_table_read_details_occupied.Rows.Add(new Object[] {
                     dr[0].ToString(), dr[1].ToString(), hookDecimal(dr[2].ToString())
@@ -1159,17 +1160,8 @@ namespace Sydeso
                 cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd"));
                 cmd.ExecuteNonQuery();
                 Disconnect();
-
-                // Change Status of Table to Occupied if possible
-                if (res_table_count_reserved(id) == 0)
-                {
-                    res_table_update_status(id, "OCCUPIED");
-                }
             }
-            else
-            {
-                res_table_update_status(id, "OCCUPIED");
-            }
+            res_table_update_status(id, "OCCUPIED");
 
             if (mode == "PENDING SALE")
                 res_table_order_update(id, order_number_get().ToString());
@@ -1425,6 +1417,7 @@ namespace Sydeso
             cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString("hh:mm:ss tt"));
             cmd.ExecuteNonQuery();
             Disconnect();
+            MessageBox.Show("SALES CREATE");
         }
 
         public int sales_number_get()
@@ -1592,8 +1585,8 @@ namespace Sydeso
 
             String query = "SELECT a.ID, a.Table_ID, a.Customer_Name, b.Firstname, a.Amount, a.Date, a.Time " 
                 + "FROM restaurant_order a LEFT JOIN system_accounts b ON a.Account_ID = b.ID "
-                + "WHERE a.Customer_Name LIKE @search OR a.ID LIKE @search OR a.Table_ID LIKE @search "
-                + "OR a.Date LIKE @search OR a.Time LIKE @search";
+                + "WHERE (a.Customer_Name LIKE @search OR a.ID LIKE @search OR a.Table_ID LIKE @search "
+                + "OR a.Date LIKE @search OR a.Time LIKE @search) AND a.Status = ''";
             Connect();
             cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@search", search + "%");
@@ -1602,7 +1595,7 @@ namespace Sydeso
             while (dr.Read())
             {
                 _order_pending.Rows.Add(new Object[] {
-                    dr[0], dr[1], dr[2], dr[3], dr[4], hookDecimal(dr[5].ToString()), dr[6]
+                    dr[0], dr[1], dr[2], dr[3], hookDecimal(dr[4].ToString()), Convert.ToDateTime(dr[5]).ToString("yyyy-MM-dd"), dr[6]
                 });
             }
             dr.Close();
@@ -1691,10 +1684,66 @@ namespace Sydeso
             return _orders;
         }
 
+        private int order_table_occupied_count(String id)
+        {
+            String query = "SELECT COUNT(Table_ID) FROM restaurant_order WHERE Table_ID = @id AND Status = ''";
+            Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                return Convert.ToInt32(dr[0]);
+            }
+            dr.Close();
+            Disconnect();
+            return 0;
+        }
+
         public void order_update_status(String id)
         {
+            String query = "UPDATE restaurant_order SET Status = 'PAID' WHERE ID = @id";
             Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            Disconnect();
+
+            query = "SELECT Table_ID FROM restaurant_order WHERE ID = @id";
+            Connect();
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                String tid = dr["Table_ID"].ToString();
+                if (tid != "0")
+                {
+                    // Check if the table is reserved
+                    int count = res_table_count_reserved(tid);
+
+                    if (count == 0)
+                    {
+                        // Update to Status to Vacant (Occupied -> Vacant)
+
+                        if (order_table_occupied_count(tid) == 0)
+                            res_table_update_status(tid, "VACANT");
+                        else // Update to Status to Vacant (Occupied -> Occupied)
+                            res_table_update_status(tid, "OCCUPIED");
+                    }
+                    else
+                    {
+                        // Update to Status to Reserved (Occupied -> Reserved)
+                        res_table_update_status(tid, "RESERVED");
+                    }
+                }
+            }
+            dr.Close();
+            Disconnect();
         }
+       
         #endregion
 
         #endregion

@@ -117,15 +117,22 @@ namespace Sydeso
                 change = (Convert.ToDouble(cash) - Convert.ToDouble(amount)).ToString();
 
                 if (print.ShowDialog() == DialogResult.OK)
+                {
+                    rh.sales_create(missing[7] + ": " + cus, missing[6], cash, missing[1], missing[2], amount, change, missing[4], missing[5], missing[3], missing[0]);
                     doc.Print();
 
-                List<List<String>> items = rh.order(id);
+                    List<List<String>> items = rh.order(id);
 
-                rh.sales_create(missing[7] + ": " + cus, missing[6], cash, missing[1], missing[2], amount, change, missing[4], missing[5], missing[3], missing[0]);
+                    foreach (var list in items)
+                    {
+                        rh.sales_details_create(rh.sales_number_get().ToString(), list[0], list[1], list[2]);
+                    }
 
-                foreach (var list in items)
-                {
-                    rh.sales_details_create(rh.sales_number_get().ToString(), list[0], list[1], list[2]);
+                    rh.order_update_status(id);
+                    rh.alert("Notification: ", "Transaction done. System is ready for the next transaction.", "success");
+
+                    // Refresh the Table
+                    dataGridView1.DataSource = rh.order_pending("");
                 }
             }
         }

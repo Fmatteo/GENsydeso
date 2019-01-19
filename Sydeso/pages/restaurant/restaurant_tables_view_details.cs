@@ -79,5 +79,19 @@ namespace Sydeso
         {
             this.Close();
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView2.Visible)
+            {
+                if (e.RowIndex >= 0)
+                {
+                    DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+                    String id = row.Cells[0].Value.ToString();
+
+                    dataGridView2.DataSource = rh.res_table_read_details_occupied_item(id);
+                }
+            }
+        }
     }
 }
