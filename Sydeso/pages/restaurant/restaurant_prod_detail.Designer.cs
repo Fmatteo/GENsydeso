@@ -50,16 +50,16 @@
             this.borderedPanel1.Location = new System.Drawing.Point(0, 0);
             this.borderedPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.borderedPanel1.Name = "borderedPanel1";
-            this.borderedPanel1.Size = new System.Drawing.Size(200, 162);
+            this.borderedPanel1.Size = new System.Drawing.Size(130, 200);
             this.borderedPanel1.TabIndex = 0;
             // 
             // customPanel1
             // 
             this.customPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
             this.customPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.customPanel1.Location = new System.Drawing.Point(0, 120);
+            this.customPanel1.Location = new System.Drawing.Point(0, 160);
             this.customPanel1.Name = "customPanel1";
-            this.customPanel1.Size = new System.Drawing.Size(200, 1);
+            this.customPanel1.Size = new System.Drawing.Size(130, 1);
             this.customPanel1.TabIndex = 4;
             // 
             // lblPrice
@@ -67,7 +67,7 @@
             this.lblPrice.AutoSize = true;
             this.lblPrice.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPrice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
-            this.lblPrice.Location = new System.Drawing.Point(83, 140);
+            this.lblPrice.Location = new System.Drawing.Point(48, 180);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(34, 15);
             this.lblPrice.TabIndex = 2;
@@ -78,7 +78,7 @@
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(81)))), ((int)(((byte)(80)))));
-            this.lblName.Location = new System.Drawing.Point(58, 124);
+            this.lblName.Location = new System.Drawing.Point(23, 164);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(84, 15);
             this.lblName.TabIndex = 1;
@@ -90,7 +90,7 @@
             this.pbImage.Image = ((System.Drawing.Image)(resources.GetObject("pbImage.Image")));
             this.pbImage.Location = new System.Drawing.Point(0, 0);
             this.pbImage.Name = "pbImage";
-            this.pbImage.Size = new System.Drawing.Size(200, 120);
+            this.pbImage.Size = new System.Drawing.Size(130, 160);
             this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbImage.TabIndex = 0;
             this.pbImage.TabStop = false;
@@ -104,7 +104,7 @@
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "restaurant_prod_detail";
-            this.Size = new System.Drawing.Size(200, 162);
+            this.Size = new System.Drawing.Size(130, 200);
             this.borderedPanel1.ResumeLayout(false);
             this.borderedPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();

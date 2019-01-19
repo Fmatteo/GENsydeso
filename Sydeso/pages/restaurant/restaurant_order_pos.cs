@@ -107,7 +107,7 @@ namespace Sydeso
                 }
             }
 
-            int count = 0, offSetX = 0, offSetY = 0;
+            int count = 0, offSetX = 0, offSetY = 1;
             for (int i = 0; i < list.Count; i++)
             {
                 count++;
@@ -122,9 +122,9 @@ namespace Sydeso
                 }
 
                 this.pnl_items.Controls.Add(list[i]);
-                offSetX += list[i].Width;
+                offSetX += list[i].Width + 1;
 
-                if (count == 2)
+                if (count == 3)
                 {
                     count = 0;
                     offSetX = 0;
