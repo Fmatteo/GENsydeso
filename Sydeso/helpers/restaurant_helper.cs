@@ -260,7 +260,7 @@ namespace Sydeso
             cmd.Parameters.AddWithValue("@cat", cat);
 
             if (!string.IsNullOrWhiteSpace(path))
-                cmd.Parameters.AddWithValue("@image", imageToByteArray(ResizeImage(Image.FromFile(path), 252, 300)));
+                cmd.Parameters.AddWithValue("@image", File.ReadAllBytes(path));
 
             cmd.ExecuteNonQuery();
             Disconnect();
