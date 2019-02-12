@@ -68,6 +68,16 @@ namespace Sydeso
             catch (MySqlException) { }
         }
 
+        public byte[] image(Image imageIn)
+        {
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+            byte[] data = ms.ToArray();
+            return data;
+
+        }
+
         public String hashPass(String pass)
         {
             MD5 md5 = MD5.Create();

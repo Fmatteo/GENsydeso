@@ -260,7 +260,7 @@ namespace Sydeso
             cmd.Parameters.AddWithValue("@cat", cat);
 
             if (!string.IsNullOrWhiteSpace(path))
-                cmd.Parameters.AddWithValue("@image", File.ReadAllBytes(path));
+                cmd.Parameters.AddWithValue("@image", image(Image.FromFile(path)));
 
             cmd.ExecuteNonQuery();
             Disconnect();
@@ -288,7 +288,7 @@ namespace Sydeso
             cmd.Parameters.AddWithValue("@cat", cat);
 
             if (!string.IsNullOrWhiteSpace(path))
-                cmd.Parameters.AddWithValue("@image", File.ReadAllBytes(path));
+                cmd.Parameters.AddWithValue("@image", image(Image.FromFile(path)));
 
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
